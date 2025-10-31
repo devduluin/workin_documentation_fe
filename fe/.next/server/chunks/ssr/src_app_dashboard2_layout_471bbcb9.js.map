@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/hrisguide/Frontend/src/app/dashboard2/layout.js"],"sourcesContent":["import \"./styles/dashboard.css\";\r\n\r\nexport default function DashboardLayout({ children }) {\r\n  return (\r\n    <div className=\"dashboard-layout\">\r\n      {children}\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;;AAEe,SAAS,gBAAgB,EAAE,QAAQ,EAAE;IAClD,qBACE,8OAAC;QAAI,WAAU;kBACZ;;;;;;AAGP","debugId":null}}]
+}

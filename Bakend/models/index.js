@@ -9,8 +9,15 @@ Category.hasMany(Document, { foreignKey: 'categoryId', onDelete: 'CASCADE' });
 Document.belongsTo(Category, { foreignKey: 'categoryId' });
 
 // Relasi Document - DocumentSection
-Document.hasMany(DocumentSection, { foreignKey: 'documentId', onDelete: 'CASCADE' });
-DocumentSection.belongsTo(Document, { foreignKey: 'documentId' });
+Document.hasMany(DocumentSection, {
+  foreignKey: 'documentId',
+  as: 'sections',
+  onDelete: 'CASCADE',
+});
+DocumentSection.belongsTo(Document, {
+  foreignKey: 'documentId',
+  as: 'document',
+});
 
 module.exports = {
   sequelize,

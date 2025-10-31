@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Form Login */
+.login-form {
+  @apply bg-white shadow-lg rounded-xl p-8 w-full max-w-md;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Input Field */
+.input-field {
+  @apply w-full mb-4 p-3 rounded-md bg-gray-200 focus:outline-none;
+}
+
+/* Error Message */
+.error-message {
+  @apply text-red-600 font-bold mb-4 text-center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Tombol Login */
+.btn-login {
+  @apply w-full py-2 rounded-md font-semibold text-black 
+    bg-gray-300 hover:bg-gray-400 transition-all duration-300 
+    transform hover:scale-105 hover:shadow-lg;
+}
+
+/* Disable tombol */
+.btn-login:disabled {
+  @apply bg-gray-200 cursor-not-allowed scale-100 shadow-none;
+}
+
+/* Toggle Password */
+.password-toggle {
+  @apply absolute inset-y-0 right-3 flex items-center text-gray-600;
+}
+
+/* Animasi FadeIn */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

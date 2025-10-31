@@ -10,6 +10,7 @@ exports.getAllCategories = async (req, res) => {
           include: [
             {
               model: DocumentSection,
+              as: 'sections', // 👈 wajib karena di asosiasi pakai alias
               attributes: ['id', 'title', 'content']
             }
           ]
@@ -18,7 +19,7 @@ exports.getAllCategories = async (req, res) => {
       order: [
         ['id', 'ASC'],
         [Document, 'id', 'ASC'],
-        [Document, DocumentSection, 'id', 'ASC']
+        [Document, { model: DocumentSection, as: 'sections' }, 'id', 'ASC'] // 👈 tambahkan 'as' juga di order
       ]
     });
 

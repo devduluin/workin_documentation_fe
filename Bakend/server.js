@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models');
+const searchRoutes = require("./routes/searchRoutes");
 
 dotenv.config();
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api/documents', require('./routes/documentRoutes'));
 app.use('/api/sections', require('./routes/sectionRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes'));
 app.use('/uploads', express.static('uploads'));
+app.use("/api/search", require("./routes/searchRoutes"));
 
 // ✅ DB
 sequelize.authenticate()

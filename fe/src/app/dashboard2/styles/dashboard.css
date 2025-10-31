@@ -1,0 +1,383 @@
+/* === dashboard.css === */
+@import "tailwindcss";
+
+/* ===============================
+   🧭 STRUKTUR UTAMA DASHBOARD
+   =============================== */
+.dashboard-layout {
+  @apply flex min-h-screen w-full overflow-x-hidden bg-gray-50 text-gray-800;
+}
+
+/* ===============================
+   📁 SIDEBAR
+   =============================== */
+.dashboard-sidebar {
+  @apply fixed top-0 left-0 h-screen w-[260px] bg-white border-r border-gray-200 flex flex-col shadow-sm;
+  z-index: 50; /* Sidebar di atas konten */
+}
+
+.dashboard-sidebar-header {
+  @apply flex flex-col items-center p-5 border-b border-gray-100;
+  position: relative;
+  z-index: 10; /* Tombol header tetap bisa diklik */
+}
+
+.dashboard-logo {
+  @apply w-50 h-10 object-contain mb-2;
+}
+
+.dashboard-doc-title {
+  @apply text-gray-800 font-bold mb-3;
+}
+
+/* Tombol Header Sidebar */
+.dashboard-header-btns {
+  @apply flex space-x-2;
+}
+
+.dashboard-add-btn,
+.dashboard-del-btn {
+  @apply flex items-center gap-1 px-3 py-1.5 text-sm font-medium rounded-xl transition-all;
+  position: relative;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.dashboard-add-btn {
+  @apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+.dashboard-del-btn {
+  @apply bg-red-500 text-white hover:bg-red-600;
+}
+
+.dashboard-add-btn:hover,
+.dashboard-del-btn:hover {
+  transform: scale(1.03);
+}
+
+/* Navigasi Sidebar */
+.dashboard-nav {
+  @apply flex-1 overflow-y-auto px-3 py-4 space-y-1;
+}
+
+/* Tombol Menu */
+.dashboard-menu-btn {
+  @apply w-full flex justify-between items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-150;
+  @apply text-gray-700 hover:bg-blue-50 hover:text-blue-600;
+}
+
+.dashboard-menu-btn.active {
+  @apply bg-blue-100 text-blue-700 font-medium;
+}
+
+/* Submenu item */
+.dashboard-submenu {
+  @apply ml-3 mt-1 space-y-1;
+}
+
+.dashboard-submenu button {
+  @apply w-full text-left px-3 py-1 text-sm text-gray-600 rounded-md transition-colors;
+  @apply hover:bg-blue-50 hover:text-blue-600;
+}
+
+.dashboard-submenu button.active {
+  @apply bg-blue-100 text-blue-700 font-medium;
+}
+
+/* Tombol Logout */ 
+.dashboard-logout { 
+  @apply border-t border-gray-100 p-4; 
+} 
+
+.dashboard-logout button { 
+  @apply w-full text-center text-sm font-medium text-white;
+}
+
+/* Input rename */
+.dashboard-rename-input {
+  @apply border border-gray-300 rounded px-2 py-1 text-sm w-full focus:outline-none focus:ring-1 focus:ring-blue-400;
+}
+
+/* Aksi ikon (rename/delete) */
+.dashboard-menu-actions {
+  @apply flex items-center gap-1 opacity-0 transition-opacity duration-150;
+}
+
+.dashboard-icon-btn {
+  @apply text-gray-400 hover:text-blue-500 transition-colors;
+}
+
+/* ===============================
+   🧱 AREA KONTEN DASHBOARD
+   =============================== */
+.dashboard-main {
+  @apply flex-1 bg-gray-50;
+  margin-left: 260px;
+  width: calc(100% - 260px); /* ✅ ganti vw → % */
+  padding: 1rem 0 2rem 0 !important;
+  position: relative;
+  z-index: 10;
+  overflow-x: hidden; /* ✅ cegah scroll horizontal */
+  background-color: #f9fafb;
+}
+
+/* Header di atas konten */
+.dashboard-header {
+  @apply mb-6 pb-3 border-b border-gray-200;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.dashboard-header h1 {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+.dashboard-header p {
+  @apply text-gray-500 mt-1;
+}
+
+/* ===============================
+   📦 BOX KONTEN SCROLLABLE
+   =============================== */
+.content-box {
+  @apply bg-white rounded-md border border-gray-200 shadow p-4 flex flex-col;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.content-scroll {
+  @apply flex-1 overflow-y-auto overflow-x-hidden;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar custom */
+.content-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.content-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.content-scroll::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded;
+}
+.content-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* ===============================
+   ✏️ AREA EDITOR (QUILL)
+   =============================== */
+
+/* Wrapper Editor */
+.editor-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: calc(100vh - 280px);
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+/* Toolbar */
+.ql-toolbar.ql-snow {
+  border: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  background: #f9fafb;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Container Isi */
+.ql-container.ql-snow {
+  border: none !important;
+  width: 100% !important;
+  height: calc(100% - 42px) !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Area Editor */
+.ql-editor {
+  @apply max-w-full whitespace-pre-wrap break-words break-all text-gray-800;
+  flex: 1;
+  width: 100% !important;
+  padding: 1rem 2rem !important;
+  min-height: calc(100vh - 350px);
+  background: white;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar Editor */
+.ql-editor::-webkit-scrollbar {
+  width: 6px;
+}
+.ql-editor::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ql-editor::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded;
+  transition: background 0.2s ease;
+}
+.ql-editor::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Tabel di Editor */
+.ql-editor table {
+  overflow-x: auto;
+  display: block;
+}
+
+/* iFrame Video Youtube */
+.ql-editor iframe {
+  width: 100% !important;
+  max-width: 600px !important;  /* 🔹 Ukuran sedang */
+  aspect-ratio: 16 / 9 !important;
+  height: auto !important;
+  border-radius: 6px;
+  margin: 1.5rem auto;           /* 🔹 Auto biar center */
+  display: block;                /* 🔹 Supaya center-nya berfungsi */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.editable-table {
+  @apply w-full border-collapse my-2 table-auto;
+}
+
+.editable-table td,
+.editable-table th {
+  @apply border border-gray-300 p-2 align-top min-w-[60px] text-sm;
+  word-wrap: break-word;
+}
+
+.editable-table td:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.25);
+}
+
+/* Tombol Custom Editor */
+.editor-toolbar-btn {
+  @apply px-3 py-1 rounded text-sm font-medium transition;
+}
+
+.editor-toolbar-btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.editor-toolbar-btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300;
+}
+
+.editor-toolbar-btn-success {
+  @apply bg-green-600 text-white hover:bg-green-700;
+}
+
+/* Umum */
+button {
+  @apply transition-colors duration-150;
+}
+
+/* ===============================
+   📱 RESPONSIVE
+   =============================== */
+@media (max-width: 640px) {
+  .dashboard-sidebar {
+    @apply w-56;
+  }
+
+  .dashboard-main {
+    @apply ml-56 p-4;
+  }
+
+  .ql-editor {
+    @apply text-sm;
+  }
+
+  .editable-table td,
+  .editable-table th {
+    @apply text-xs;
+  }
+
+  .content-box {
+    max-height: 60vh;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* ✅ Scrollable wrapper khusus editor */
+.editor-scroll {
+  height: calc(100vh - 340px); /* editor area fleksibel */
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: white;
+  border-radius: 0 0 0.5rem 0.5rem;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar custom editor */
+.editor-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.editor-scroll::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded;
+}
+.editor-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* ====== QUILL EDITOR FIX SCROLLABLE ====== */
+.editor-container {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: white;
+}
+
+/* Pembungkus editor keseluruhan */
+.quill-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 340px); /* 🧭 bisa diubah tergantung layout */
+}
+
+/* Toolbar tetap di atas area editor */
+.quill-wrapper .ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Area isi teks bisa scroll */
+.editor-scroll .ql-container {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: none !important;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: #fff;
+  padding-bottom: 40px;
+}
+
+/* Scrollbar custom biar halus */
+.editor-scroll .ql-container::-webkit-scrollbar {
+  width: 8px;
+}
+.editor-scroll .ql-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+.editor-scroll .ql-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
