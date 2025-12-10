@@ -11,7 +11,7 @@ export default function EditCategoryPage() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/categories/${id}`, {
+        const res = await fetch(`http://localhost.guide_be:5503/api/categories/${id}`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -27,7 +27,7 @@ export default function EditCategoryPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/categories/${id}`, {
+      const res = await fetch(`http://localhost.guide_be:5503/api/categories/${id}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

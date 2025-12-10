@@ -10,7 +10,7 @@ export default function CategoryListPage() {
   // 🔹 Ambil data kategori dari backend
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/categories", {
+      const res = await fetch("http://localhost.guide_be:5503/api/categories", {
         credentials: "include",
       });
 
@@ -43,7 +43,7 @@ export default function CategoryListPage() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/categories/${id}`, {
+      const res = await fetch(`http://localhost.guide_be:5503/api/categories/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

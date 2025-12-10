@@ -13,7 +13,7 @@ export default function Sidebar({ isAdmin = false }) {
   useEffect(() => {
     async function fetchMenus() {
       try {
-        const resCat = await fetch("http://localhost:5000/api/categories");
+        const resCat = await fetch("http://localhost.guide_be:5503/api/categories");
         const catData = await resCat.json();
 
         if (catData.success && catData.data.length) {
