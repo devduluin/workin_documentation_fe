@@ -28,7 +28,7 @@ export default function DynamicContent({ selected }) {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/api/sections/document/${selected.submenu.id}`
+          `http://localhost.guide_be:5503/api/sections/document/${selected.submenu.id}`
         );
 
         if (res.ok) {
@@ -136,7 +136,7 @@ export default function DynamicContent({ selected }) {
       if (sectionId) {
         // Update section
         response = await fetch(
-          `http://localhost:5000/api/sections/${sectionId}`,
+          `http://localhost.guide_be:5503/api/sections/${sectionId}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -146,7 +146,7 @@ export default function DynamicContent({ selected }) {
         );
       } else {
         // Create section baru
-        response = await fetch("http://localhost:5000/api/sections", {
+        response = await fetch("http://localhost.guide_be:5503/api/sections", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",

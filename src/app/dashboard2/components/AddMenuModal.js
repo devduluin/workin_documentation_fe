@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "http://localhost.guide_be:5503/api";
 
 export default function AddMenuModal({ onClose, onSave }) {
   const [categories, setCategories] = useState([]);

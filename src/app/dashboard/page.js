@@ -38,7 +38,7 @@ export default function DashboardPage() {
   // 🔹 Ambil documents dari backend
   const fetchDocuments = async (categoryId = null) => {
     try {
-      let url = "http://localhost:5000/api/documents";
+      let url = "http://localhost.guide_be:5503/api/documents";
       if (categoryId) url += `?categoryId=${categoryId}`;
 
       const res = await fetch(url, {
@@ -94,7 +94,7 @@ export default function DashboardPage() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/documents/${id}`, {
+      const res = await fetch(`http://localhost.guide_be:5503/api/documents/${id}`, {
         method: "DELETE",
         credentials: "include",
         headers: {

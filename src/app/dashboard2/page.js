@@ -10,7 +10,7 @@ import "./styles/dashboard.css";
 import "react-quill-new/dist/quill.snow.css";
 import { LogOut } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "http://localhost.guide_be:5503/api";
 axios.defaults.withCredentials = true;
 
 export default function DashboardPage() {

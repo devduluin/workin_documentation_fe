@@ -39,7 +39,7 @@ export default function DocumentsPage() {
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
 
-    await fetch(`http://localhost:5000/api/documents/${id}`, {
+    await fetch(`http://localhost.guide_be:5503/api/documents/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

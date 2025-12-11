@@ -24,7 +24,7 @@ export default function EditSectionPage() {
     if (!sectionId) return;
     (async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/sections/${sectionId}`);
+        const res = await fetch(`http://localhost.guide_be:5503/api/sections/${sectionId}`);
         if (!res.ok) throw new Error("Gagal fetch data");
         const result = await res.json();
         const section = result.data;
@@ -105,7 +105,7 @@ export default function EditSectionPage() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/api/sections/${sectionId}`, {
+      const res = await fetch(`http://localhost.guide_be:5503/api/sections/${sectionId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, content }),

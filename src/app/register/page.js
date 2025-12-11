@@ -29,7 +29,7 @@ export default function RegisterPage() {
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/auth/register",
+      "http://localhost.guide_be:5503/api/auth/register",
       { username, email, password },
       { withCredentials: true }
     );

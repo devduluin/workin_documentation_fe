@@ -22,7 +22,7 @@ export default function Sidebar({ isAdmin = false }) {
           const categoriesWithDocs = await Promise.all(
             categories.map(async (cat) => {
               const resDocs = await fetch(
-                `http://localhost:5000/api/documents/category/${cat.id}`
+                `http://localhost.guide_be:5503/api/documents/category/${cat.id}`
               );
               const docData = await resDocs.json();
 
@@ -61,7 +61,7 @@ export default function Sidebar({ isAdmin = false }) {
   // Admin rename handler
   const handleRenameSubmit = async (docId, newTitle) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/documents/${docId}`, {
+      const res = await fetch(`http://localhost.guide_be:5503/api/documents/${docId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -24,7 +24,7 @@ export default function DocumentPage({ params }) {
   useEffect(() => {
     if (!documentId) return;
 
-    fetch(`http://localhost:5000/api/sections/document/${documentId}`)
+    fetch(`http://localhost.guide_be:5503/api/sections/document/${documentId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data.length > 0) {
@@ -75,7 +75,7 @@ export default function DocumentPage({ params }) {
     }
 
     const timer = setTimeout(() => {
-      fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(query)}`)
+      fetch(`http://localhost.guide_be:5503/api/search?q=${encodeURIComponent(query)}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) setSearchResults(data.data);
