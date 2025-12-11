@@ -5,6 +5,7 @@ export default function DocumentsPage() {
   const [documents, setDocuments] = useState([]);
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(true);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const fetchDocuments = async () => {
     const res = await fetch("/api/documents");
@@ -39,7 +40,7 @@ export default function DocumentsPage() {
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
 
-    await fetch(`http://localhost.guide_be:5503/api/documents/${id}`, {
+    await fetch(`${API_URL}/documents/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

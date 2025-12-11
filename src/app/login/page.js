@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,7 +21,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost.guide_be:5503/api/auth/login",
+        `${API_URL}/auth/login`,
         { username, password },
         { withCredentials: true }
       );

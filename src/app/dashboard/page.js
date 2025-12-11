@@ -11,6 +11,8 @@ export default function DashboardPage() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   // 🔹 Cek session user berdasarkan cookie httpOnly
   const checkAuth = async () => {
     try {
@@ -38,7 +40,7 @@ export default function DashboardPage() {
   // 🔹 Ambil documents dari backend
   const fetchDocuments = async (categoryId = null) => {
     try {
-      let url = "http://localhost.guide_be:5503/api/documents";
+      let url = API_URL + "/documents";
       if (categoryId) url += `?categoryId=${categoryId}`;
 
       const res = await fetch(url, {
@@ -94,7 +96,7 @@ export default function DashboardPage() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost.guide_be:5503/api/documents/${id}`, {
+      const res = await fetch(`${API_URL}/documents/${id}`, {
         method: "DELETE",
         credentials: "include",
         headers: {
@@ -158,21 +160,20 @@ export default function DashboardPage() {
       {/* Main Content */}
       <main className="flex-1 ml-64 overflow-y-auto p-6 min-h-screen">
         <div className="flex justify-between items-center mb-6">
-  <h1 className="text-2xl font-bold">Dashboard Admin</h1>
-  <div className="flex gap-3">
-    <Link href="/dashboard/categories">
-      <button className="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700">
-        Kelola Kategori
-      </button>
-    </Link>
-    <Link href="/dashboard/documents/new">
-      <button className="px-4 py-2 bg-green-600 text-white rounded shadow hover:bg-green-700">
-        Tambah Dokumen Baru
-      </button>
-    </Link>
-  </div>
-</div>
-
+          <h1 className="text-2xl font-bold">Dashboard Admin</h1>
+          <div className="flex gap-3">
+            <Link href="/dashboard/categories">
+              <button className="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700">
+                Kelola Kategori
+              </button>
+            </Link>
+            <Link href="/dashboard/documents/new">
+              <button className="px-4 py-2 bg-green-600 text-white rounded shadow hover:bg-green-700">
+                Tambah Dokumen Baru
+              </button>
+            </Link>
+          </div>
+        </div>
 
         {loading ? (
           <p>Loading...</p>

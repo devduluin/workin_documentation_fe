@@ -18,6 +18,7 @@ export default function DynamicContent({ selected }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const quillRef = useRef(null);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   // 🔹 Fetch content berdasarkan documentId
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function DynamicContent({ selected }) {
 
       try {
         const res = await fetch(
-          `http://localhost.guide_be:5503/api/sections/document/${selected.submenu.id}`
+          `${API_URL}/sections/document/${selected.submenu.id}`
         );
 
         if (res.ok) {
@@ -80,7 +81,9 @@ export default function DynamicContent({ selected }) {
     });
 
     if (url) {
-      const match = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/i);
+      const match = url.match(
+        /(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/i
+      );
       if (match && match[1]) {
         const embedUrl = `https://www.youtube.com/embed/${match[1]}`;
         const editor = quillRef.current.getEditor();
@@ -135,18 +138,15 @@ export default function DynamicContent({ selected }) {
       let response;
       if (sectionId) {
         // Update section
-        response = await fetch(
-          `http://localhost.guide_be:5503/api/sections/${sectionId}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(payload),
-          }
-        );
+        response = await fetch(`${API_URL}/sections/${sectionId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(payload),
+        });
       } else {
         // Create section baru
-        response = await fetch("http://localhost.guide_be:5503/api/sections", {
+        response = await fetch(`${API_URL}/sections`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",

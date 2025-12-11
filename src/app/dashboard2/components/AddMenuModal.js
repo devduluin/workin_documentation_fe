@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost.guide_be:5503/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AddMenuModal({ onClose, onSave }) {
   const [categories, setCategories] = useState([]);
@@ -18,7 +18,9 @@ export default function AddMenuModal({ onClose, onSave }) {
     setMounted(true);
     const fetchCategories = async () => {
       try {
-        const res = await axios.get(`${API_URL}/categories`, { withCredentials: true });
+        const res = await axios.get(`${API_URL}/categories`, {
+          withCredentials: true,
+        });
         setCategories(res.data.data || []);
       } catch (err) {
         console.error("❌ Gagal mengambil kategori:", err);
@@ -49,10 +51,14 @@ export default function AddMenuModal({ onClose, onSave }) {
   return createPortal(
     <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-[9999]">
       <div className="bg-white p-6 rounded-lg w-96 shadow-xl">
-        <h3 className="text-lg font-semibold mb-3">Tambah Kategori / Dokumen</h3>
+        <h3 className="text-lg font-semibold mb-3">
+          Tambah Kategori / Dokumen
+        </h3>
 
         {/* Dropdown pilih kategori */}
-        <label className="block mb-2 text-sm text-gray-700">Pilih Kategori</label>
+        <label className="block mb-2 text-sm text-gray-700">
+          Pilih Kategori
+        </label>
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}

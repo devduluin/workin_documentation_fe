@@ -10,7 +10,7 @@ import "./styles/dashboard.css";
 import "react-quill-new/dist/quill.snow.css";
 import { LogOut } from "lucide-react";
 
-const API_URL = "http://localhost.guide_be:5503/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 axios.defaults.withCredentials = true;
 
 export default function DashboardPage() {
@@ -86,14 +86,17 @@ export default function DashboardPage() {
           categoryId = existingCategory.id;
           newCategory = existingCategory;
         } else {
-          const catRes = await axios.post(`${API_URL}/categories`, { name: menuName });
+          const catRes = await axios.post(`${API_URL}/categories`, {
+            name: menuName,
+          });
           newCategory = catRes.data.data;
           categoryId = newCategory.id;
         }
       }
 
       if (submenuName.trim()) {
-        if (!categoryId) return console.warn("⚠️ Tidak ada kategori untuk dokumen ini!");
+        if (!categoryId)
+          return console.warn("⚠️ Tidak ada kategori untuk dokumen ini!");
         const docRes = await axios.post(`${API_URL}/documents`, {
           title: submenuName,
           categoryId,
@@ -122,9 +125,13 @@ export default function DashboardPage() {
   const handleRename = async (target, newTitle) => {
     try {
       if (target.type === "menu") {
-        await axios.put(`${API_URL}/categories/${target.id}`, { name: newTitle });
+        await axios.put(`${API_URL}/categories/${target.id}`, {
+          name: newTitle,
+        });
       } else {
-        await axios.put(`${API_URL}/documents/${target.id}`, { title: newTitle });
+        await axios.put(`${API_URL}/documents/${target.id}`, {
+          title: newTitle,
+        });
       }
       await fetchData();
     } catch (err) {
@@ -133,23 +140,23 @@ export default function DashboardPage() {
   };
 
   const executeDelete = async () => {
-  try {
-    if (targetDelete.type === "menu") {
-      await axios.delete(`${API_URL}/categories/${targetDelete.id}`);
-    } else {
-      await axios.delete(`${API_URL}/documents/${targetDelete.id}`);
+    try {
+      if (targetDelete.type === "menu") {
+        await axios.delete(`${API_URL}/categories/${targetDelete.id}`);
+      } else {
+        await axios.delete(`${API_URL}/documents/${targetDelete.id}`);
+      }
+
+      setShowConfirmModal(false);
+
+      // 🧹 Reset dokumen/halaman aktif biar gak nyangkut di data yang udah kehapus
+      setSelected({ menu: null, submenu: null });
+
+      await fetchData();
+    } catch (err) {
+      console.error("❌ Gagal hapus:", err);
     }
-
-    setShowConfirmModal(false);
-
-    // 🧹 Reset dokumen/halaman aktif biar gak nyangkut di data yang udah kehapus
-    setSelected({ menu: null, submenu: null });
-
-    await fetchData();
-  } catch (err) {
-    console.error("❌ Gagal hapus:", err);
-  }
-};
+  };
 
   const confirmDelete = (target) => {
     setTargetDelete(target);
@@ -199,8 +206,12 @@ export default function DashboardPage() {
       <main className="dashboard-main">
         <header className="dashboard-header mb-6 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">Dashboard Admin</h1>
-            <p className="text-gray-600">Kelola kategori dan konten dokumentasi HRMS</p>
+            <h1 className="text-2xl font-bold text-gray-800">
+              Dashboard Admin
+            </h1>
+            <p className="text-gray-600">
+              Kelola kategori dan konten dokumentasi HRMS
+            </p>
           </div>
         </header>
 

@@ -7,11 +7,12 @@ export default function EditCategoryPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const res = await fetch(`http://localhost.guide_be:5503/api/categories/${id}`, {
+        const res = await fetch(`${API_URL}/categories/${id}`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -27,7 +28,7 @@ export default function EditCategoryPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost.guide_be:5503/api/categories/${id}`, {
+      const res = await fetch(`${API_URL}/categories/${id}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

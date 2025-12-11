@@ -15,6 +15,7 @@ export default function DocumentPage({ params }) {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [contentHeight, setContentHeight] = useState("100vh");
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const contentRef = useRef(null);
   const mainRef = useRef(null);
@@ -24,7 +25,7 @@ export default function DocumentPage({ params }) {
   useEffect(() => {
     if (!documentId) return;
 
-    fetch(`http://localhost.guide_be:5503/api/sections/document/${documentId}`)
+    fetch(`${API_URL}/sections/document/${documentId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data.length > 0) {
@@ -75,7 +76,7 @@ export default function DocumentPage({ params }) {
     }
 
     const timer = setTimeout(() => {
-      fetch(`http://localhost.guide_be:5503/api/search?q=${encodeURIComponent(query)}`)
+      fetch(`${API_URL}/search?q=${encodeURIComponent(query)}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) setSearchResults(data.data);

@@ -7,8 +7,7 @@ export default function NewCategoryPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const API_BASE =
-    process.env.NEXT_PUBLIC_API_BASE || "http://localhost.guide_be:5503/api";
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,14 +20,13 @@ export default function NewCategoryPage() {
     setLoading(true);
     try {
       const res = await fetch(`${API_BASE}/categories`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  credentials: "include", // ⬅️ INI PENTING BANGET
-  body: JSON.stringify({ name }),
-});
-
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // ⬅️ INI PENTING BANGET
+        body: JSON.stringify({ name }),
+      });
 
       if (!res.ok) {
         const errData = await res.json();
@@ -65,7 +63,9 @@ export default function NewCategoryPage() {
         className="space-y-4 bg-white p-4 rounded-xl shadow"
       >
         <div>
-          <label className="block text-sm font-medium mb-1">Nama Kategori</label>
+          <label className="block text-sm font-medium mb-1">
+            Nama Kategori
+          </label>
           <input
             type="text"
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"

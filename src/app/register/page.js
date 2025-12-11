@@ -1,4 +1,5 @@
-{/*"use client";
+{
+  /*"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleRegister = async (e) => {
   e.preventDefault();
@@ -29,7 +31,7 @@ export default function RegisterPage() {
 
   try {
     const response = await axios.post(
-      "http://localhost.guide_be:5503/api/auth/register",
+      `${API_URL}/auth/register`,
       { username, email, password },
       { withCredentials: true }
     );
@@ -142,4 +144,5 @@ export default function RegisterPage() {
       </div>
     </div>
   );
-}*/}
+}*/
+}

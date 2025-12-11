@@ -6,11 +6,12 @@ import { Pencil, Trash } from "lucide-react";
 export default function CategoryListPage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   // 🔹 Ambil data kategori dari backend
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://localhost.guide_be:5503/api/categories", {
+      const res = await fetch(`${API_URL}/categories`, {
         credentials: "include",
       });
 
@@ -43,7 +44,7 @@ export default function CategoryListPage() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost.guide_be:5503/api/categories/${id}`, {
+      const res = await fetch(`${API_URL}/categories/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

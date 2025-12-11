@@ -9,6 +9,8 @@ export default function Header() {
   const router = useRouter();
   const timeoutRef = useRef(null);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     if (query.trim() === "") {
       setResults([]);
@@ -20,7 +22,7 @@ export default function Header() {
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(async () => {
       try {
-        const res = await fetch(`http://localhost.guide_be:5503/api/search?q=${query}`);
+        const res = await fetch(`${API_URL}/search?q=${query}`);
         const data = await res.json();
         if (data.success) {
           setResults(data.data);
@@ -38,7 +40,9 @@ export default function Header() {
     setShowDropdown(false);
     setQuery("");
     if (item.sectionId) {
-      router.push(`/docs/${item.categoryId}/${item.documentId}#${item.sectionId}`);
+      router.push(
+        `/docs/${item.categoryId}/${item.documentId}#${item.sectionId}`
+      );
     } else {
       router.push(`/docs/${item.categoryId}/${item.documentId}`);
     }
