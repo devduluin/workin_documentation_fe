@@ -10,12 +10,12 @@ export default function Sidebar({ isAdmin = false }) {
   const [editingDocId, setEditingDocId] = useState(null);
   const [editingTitle, setEditingTitle] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     async function fetchMenus() {
       try {
-        const resCat = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/categories`
-        );
+        const resCat = await fetch(`${API_URL}/categories`);
         const catData = await resCat.json();
 
         if (catData.success && catData.data.length) {
@@ -24,7 +24,7 @@ export default function Sidebar({ isAdmin = false }) {
           const categoriesWithDocs = await Promise.all(
             categories.map(async (cat) => {
               const resDocs = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/documents/category/${cat.id}`
+                `${API_URL}/documents/category/${cat.id}`
               );
               const docData = await resDocs.json();
 
@@ -50,7 +50,7 @@ export default function Sidebar({ isAdmin = false }) {
     }
 
     fetchMenus();
-  }, []);
+  }, [API_URL]);
 
   useEffect(() => {
     menus.forEach((menu, idx) => {
@@ -63,15 +63,12 @@ export default function Sidebar({ isAdmin = false }) {
   // Admin rename handler
   const handleRenameSubmit = async (docId, newTitle) => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/documents/${docId}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({ title: newTitle }),
-        }
-      );
+      const res = await fetch(`${API_URL}/documents/${docId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ title: newTitle }),
+      });
 
       if (!res.ok) throw new Error("Rename failed");
 

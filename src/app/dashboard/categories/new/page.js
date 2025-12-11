@@ -8,7 +8,7 @@ export default function NewCategoryPage() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const API_BASE =
-    process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000/api";
+    process.env.NEXT_PUBLIC_API_BASE || "http://localhost.guide_be:5503/api";
 
   const handleSubmit = async (e) => {
     e.preventDefault();

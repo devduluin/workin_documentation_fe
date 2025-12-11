@@ -20,7 +20,7 @@ export default function Header() {
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/search?q=${query}`);
+        const res = await fetch(`http://localhost.guide_be:5503/api/search?q=${query}`);
         const data = await res.json();
         if (data.success) {
           setResults(data.data);

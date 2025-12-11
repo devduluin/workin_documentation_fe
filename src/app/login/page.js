@@ -20,7 +20,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost.guide_be:5503/api/auth/login",
         { username, password },
         { withCredentials: true }
       );
