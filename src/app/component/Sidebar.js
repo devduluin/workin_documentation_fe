@@ -10,10 +10,12 @@ export default function Sidebar({ isAdmin = false }) {
   const [editingDocId, setEditingDocId] = useState(null);
   const [editingTitle, setEditingTitle] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     async function fetchMenus() {
       try {
-        const resCat = await fetch("http://localhost.guide_be:5503/api/categories");
+        const resCat = await fetch(`${API_URL}/categories`);
         const catData = await resCat.json();
 
         if (catData.success && catData.data.length) {
@@ -22,7 +24,7 @@ export default function Sidebar({ isAdmin = false }) {
           const categoriesWithDocs = await Promise.all(
             categories.map(async (cat) => {
               const resDocs = await fetch(
-                `http://localhost.guide_be:5503/api/documents/category/${cat.id}`
+                `${API_URL}/documents/category/${cat.id}`
               );
               const docData = await resDocs.json();
 
@@ -48,7 +50,7 @@ export default function Sidebar({ isAdmin = false }) {
     }
 
     fetchMenus();
-  }, []);
+  }, [API_URL]);
 
   useEffect(() => {
     menus.forEach((menu, idx) => {
@@ -61,7 +63,7 @@ export default function Sidebar({ isAdmin = false }) {
   // Admin rename handler
   const handleRenameSubmit = async (docId, newTitle) => {
     try {
-      const res = await fetch(`http://localhost.guide_be:5503/api/documents/${docId}`, {
+      const res = await fetch(`${API_URL}/documents/${docId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -134,9 +136,7 @@ export default function Sidebar({ isAdmin = false }) {
                             <input
                               type="text"
                               value={editingTitle}
-                              onChange={(e) =>
-                                setEditingTitle(e.target.value)
-                              }
+                              onChange={(e) => setEditingTitle(e.target.value)}
                               className="border p-1 rounded text-sm flex-1"
                             />
                             <button
