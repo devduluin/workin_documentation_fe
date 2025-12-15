@@ -92,8 +92,8 @@ export default function Sidebar({ isAdmin = false }) {
     <div className="w-64 bg-gray-50 shadow flex flex-col sticky top-0 h-screen overflow-y-auto">
       <div className="p-5 border-b border-gray-200 flex flex-col items-center justify-center text-center space-y-0">
         <img
-          src="/duluin-hrms.png"
-          alt="Logo HRMS"
+          src="/workin-color.png"
+          alt="Logo Workin"
           className="w-28 h-auto object-contain -my-2 block"
         />
         <h3 className="text-base font-bold text-gray-800 leading-tight mt-5">

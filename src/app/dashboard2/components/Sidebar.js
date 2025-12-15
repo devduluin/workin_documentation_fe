@@ -46,7 +46,7 @@ export default function Sidebar({
     <aside className="dashboard-sidebar">
       {/* ==== Header ==== */}
       <div className="dashboard-sidebar-header">
-        <img src="/duluin-hrms.png" alt="Logo HRMS" className="dashboard-logo" />
+        <img src="/workin-color.png" alt="Logo Workin" className="dashboard-logo" />
         <h3 className="dashboard-doc-title">Documentation</h3>
 
         <div className="dashboard-header-btns">

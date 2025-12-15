@@ -48,8 +48,8 @@ export default function LoginPage() {
       {/* Header Banner */}
       <div className="bg-[#052766] text-white py-8 text-center">
         <div className="flex flex-col items-center">
-          <img src="/logo-duluin.png" alt="Duluin HRMS" className="h-12 mb-2" />
-          <h1 className="text-3xl font-bold">Portal Dokumentasi Teknis</h1>
+          <img src="/logo-workin-white.png" alt="Workin by Duluin" className="h-12 mb-2" />
+          <h1 className="text-3xl font-bold header-title"> Portal Dokumentasi Teknis </h1>
         </div>
       </div>
 

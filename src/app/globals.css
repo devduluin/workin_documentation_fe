@@ -23,25 +23,52 @@ body {
 /* === Typography === */
 p {
   @apply font-sans;
+  color: #000000
 }
 
 h1 {
   font-size: 36px;
   margin-bottom: 1rem;
   line-height: 1.2;
+  color: #000000
 }
 
 h2 {
   font-size: 30px;
   margin-bottom: 1rem;
   line-height: 1.2;
+  color: #000000
 }
 
 h3 {
   font-size: 1.125rem;
   margin-bottom: 0.75rem;
+  color: #000000
 }
 
+li {
+  color: #000000
+}
+
+td {
+  color: #000000
+}
+
+input::placeholder {
+  color: lab(35.6337% -1.58697 -10.8425)   /* warna teks placeholder */
+}
+
+input {
+  color: lab(35.6337% -1.58697 -10.8425)
+}
+
+.header-title {
+  color: #ffffff
+}
+
+label {
+  color: #000000
+}
 /* === Cards === */
 .card {
   border-radius: 0.5rem;

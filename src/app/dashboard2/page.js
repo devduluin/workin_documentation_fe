@@ -210,7 +210,7 @@ export default function DashboardPage() {
               Dashboard Admin
             </h1>
             <p className="text-gray-600">
-              Kelola kategori dan konten dokumentasi HRMS
+              Kelola kategori dan konten dokumentasi Workin by Duluin
             </p>
           </div>
         </header>
