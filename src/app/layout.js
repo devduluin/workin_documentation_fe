@@ -2,8 +2,8 @@ import "quill/dist/quill.snow.css"; // ✅ penting
 import "./globals.css";
 
 export const metadata = {
-  title: "Duluin HRMS Docs",
-  description: "Dokumentasi resmi HRMS",
+  title: "Workin by Duluin Documentation",
+  description: "Dokumentasi resmi Workin by Duluin",
 };
 
 export default function RootLayout({ children }) {
