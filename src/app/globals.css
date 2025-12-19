@@ -69,6 +69,10 @@ input {
 label {
   color: #000000
 }
+
+strong {
+  color: #000000
+}
 /* === Cards === */
 .card {
   border-radius: 0.5rem;
@@ -87,6 +91,7 @@ label {
 }
 
 /* === Sidebar === */
+/*
 .sidebar {
   position: fixed;
   top: 0;
@@ -96,14 +101,15 @@ label {
   padding: 1.25rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  z-index: 10;  /* Tambahan untuk memastikan di atas elemen lain */
+  z-index: 10;
 }
 
 @media (max-width: 1024px) {
   .sidebar {
-    display: none;  /* Sembunyikan sidebar di layar kecil */
+    display: none;
   }
 }
+*/
 
 .main-content {
   margin-left: 16rem;
@@ -115,12 +121,19 @@ label {
 .preview-image1,
 .preview-image2 {
   height: auto;
-  width: 900px;
+  width: 100%;
+  max-width: 900px;
 }
 
 .judul {
   padding-top: 30px;
   padding-left: 50px;
+}
+
+@media (max-width: 768px) {
+  .judul {
+    padding-left: 20px;
+  }
 }
 
 /* === Section spacing === */
@@ -253,9 +266,36 @@ label {
   to { opacity: 1; transform: translateY(0); }
 }
 
-html,
-body {
-  height: 100%;
-  overflow-x: hidden; /* ❌ jangan sembunyikan scroll vertikal */
-  overflow-y: auto;   /* ✅ biarkan bisa discroll */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.25s ease-out forwards;
+}
+
+.animate-slide-out {
+  animation: slideOut 0.25s ease-in forwards;
+}
+
+.toc::-webkit-scrollbar {
+  width: 0;
+}
+.toc {
+  scrollbar-width: none;
+}
+

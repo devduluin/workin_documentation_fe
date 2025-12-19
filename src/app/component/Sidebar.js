@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export default function Sidebar({ isAdmin = false }) {
+export default function Sidebar({ isAdmin = false, onClose }) {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState(null);
   const [menus, setMenus] = useState([]);
