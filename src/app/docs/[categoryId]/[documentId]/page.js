@@ -2,26 +2,27 @@
 
 import "quill/dist/quill.snow.css";
 import "../../../globals.css";
-import React, { useEffect, useLayoutEffect, useState, useRef } from "react";
-import Sidebar from "../../../component/Sidebar";
-import { Search } from "lucide-react"; // ✅ Tambahkan ikon dari lucide-react
+import React, { useEffect, useState, useRef } from "react";
+import { Search } from "lucide-react";
+import TableOfContents from "@/app/component/TableOfContents";
 
 export default function DocumentPage({ params }) {
-  const { categoryId, documentId } = React.use(params);
+  const { documentId } = React.use(params);
 
   const [content, setContent] = useState("");
   const [sections, setSections] = useState([]);
   const [activeId, setActiveId] = useState(null);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [contentHeight, setContentHeight] = useState("100vh");
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const contentRef = useRef(null);
-  const mainRef = useRef(null);
-  const searchRef = useRef(null);
+  const isProgrammaticScroll = useRef(false);
 
-  // 🔹 Fetch sections
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  /* =====================
+     FETCH CONTENT
+  ===================== */
   useEffect(() => {
     if (!documentId) return;
 
@@ -31,149 +32,187 @@ export default function DocumentPage({ params }) {
         if (data.success && data.data.length > 0) {
           const html = data.data[0].content || "";
 
-          const fixedHtml = html.replace(/<h2>(.*?)<\/h2>/g, (match, title) => {
-            const plainTitle = title.replace(/<[^>]+>/g, "").trim();
-            const id = plainTitle
+          const fixedHtml = html.replace(/<h2>(.*?)<\/h2>/g, (_, title) => {
+            const plain = title.replace(/<[^>]+>/g, "").trim();
+            const id = plain
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, "-")
               .replace(/^-+|-+$/g, "");
+
             return `<h2 id="${id}">${title}</h2>`;
           });
 
           setContent(fixedHtml);
         } else {
-          setContent("<p>Tidak ada konten untuk dokumen ini.</p>");
+          setContent("<p>Tidak ada konten.</p>");
         }
-      })
-      .catch((err) => console.error("Error fetching section:", err));
+      });
   }, [documentId]);
 
-  // 🔹 Extract <h2>
+  /* =====================
+     EXTRACT TOC
+  ===================== */
   useEffect(() => {
     if (!contentRef.current) return;
 
     const observer = new MutationObserver(() => {
       const headings = contentRef.current.querySelectorAll("h2[id]");
-      if (headings.length > 0) {
-        const list = Array.from(headings).map((h) => ({
+      if (!headings.length) return;
+
+      setSections(
+        Array.from(headings).map((h) => ({
           id: h.id,
           title: h.textContent.trim(),
-        }));
-        setSections(list);
-        observer.disconnect();
-      }
+        }))
+      );
+
+      setActiveId(headings[0].id);
+      observer.disconnect();
     });
 
-    observer.observe(contentRef.current, { childList: true, subtree: true });
+    observer.observe(contentRef.current, {
+      childList: true,
+      subtree: true,
+    });
+
     return () => observer.disconnect();
   }, [content]);
 
-  // 🔹 Global search
+  /* =====================
+     INTERSECTION OBSERVER (BODY SCROLL)
+  ===================== */
+  const getCurrentSection = () => {
+  const headings = Array.from(document.querySelectorAll("h2[id]"));
+
+  const offset = 100; // header height
+  const scrollY = window.scrollY + offset;
+
+  let current = headings[0]?.id;
+
+  for (const h of headings) {
+    if (h.offsetTop <= scrollY) {
+      current = h.id;
+    } else {
+      break;
+    }
+  }
+
+  return current;
+};
+  
+  useEffect(() => {
+  if (!sections.length) return;
+
+  const headings = Array.from(document.querySelectorAll("h2[id]"));
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (isProgrammaticScroll.current) return;
+
+      const current = getCurrentSection();
+      if (current) setActiveId(current);
+    },
+    {
+      root: null,
+      rootMargin: "-96px 0px -60% 0px",
+      threshold: [0, 0.01, 0.1],
+    }
+  );
+
+  headings.forEach((h) => observer.observe(h));
+
+  // 🔥 SCROLL FALLBACK (INI KUNCI UTAMANYA)
+  const onScroll = () => {
+    if (isProgrammaticScroll.current) return;
+    const current = getCurrentSection();
+    if (current) setActiveId(current);
+  };
+
+  window.addEventListener("scroll", onScroll);
+
+  // initial sync
+  onScroll();
+
+  return () => {
+    observer.disconnect();
+    window.removeEventListener("scroll", onScroll);
+  };
+}, [sections]);
+
+  /* =====================
+     TOC CLICK
+  ===================== */
+  const handleTocNavigate = (id) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    isProgrammaticScroll.current = true;
+
+    const y =
+      target.getBoundingClientRect().top + window.scrollY - 80;
+
+    window.scrollTo({
+      top: y,
+      behavior: "smooth",
+    });
+
+    setActiveId(id);
+
+    setTimeout(() => {
+      isProgrammaticScroll.current = false;
+    }, 400);
+  };
+
+  /* =====================
+     SEARCH
+  ===================== */
   useEffect(() => {
     if (!query.trim()) {
       setSearchResults([]);
       return;
     }
 
-    const timer = setTimeout(() => {
+    const t = setTimeout(() => {
       fetch(`${API_URL}/search?q=${encodeURIComponent(query)}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) setSearchResults(data.data);
-        })
-        .catch((err) => console.error("Search error:", err));
+        });
     }, 400);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(t);
   }, [query]);
 
-  // 🔹 Highlight active heading
-  useEffect(() => {
-    if (!contentRef.current || !mainRef.current) return;
-
-    const headings = contentRef.current.querySelectorAll("h2[id]");
-    if (!headings.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-        if (visible.length > 0) {
-          const nextActive = visible[0].target.id;
-          if (nextActive !== activeId) setActiveId(nextActive);
-        }
-      },
-      {
-        root: contentRef.current,
-        rootMargin: "0px 0px -50% 0px",
-        threshold: 0.2,
-      }
-    );
-
-    headings.forEach((h) => observer.observe(h));
-    return () => observer.disconnect();
-  }, [sections, activeId]);
-
-  // 🔹 Auto adjust height of content area
-  useLayoutEffect(() => {
-    const resize = () => {
-      if (searchRef.current) {
-        const topHeight =
-          searchRef.current.offsetTop + searchRef.current.offsetHeight + 24;
-        setContentHeight(`calc(100vh - ${topHeight}px)`);
-      }
-    };
-    resize();
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  }, []);
-
   return (
-    <div className="flex min-h-screen bg-white">
-      {/* Sidebar kiri */}
-      <aside>
-        <Sidebar />
-      </aside>
-
-      {/* Main content */}
-      <main
-        ref={mainRef}
-        className={`flex-1 p-8 scroll-smooth ${
-          sections.length === 0 ? "max-w-full" : "max-w-[calc(100%-16rem)]"
-        }`}
-      >
-        {/* 🔍 Search bar */}
-        <div ref={searchRef} className="flex justify-center mb-6">
+    <div className="flex bg-white">
+      {/* MAIN */}
+      <main className="flex-1 flex flex-col lg:mr-64">
+        {/* SEARCH */}
+        <div className="flex justify-center py-6">
           <div className="relative w-full max-w-md">
-            {/* 🔍 Ikon kaca pembesar */}
-            <Search className="absolute left-3 top-2.5 text-gray-400 w-5 h-5 pointer-events-none" />
-
+            <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
             <input
-              type="text"
-              placeholder="Cari konten di sini..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full border rounded-md pl-10 pr-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              placeholder="Cari konten..."
+              className="w-full border rounded-md pl-10 pr-4 py-2"
             />
 
-            {/* 🔽 Dropdown hasil pencarian */}
             {searchResults.length > 0 && (
-              <div className="absolute z-10 bg-white border rounded-md mt-1 shadow-lg w-full max-h-60 overflow-auto">
-                {searchResults.map((r, index) => (
+              <div className="absolute z-10 bg-white border mt-1 w-full max-h-60 overflow-auto">
+                {searchResults.map((r, i) => (
                   <a
-                    key={`${r.type}-${r.sectionId || r.documentId || index}`}
+                    key={i}
                     href={`/docs/${r.categoryId}/${r.documentId}${
                       r.sectionId ? `#${r.sectionId}` : ""
                     }`}
-                    className="block px-4 py-2 hover:bg-blue-50 text-gray-700"
+                    className="block px-4 py-2 hover:bg-blue-50"
                     onClick={() => setQuery("")}
                   >
-                    <span className="font-semibold">{r.title}</span>
-                    <span className="text-sm text-gray-500 block">
-                      {r.categoryName || "Tanpa Kategori"}
-                    </span>
+                    <strong>{r.title}</strong>
+                    <div className="text-sm text-gray-500">
+                      {r.categoryName}
+                    </div>
                   </a>
                 ))}
               </div>
@@ -181,38 +220,25 @@ export default function DocumentPage({ params }) {
           </div>
         </div>
 
-        {/* Isi konten (scrollable area) */}
+        {/* CONTENT */}
         <div
           ref={contentRef}
-          className="prose max-w-none ql-editor overflow-y-auto pr-4"
-          style={{ height: contentHeight }}
+          className="prose max-w-none ql-editor px-4"
           dangerouslySetInnerHTML={{ __html: content }}
         />
+
+        {/* FOOTER */}
+       <footer className="border-t py-4 flex items-center justify-center text-sm text-gray-500 font-semibold">
+  Copyright © {new Date().getFullYear()} PT. Rasa Aksata Nusantara. All Rights Reserved.
+</footer> 
       </main>
 
-      {/* Daftar Isi kanan */}
-      {sections.length > 0 && (
-        <aside className="w-64 bg-gray-50 shadow-inner border-l border-gray-200 sticky top-0 h-screen overflow-y-auto">
-          <div className="p-4 border-b border-gray-200">
-            <h3 className="text-lg font-bold text-gray-800">Daftar Isi</h3>
-          </div>
-          <nav className="flex flex-col p-4 space-y-2">
-            {sections.map((s) => (
-              <a
-                key={s.id}
-                href={`#${s.id}`}
-                className={`px-3 py-2 rounded-md transition scroll-smooth ${
-                  activeId === s.id
-                    ? "bg-blue-500 text-white font-semibold shadow-md"
-                    : "text-gray-700 hover:bg-blue-100 hover:text-blue-800"
-                }`}
-              >
-                {s.title}
-              </a>
-            ))}
-          </nav>
-        </aside>
-      )}
+      {/* TOC */}
+      <TableOfContents
+        sections={sections}
+        activeId={activeId}
+        onNavigate={handleTocNavigate}
+      />
     </div>
   );
 }
