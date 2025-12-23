@@ -15,6 +15,9 @@ export default function DocumentPage({ params }) {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  // 🔥 STATE ANIMASI
+  const [contentReady, setContentReady] = useState(false);
+
   const contentRef = useRef(null);
   const isProgrammaticScroll = useRef(false);
 
@@ -25,6 +28,8 @@ export default function DocumentPage({ params }) {
   ===================== */
   useEffect(() => {
     if (!documentId) return;
+
+    setContentReady(false); // reset animasi
 
     fetch(`${API_URL}/sections/document/${documentId}`)
       .then((res) => res.json())
@@ -46,6 +51,9 @@ export default function DocumentPage({ params }) {
         } else {
           setContent("<p>Tidak ada konten.</p>");
         }
+
+        // 🔥 trigger animasi setelah konten siap
+        setTimeout(() => setContentReady(true), 50);
       });
   }, [documentId]);
 
@@ -79,65 +87,54 @@ export default function DocumentPage({ params }) {
   }, [content]);
 
   /* =====================
-     INTERSECTION OBSERVER (BODY SCROLL)
+     SCROLL SPY
   ===================== */
   const getCurrentSection = () => {
-  const headings = Array.from(document.querySelectorAll("h2[id]"));
+    const headings = Array.from(document.querySelectorAll("h2[id]"));
+    const offset = 100;
+    const scrollY = window.scrollY + offset;
 
-  const offset = 100; // header height
-  const scrollY = window.scrollY + offset;
-
-  let current = headings[0]?.id;
-
-  for (const h of headings) {
-    if (h.offsetTop <= scrollY) {
-      current = h.id;
-    } else {
-      break;
+    let current = headings[0]?.id;
+    for (const h of headings) {
+      if (h.offsetTop <= scrollY) current = h.id;
+      else break;
     }
-  }
+    return current;
+  };
 
-  return current;
-};
-  
   useEffect(() => {
-  if (!sections.length) return;
+    if (!sections.length) return;
 
-  const headings = Array.from(document.querySelectorAll("h2[id]"));
+    const headings = Array.from(document.querySelectorAll("h2[id]"));
 
-  const observer = new IntersectionObserver(
-    (entries) => {
+    const observer = new IntersectionObserver(
+      () => {
+        if (isProgrammaticScroll.current) return;
+        const current = getCurrentSection();
+        if (current) setActiveId(current);
+      },
+      {
+        rootMargin: "-96px 0px -60% 0px",
+        threshold: [0, 0.01],
+      }
+    );
+
+    headings.forEach((h) => observer.observe(h));
+
+    const onScroll = () => {
       if (isProgrammaticScroll.current) return;
-
       const current = getCurrentSection();
       if (current) setActiveId(current);
-    },
-    {
-      root: null,
-      rootMargin: "-96px 0px -60% 0px",
-      threshold: [0, 0.01, 0.1],
-    }
-  );
+    };
 
-  headings.forEach((h) => observer.observe(h));
+    window.addEventListener("scroll", onScroll);
+    onScroll();
 
-  // 🔥 SCROLL FALLBACK (INI KUNCI UTAMANYA)
-  const onScroll = () => {
-    if (isProgrammaticScroll.current) return;
-    const current = getCurrentSection();
-    if (current) setActiveId(current);
-  };
-
-  window.addEventListener("scroll", onScroll);
-
-  // initial sync
-  onScroll();
-
-  return () => {
-    observer.disconnect();
-    window.removeEventListener("scroll", onScroll);
-  };
-}, [sections]);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [sections]);
 
   /* =====================
      TOC CLICK
@@ -148,11 +145,8 @@ export default function DocumentPage({ params }) {
 
     isProgrammaticScroll.current = true;
 
-    const y =
-      target.getBoundingClientRect().top + window.scrollY - 80;
-
     window.scrollTo({
-      top: y,
+      top: target.getBoundingClientRect().top + window.scrollY - 80,
       behavior: "smooth",
     });
 
@@ -220,17 +214,21 @@ export default function DocumentPage({ params }) {
           </div>
         </div>
 
-        {/* CONTENT */}
+        {/* 🔥 CONTENT WITH ANIMATION */}
         <div
           ref={contentRef}
-          className="prose max-w-none ql-editor px-4"
+          className={`
+            prose max-w-none ql-editor px-4
+            transition-all duration-500 ease-out
+            ${contentReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}
+          `}
           dangerouslySetInnerHTML={{ __html: content }}
         />
 
         {/* FOOTER */}
-       <footer className="border-t py-4 flex items-center justify-center text-sm text-gray-500 font-semibold">
-  Copyright © {new Date().getFullYear()} PT. Rasa Aksata Nusantara. All Rights Reserved.
-</footer> 
+        <footer className="border-t py-4 flex items-center justify-center text-sm text-gray-500 font-semibold">
+          Copyright © {new Date().getFullYear()} PT. Rasa Aksata Nusantara. All Rights Reserved.
+        </footer>
       </main>
 
       {/* TOC */}
