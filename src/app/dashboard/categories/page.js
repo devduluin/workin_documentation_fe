@@ -11,7 +11,8 @@ export default function CategoryListPage() {
   // 🔹 Ambil data kategori dari backend
   const fetchCategories = async () => {
     try {
-      const res = await fetch(`${API_URL}/categories`, {
+      // const res = await fetch(`${API_URL}/categories`, {
+      const res = await fetch("http://localhost.guide_be:5503/api/categories", {
         credentials: "include",
       });
 
