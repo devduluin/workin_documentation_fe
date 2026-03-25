@@ -2,6 +2,7 @@
 
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function ConfirmModal({ title, message, onClose, onConfirm }) {
   const [mounted, setMounted] = useState(false);
@@ -9,23 +10,27 @@ export default function ConfirmModal({ title, message, onClose, onConfirm }) {
   if (!mounted) return null;
 
   return createPortal(
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[9999]">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-96">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
-        <p className="text-gray-500 mb-6">{message}</p>
-        <div className="flex justify-end gap-3">
-          <button
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+        <p className="text-gray-500">{message}</p>
+        <div className="flex justify-end gap-3 pt-1">
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
             onClick={onClose}
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-medium"
           >
             Batal
-          </button>
-          <button
+          </Button>
+          <Button
+            type="button"
+            variant="destructive"
+            size="sm"
             onClick={onConfirm}
-            className="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-md text-sm font-medium"
           >
             Hapus
-          </button>
+          </Button>
         </div>
       </div>
     </div>,

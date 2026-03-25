@@ -1,15 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import {
-  ChevronDown,
-  ChevronRight,
-  Plus,
-  Trash2,
-  X,
-  Pencil,
-} from "lucide-react";
-import SidebarItem from "./SidebarItem";
+import { ChevronDown, ChevronRight, Plus, Trash2, Pencil } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Sidebar({
   menuData,
@@ -18,18 +11,26 @@ export default function Sidebar({
   onAddMenu,
   onDelete,
   onRename,
-  onLogout, // Terima props onLogout
+  onLogout,
 }) {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const [editingItem, setEditingItem] = useState(null); // { type: "menu" | "submenu", id }
+  const [expandedIds, setExpandedIds] = useState(new Set());
+  const [editingItem, setEditingItem] = useState(null);
   const [newTitle, setNewTitle] = useState("");
 
-  const toggleMenu = (menuId) => {
-    setActiveMenu(activeMenu === menuId ? null : menuId);
+  const toggleExpanded = (id) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
   };
 
-  const handleRenameStart = (type, item) => {
-    setEditingItem({ type, id: item.id });
+  const handleRenameStart = (item) => {
+    setEditingItem({ id: item.id });
     setNewTitle(item.title);
   };
 
@@ -42,149 +43,102 @@ export default function Sidebar({
     setNewTitle("");
   };
 
+  const renderNode = (node, depth) => {
+    const hasChildren = node.children && node.children.length > 0;
+    const isExpanded = expandedIds.has(node.id);
+    const isEditing = editingItem?.id === node.id;
+    const isSelected = selected?.id === node.id;
+
+    return (
+      <div key={node.id}>
+        <div
+          className="flex justify-between items-center group"
+          style={{ paddingLeft: depth * 12 }}
+        >
+          <div className="flex items-center gap-2 flex-1">
+            {hasChildren && (
+              <button
+                onClick={() => toggleExpanded(node.id)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              </button>
+            )}
+            {!hasChildren && <div className="w-4" />}
+            <button
+              onClick={() => setSelected(node)}
+              className={`dashboard-menu-btn ${isSelected ? "active" : ""}`}
+            >
+              {isEditing ? (
+                <input
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                  onBlur={handleRenameSubmit}
+                  onKeyDown={(e) => e.key === "Enter" && handleRenameSubmit()}
+                  className="border border-gray-300 rounded px-2 py-1 text-sm w-full"
+                  autoFocus
+                />
+              ) : (
+                <span className="flex items-center gap-2">
+                  <span>{node.title}</span>
+                  <span className="text-xs text-gray-400">{node.type}</span>
+                </span>
+              )}
+            </button>
+          </div>
+          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+            <button
+              onClick={() => handleRenameStart(node)}
+              className="text-gray-400 hover:text-blue-500"
+            >
+              <Pencil size={13} />
+            </button>
+            <button
+              onClick={() => onDelete({ id: node.id })}
+              className="text-gray-400 hover:text-red-500"
+            >
+              <Trash2 size={13} />
+            </button>
+          </div>
+        </div>
+        {hasChildren && isExpanded && (
+          <div>{node.children.map((child) => renderNode(child, depth + 1))}</div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <aside className="dashboard-sidebar">
-      {/* ==== Header ==== */}
       <div className="dashboard-sidebar-header">
         <img src="/workin-color.png" alt="Logo Workin" className="dashboard-logo" />
         <h3 className="dashboard-doc-title">Documentation</h3>
 
         <div className="dashboard-header-btns">
-          <button onClick={onAddMenu} className="dashboard-add-btn">
+          <Button
+            type="button"
+            size="sm"
+            variant="secondary"
+            onClick={onAddMenu}
+            className="dashboard-add-btn"
+          >
             <Plus size={16} />
             <span>Add</span>
-          </button>
+          </Button>
         </div>
       </div>
 
-      {/* ==== Menu Navigasi ==== */}
       <nav className="dashboard-nav">
-        {menuData.map((menu) => {
-          const subCount = menu.submenus?.length || 0;
-          const hasSubmenus = subCount > 1;
-          const singleDoc = subCount === 1;
-
-          return (
-            <div key={menu.id}>
-              <div className="flex justify-between items-center group">
-                <button
-                  onClick={() => {
-                    if (hasSubmenus) toggleMenu(menu.id);
-                    else if (singleDoc)
-                      setSelected({ menu, submenu: menu.submenus[0] });
-                    else setSelected({ menu, submenu: null });
-                  }}
-                  className={`dashboard-menu-btn ${
-                    selected?.menu?.id === menu.id ? "active" : ""
-                  }`}
-                >
-                  {/* === Inline rename menu === */}
-                  {editingItem?.type === "menu" && editingItem.id === menu.id ? (
-                    <input
-                      value={newTitle}
-                      onChange={(e) => setNewTitle(e.target.value)}
-                      onBlur={handleRenameSubmit}
-                      onKeyDown={(e) => e.key === "Enter" && handleRenameSubmit()}
-                      className="border border-gray-300 rounded px-2 py-1 text-sm w-full"
-                      autoFocus
-                    />
-                  ) : (
-                    <span>{menu.title}</span>
-                  )}
-
-                  {/* tampilkan panah cuma kalau punya lebih dari 1 dokumen */}
-                  {hasSubmenus &&
-                    (activeMenu === menu.id ? (
-                      <ChevronDown size={16} />
-                    ) : (
-                      <ChevronRight size={16} />
-                    ))}
-                </button>
-
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
-                  {/* ✏️ Rename Menu */}
-                  <button
-                    onClick={() => handleRenameStart("menu", menu)}
-                    className="text-gray-400 hover:text-blue-500"
-                  >
-                    <Pencil size={15} />
-                  </button>
-
-                  {/* 🗑️ Delete Menu */}
-                  <button
-                    onClick={() => onDelete({ type: "menu", id: menu.id })}
-                    className="text-gray-400 hover:text-red-500"
-                  >
-                    <Trash2 size={15} />
-                  </button>
-                </div>
-              </div>
-
-              {/* === Submenu (kalau > 1) === */}
-              {hasSubmenus && activeMenu === menu.id && (
-                <div className="dashboard-submenu">
-                  {menu.submenus.map((sub) => (
-                    <div
-                      key={sub.id}
-                      className="flex justify-between items-center group pl-3"
-                    >
-                      {editingItem?.type === "submenu" &&
-                      editingItem.id === sub.id ? (
-                        <input
-                          value={newTitle}
-                          onChange={(e) => setNewTitle(e.target.value)}
-                          onBlur={handleRenameSubmit}
-                          onKeyDown={(e) =>
-                            e.key === "Enter" && handleRenameSubmit()
-                          }
-                          className="border border-gray-300 rounded px-2 py-1 text-sm w-full"
-                          autoFocus
-                        />
-                      ) : (
-                        <SidebarItem
-                          submenu={sub}
-                          isSelected={selected?.submenu?.id === sub.id}
-                          onClick={() => setSelected({ menu, submenu: sub })}
-                        />
-                      )}
-
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
-                        {/* ✏️ Rename Submenu */}
-                        <button
-                          onClick={() => handleRenameStart("submenu", sub)}
-                          className="text-gray-400 hover:text-blue-500"
-                        >
-                          <Pencil size={13} />
-                        </button>
-
-                        {/* ❌ Delete Submenu */}
-                        <button
-                          onClick={() =>
-                            onDelete({
-                              type: "submenu",
-                              menuId: menu.id,
-                              id: sub.id,
-                            })
-                          }
-                          className="text-gray-400 hover:text-red-500"
-                        >
-                          <X size={13} />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {menuData.map((node) => renderNode(node, 0))}
       </nav>
 
-      {/* ==== Logout ==== */}
       <div className="mt-auto p-4 border-t border-gray-200">
-        <button
-          onClick={onLogout} // ganti dari console.log ke onLogout
-          className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition"
+        <Button
+          type="button"
+          variant="destructive"
+          size="md"
+          onClick={onLogout}
+          className="w-full flex items-center justify-center gap-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +155,7 @@ export default function Sidebar({
             />
           </svg>
           Logout
-        </button>
+        </Button>
       </div>
     </aside>
   );

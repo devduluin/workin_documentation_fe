@@ -115,7 +115,7 @@
   @apply flex-1 bg-gray-50;
   margin-left: 260px;
   width: calc(100% - 260px); /* ✅ ganti vw → % */
-  padding: 1rem 0 2rem 0 !important;
+  padding: 1.5rem 2rem 2.5rem 2rem !important;
   position: relative;
   z-index: 10;
   overflow-x: hidden; /* ✅ cegah scroll horizontal */
@@ -124,9 +124,7 @@
 
 /* Header di atas konten */
 .dashboard-header {
-  @apply mb-6 pb-3 border-b border-gray-200;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  @apply mb-4 pb-3 border-b border-gray-200;
 }
 
 .dashboard-header h1 {
@@ -141,8 +139,8 @@
    📦 BOX KONTEN SCROLLABLE
    =============================== */
 .content-box {
-  @apply bg-white rounded-md border border-gray-200 shadow p-4 flex flex-col;
-  max-height: 70vh;
+  @apply bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-col;
+  max-height: 72vh;
   overflow: hidden;
 }
 
@@ -172,9 +170,9 @@
 /* Wrapper Editor */
 .editor-container {
   width: 100%;
-  margin: 0;
+  margin: 0.5rem 0 0 0;
   padding: 0;
-  height: calc(100vh - 280px);
+  height: calc(100vh - 300px);
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
@@ -206,7 +204,7 @@
   flex: 1;
   width: 100% !important;
   padding: 1rem 2rem !important;
-  min-height: calc(100vh - 350px);
+  min-height: calc(100vh - 360px);
   background: white;
   overflow-y: auto;
   scroll-behavior: smooth;
@@ -243,6 +241,139 @@
   margin: 1.5rem auto;           /* 🔹 Auto biar center */
   display: block;                /* 🔹 Supaya center-nya berfungsi */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tiptap-toolbar {
+  @apply flex flex-wrap items-center gap-2 rounded-t-lg border border-gray-200 bg-white px-3 py-2 shadow-sm;
+}
+
+.tiptap-btn {
+  @apply inline-flex items-center justify-center h-8 w-8 rounded-md border border-transparent text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition;
+}
+
+.tiptap-btn-wide {
+  @apply w-auto px-2.5 gap-1.5;
+}
+
+.tiptap-btn-label {
+  @apply text-xs font-medium text-gray-700;
+}
+
+.tiptap-btn:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.tiptap-btn.active {
+  @apply bg-blue-50 text-blue-700 border border-blue-200;
+}
+
+.tiptap-divider {
+  @apply h-5 w-px bg-gray-200;
+}
+
+.tiptap-shell {
+  @apply w-full rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden;
+}
+
+.tiptap-group {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.tiptap-select {
+  @apply h-8 text-sm rounded-md border border-gray-200 bg-white;
+}
+
+.tiptap-wrapper {
+  @apply bg-white border-t border-gray-200;
+}
+
+.tiptap-editor {
+  @apply h-[70vh] overflow-y-auto px-6 py-5 text-gray-800;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.tiptap-editor .ProseMirror {
+  outline: none;
+}
+
+.tiptap-editor .ProseMirror h1 {
+  @apply text-2xl font-semibold text-gray-900 mt-6 mb-3;
+}
+
+.tiptap-editor .ProseMirror h2 {
+  @apply text-xl font-semibold text-gray-900 mt-5 mb-3;
+}
+
+.tiptap-editor .ProseMirror h3 {
+  @apply text-lg font-semibold text-gray-900 mt-4 mb-2;
+}
+
+.tiptap-editor .ProseMirror p {
+  @apply my-2;
+}
+
+.tiptap-editor .ProseMirror ul {
+  @apply list-disc pl-6 my-3;
+}
+
+.tiptap-editor .ProseMirror ol {
+  @apply list-decimal pl-6 my-3;
+}
+
+.tiptap-editor .ProseMirror blockquote {
+  @apply border-l-4 border-blue-200 bg-blue-50/40 px-4 py-2 rounded-md text-gray-700 my-4;
+}
+
+.tiptap-editor .ProseMirror code {
+  @apply rounded bg-gray-100 px-1.5 py-0.5 text-sm;
+}
+
+.tiptap-editor .ProseMirror pre {
+  @apply rounded-lg bg-gray-900 text-gray-100 p-4 overflow-x-auto my-4;
+}
+
+.tiptap-editor .ProseMirror table {
+  @apply w-full border-collapse my-4 text-sm;
+}
+
+.tiptap-editor .ProseMirror th,
+.tiptap-editor .ProseMirror td {
+  @apply border border-gray-200 px-3 py-2 align-top;
+}
+
+.tiptap-editor .ProseMirror th {
+  @apply bg-gray-50 font-semibold text-gray-800;
+}
+
+.tiptap-editor .ProseMirror img {
+  @apply max-w-full rounded-lg my-3;
+  display: block;
+}
+
+.tiptap-editor .ProseMirror iframe {
+  @apply w-full rounded-lg my-4;
+  aspect-ratio: 16 / 9;
+}
+
+.tiptap-editor .ProseMirror a {
+  @apply text-blue-600 underline underline-offset-2;
+}
+
+.tiptap-editor .ProseMirror mark {
+  @apply bg-yellow-100 text-gray-900 rounded px-1;
+}
+
+.tiptap-editor .ProseMirror ul[data-type="taskList"] {
+  @apply list-none pl-2 my-3;
+}
+
+.tiptap-editor .ProseMirror li[data-type="taskItem"] {
+  @apply flex items-start gap-2;
+}
+
+.tiptap-editor .ProseMirror li[data-type="taskItem"] > label {
+  @apply mt-1;
 }
 
 .editable-table {

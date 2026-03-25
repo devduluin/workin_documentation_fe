@@ -1,116 +1,113 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { createPortal } from "react-dom";
-import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export default function AddMenuModal({ onClose, onSave, nodes = [], selected }) {
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("head");
+  const [parentId, setParentId] = useState("");
 
-export default function AddMenuModal({ onClose, onSave }) {
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [newCategoryName, setNewCategoryName] = useState("");
-  const [documentName, setDocumentName] = useState("");
-  const [mounted, setMounted] = useState(false);
-
-  // 🔹 Fetch kategori saat modal muncul
-  useEffect(() => {
-    setMounted(true);
-    const fetchCategories = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/categories`, {
-          withCredentials: true,
-        });
-        setCategories(res.data.data || []);
-      } catch (err) {
-        console.error("❌ Gagal mengambil kategori:", err);
-      }
-    };
-    fetchCategories();
-  }, []);
-
-  if (!mounted) return null;
+  const parentOptions = useMemo(() => {
+    if (type === "head") return [];
+    const parentType =
+      type === "sub" ? "head" : type === "sub_sub" ? "sub" : "sub_sub";
+    return nodes.filter((node) => node.type === parentType);
+  }, [nodes, type]);
 
   const handleSubmit = () => {
-    // Kasus 1: tambah kategori baru aja
-    if (!documentName.trim() && newCategoryName.trim()) {
-      onSave(newCategoryName, "");
+    if (!title.trim()) return;
+    const parentType =
+      type === "sub" ? "head" : type === "sub_sub" ? "sub" : "sub_sub";
+    let resolvedParent =
+      type === "head" ? null : parentId !== "" ? Number(parentId) : null;
+    if (type !== "head" && resolvedParent === null) {
+      if (selected && selected.type === parentType) {
+        resolvedParent = selected.id;
+      }
     }
-    // Kasus 2: tambah dokumen di kategori baru
-    else if (documentName.trim() && newCategoryName.trim()) {
-      onSave(newCategoryName, documentName);
+    if (type !== "head" && resolvedParent === null) {
+      alert("Parent wajib dipilih untuk tipe ini.");
+      return;
     }
-    // Kasus 3: tambah dokumen di kategori yang sudah ada
-    else if (documentName.trim() && selectedCategory) {
-      onSave(selectedCategory, documentName);
-    }
-
+    onSave(title.trim(), type, resolvedParent);
     onClose();
   };
 
   return createPortal(
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-[9999]">
-      <div className="bg-white p-6 rounded-lg w-96 shadow-xl">
-        <h3 className="text-lg font-semibold mb-3">
-          Tambah Kategori / Dokumen
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900">
+          Tambah Node Dokumentasi
         </h3>
 
-        {/* Dropdown pilih kategori */}
-        <label className="block mb-2 text-sm text-gray-700">
-          Pilih Kategori
-        </label>
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="w-full border p-2 rounded mb-4 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-        >
-          <option value="">(Buat Kategori Baru)</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.name}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-
-        {/* Input nama kategori baru */}
-        {!selectedCategory && (
-          <>
-            <label className="block mb-2 text-sm text-gray-700">
-              Nama Kategori Baru
+        <div className="space-y-3">
+          <div>
+            <label className="block mb-1 text-sm text-gray-700">
+              Tipe Node
             </label>
-            <input
-              value={newCategoryName}
-              onChange={(e) => setNewCategoryName(e.target.value)}
-              className="w-full border p-2 rounded mb-4 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            <Select
+              value={type}
+              onChange={(e) => {
+                setType(e.target.value);
+                setParentId("");
+              }}
+            >
+              <option value="head">Head</option>
+              <option value="sub">Sub</option>
+              <option value="sub_sub">Sub-sub</option>
+              <option value="page">Page</option>
+            </Select>
+          </div>
+
+          {type !== "head" && (
+            <div>
+              <label className="block mb-1 text-sm text-gray-700">
+                Parent
+              </label>
+              <Select
+                value={parentId}
+                onChange={(e) => setParentId(e.target.value)}
+              >
+                <option value="">
+                  {selected ? `Gunakan ${selected.title}` : "Pilih parent"}
+                </option>
+                {parentOptions.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.title} (#{option.id})
+                  </option>
+                ))}
+              </Select>
+            </div>
+          )}
+
+          <div>
+            <label className="block mb-1 text-sm text-gray-700">
+              Judul Node
+            </label>
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="Contoh: Employee Management"
             />
-          </>
-        )}
+          </div>
+        </div>
 
-        {/* Input nama dokumen */}
-        <label className="block mb-2 text-sm text-gray-700">
-          Nama Dokumen (opsional)
-        </label>
-        <input
-          value={documentName}
-          onChange={(e) => setDocumentName(e.target.value)}
-          className="w-full border p-2 rounded mb-4 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          placeholder="Contoh: Employee List"
-        />
-
-        <div className="flex justify-end space-x-2">
-          <button
+        <div className="flex justify-end gap-2 pt-2">
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
             onClick={onClose}
-            className="px-4 py-1.5 rounded border border-gray-300 hover:bg-gray-100 text-sm font-medium"
           >
             Batal
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm font-medium"
-          >
+          </Button>
+          <Button type="button" size="sm" onClick={handleSubmit}>
             Simpan
-          </button>
+          </Button>
         </div>
       </div>
     </div>,
