@@ -1,301 +1,186 @@
-/* === Tailwind base === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @import "tailwindcss";
 
-/* === Base color variables === */
+@layer base {
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-brand: 37 99 235;
+  --color-accent: 99 102 241;
+  --color-navy: 15 23 42;
+  --gradient-brand: linear-gradient(135deg, #2563eb 0%, #6366f1 50%, #8b5cf6 100%);
+  --gradient-mesh: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, hsla(189,100%,56%,0.1) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, hsla(258,100%,68%,0.08) 0px, transparent 50%);
+  --shadow-soft: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  --shadow-medium: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  --shadow-heavy: 0 4px 6px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.08);
+  --shadow-glow-blue: 0 0 0 1px rgba(37,99,235,0.1), 0 4px 16px rgba(37,99,235,0.12);
+  --shadow-glow-purple: 0 0 0 1px rgba(99,102,241,0.1), 0 4px 16px rgba(99,102,241,0.12);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ffffff;
-  }
+html {
+  @apply scroll-smooth;
+  scroll-padding-top: 120px;
 }
 
-/* === Global body === */
 body {
-  background: var(--background);
-  color: var(--foreground);
+  @apply bg-white text-slate-900 antialiased;
+  font-feature-settings: "cv11", "ss01", "ss03";
 }
 
-/* === Typography === */
-p {
-  @apply font-sans;
-  color: #000000
+::selection {
+  @apply bg-indigo-200/60 text-indigo-900;
 }
 
-h1 {
-  font-size: 36px;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  color: #000000
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300;
+}
 }
 
-h2 {
-  font-size: 30px;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  color: #000000
+@layer components {
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20;
+}
+.glass-dark {
+  @apply bg-slate-900/80 backdrop-blur-xl border border-white/10;
+}
+.card-elevated {
+  @apply bg-white border border-slate-200/60 rounded-2xl;
+  box-shadow: var(--shadow-soft);
+}
+.card-elevated:hover {
+  box-shadow: var(--shadow-medium);
+}
+.card-interactive {
+  @apply bg-white border border-slate-200/60 rounded-2xl transition-all duration-300;
+  box-shadow: var(--shadow-soft);
+}
+.card-interactive:hover {
+  @apply border-slate-300/80 -translate-y-0.5;
+  box-shadow: var(--shadow-heavy);
+}
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: var(--gradient-brand);
+}
+.gradient-border {
+  position: relative;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(37,99,235,0.3), rgba(99,102,241,0.3), rgba(139,92,246,0.3));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+}
+.mesh-bg {
+  background-image: var(--gradient-mesh);
+}
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white rounded-xl transition-all duration-200;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 4px 12px rgba(37,99,235,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 8px 24px rgba(37,99,235,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all duration-200;
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-all duration-200;
+}
+.dot-pattern {
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.line-pattern {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 39px,
+    rgba(148, 163, 184, 0.06) 39px,
+    rgba(148, 163, 184, 0.06) 40px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 39px,
+    rgba(148, 163, 184, 0.06) 39px,
+    rgba(148, 163, 184, 0.06) 40px
+  );
+}
 }
 
-h3 {
-  font-size: 1.125rem;
-  margin-bottom: 0.75rem;
-  color: #000000
+@layer utilities {
+.animate-in {
+  animation: animateIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-slide-down {
+  animation: slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-slide-left {
+  animation: slideLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-scale-in {
+  animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+.text-balance {
+  text-wrap: balance;
 }
 
-li {
-  color: #000000
-}
-
-td {
-  color: #000000
-}
-
-input::placeholder {
-  color: lab(35.6337% -1.58697 -10.8425)   /* warna teks placeholder */
-}
-
-input {
-  color: lab(35.6337% -1.58697 -10.8425)
-}
-
-.header-title {
-  color: #ffffff
-}
-
-label {
-  color: #000000
-}
-
-strong {
-  color: #000000
-}
-/* === Cards === */
-.card {
-  border-radius: 0.5rem;
-  padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
-}
-
-.card h3 {
-  margin-bottom: 0.5rem;
-}
-
-.card img {
-  object-fit: contain;
-  border-radius: 6px;
-}
-
-/* === Sidebar === */
-/*
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 16rem;
-  padding: 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  z-index: 10;
-}
-
-@media (max-width: 1024px) {
-  .sidebar {
-    display: none;
-  }
-}
-*/
-
-.main-content {
-  margin-left: 16rem;
-  flex: 1;
-  padding: 2.5rem;
-}
-
-/* === Images === */
-.preview-image1,
-.preview-image2 {
-  height: auto;
-  width: 100%;
-  max-width: 900px;
-}
-
-.judul {
-  padding-top: 30px;
-  padding-left: 50px;
-}
-
-@media (max-width: 768px) {
-  .judul {
-    padding-left: 20px;
-  }
-}
-
-/* === Section spacing === */
-.hrms,
-.extra {
-  text-align: center;
-}
-
-.title-daftar,
-.title-password,
-.emergency,
-.extra,
-.tips,
-.indicators,
-.list,
-.tabel,
-.batas {
-  padding-top: 20px;
-}
-
-.tabel,
-.indicators {
-  padding-bottom: 20px;
-}
-
-.tips {
-  padding-top: 40px;
-}
-
-/* === QuillJS content layout only === */
-.ql-editor {
-  line-height: 1.8;
-  padding: 0;
-}
-
-.ql-editor h1,
-.ql-editor h2 {
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  font-size: 30px;
-}
-
-.ql-editor h3 {
-  font-size: 1.125rem;
-  margin-bottom: 0.75rem;
-}
-
-.ql-editor p {
-  margin-bottom: 1rem;
-}
-
-.ql-editor ul,
-.ql-editor ol {
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.ql-editor img {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  border-radius: 6px;
-  object-fit: contain;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin: 1.5rem 0;
-}
-
-.ql-editor blockquote {
-  border-left: 4px solid #ddd;
-  padding-left: 1rem;
-  margin: 1.5rem 0;
-}
-
-.ql-editor pre {
-  background-color: #f3f4f6;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  overflow-x: auto;
-}
-
-.ql-editor iframe {
-  width: 100% !important;
-  max-width: 600px !important;  /* 🔹 Ukuran sedang */
-  aspect-ratio: 16 / 9 !important;
-  height: auto !important;
-  border-radius: 6px;
-  margin: 1.5rem auto;           /* 🔹 Auto biar center */
-  display: block;                /* 🔹 Supaya center-nya berfungsi */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Form Login & Register */
-.login-form {
-  @apply bg-white shadow-lg rounded-xl p-8 w-full max-w-md mx-auto;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Input Field */
-.input-field {
-  @apply w-full mb-4 p-3 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600;
-}
-
-/* Error Message */
-.error-message {
-  @apply text-red-600 font-bold mb-4 text-center;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Tombol Login/Register */
-.btn-login {
-  @apply w-full py-2 rounded-md font-semibold text-black 
-    bg-gray-300 hover:bg-gray-400 transition-all duration-300 
-    transform hover:scale-105 hover:shadow-lg;
-}
-
-/* Disable tombol */
-.btn-login:disabled {
-  @apply bg-gray-200 cursor-not-allowed scale-100 shadow-none;
-}
-
-/* Toggle Password Button */
-.password-toggle {
-  @apply absolute inset-y-0 right-3 flex items-center text-gray-600;
-}
-
-/* Animasi FadeIn */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes animateIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
-
-.animate-slide-in {
-  animation: slideIn 0.25s ease-out forwards;
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
-
-.animate-slide-out {
-  animation: slideOut 0.25s ease-in forwards;
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
-
-.toc::-webkit-scrollbar {
-  width: 0;
 }
-.toc {
-  scrollbar-width: none;
-}
-
