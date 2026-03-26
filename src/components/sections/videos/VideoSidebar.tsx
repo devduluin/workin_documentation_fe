@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Play, ChevronRight, MonitorPlay } from "lucide-react";
 import { videoCategories } from "@/lib/videoData";
 import { useVideoStore } from "@/stores/useVideos";
@@ -21,7 +20,7 @@ export default function VideoSidebar() {
       </div>
 
       {/* Category List */}
-      <div className="card-elevated !rounded-xl overflow-hidden">
+      <div className="card-elevated rounded-xl! overflow-hidden">
         <div className="divide-y divide-slate-100/80">
           {videoCategories.map((category) => {
             const isActive = activeCategoryId === category.id;
@@ -31,7 +30,7 @@ export default function VideoSidebar() {
                 onClick={() => setActiveCategoryId(category.id)}
                 className={`w-full flex items-center gap-3 px-4 py-3.5 text-left transition-all duration-200 group ${
                   isActive
-                    ? "bg-gradient-to-r from-violet-50/80 via-indigo-50/40 to-white"
+                    ? "bg-linear-to-r from-violet-50/80 via-indigo-50/40 to-white"
                     : "hover:bg-slate-50/80"
                 }`}
               >
@@ -39,7 +38,7 @@ export default function VideoSidebar() {
                 <div
                   className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${
                     isActive
-                      ? "bg-gradient-to-br from-violet-500 to-indigo-600 shadow-lg shadow-violet-500/25"
+                      ? "bg-linear-to-br from-violet-500 to-indigo-600 shadow-lg shadow-violet-500/25"
                       : "bg-slate-100 group-hover:bg-slate-200/70"
                   }`}
                 >
@@ -72,7 +71,7 @@ export default function VideoSidebar() {
 
                 {/* Arrow / Active indicator */}
                 {isActive ? (
-                  <div className="w-1.5 h-8 bg-gradient-to-b from-violet-500 to-indigo-600 rounded-full shrink-0" />
+                  <div className="w-1.5 h-8 bg-linear-to-b from-violet-500 to-indigo-600 rounded-full shrink-0" />
                 ) : (
                   <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-slate-400 shrink-0 transition-colors" />
                 )}
@@ -83,9 +82,9 @@ export default function VideoSidebar() {
       </div>
 
       {/* Stats Card */}
-      <div className="card-elevated !rounded-xl p-4">
+      <div className="card-elevated rounded-xl! p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-100 to-indigo-100 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-violet-100 to-indigo-100 flex items-center justify-center">
             <Play className="h-4 w-4 text-violet-600" />
           </div>
           <div>

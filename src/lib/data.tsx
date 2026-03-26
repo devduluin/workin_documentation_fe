@@ -2,30 +2,12 @@ import {
   SidebarCategory,
   ReleaseLogEntry,
   InfoCard,
-  NavProduct,
   RelatedArticle,
   BreadcrumbItem,
   TableOfContentsItem,
+  Topics,
 } from "@/types";
-
-export const navProducts: NavProduct[] = [
-  { name: "Mekari Talenta", href: "https://www.talenta.co/" },
-  { name: "Mekari Jurnal", href: "https://www.jurnal.id/id/" },
-  { name: "Mekari Klikpajak", href: "https://klikpajak.id/" },
-  { name: "Mekari Qontak", href: "https://qontak.com/" },
-  { name: "Mekari Flex", href: "https://mekari.com/produk/mekari-flex/" },
-  { name: "Mekari Pay", href: "https://mekari.com/produk/mekari-pay/" },
-  {
-    name: "Mekari Capital",
-    href: "https://www.jurnal.id/id/fitur/mekari-capital/",
-  },
-  { name: "Mekari Sign", href: "https://mekarisign.com/" },
-  {
-    name: "Mekari Expense",
-    href: "https://www.talenta.co/fitur/mekari-expense/",
-  },
-  { name: "Mekari Stream", href: "#" },
-];
+import { SignatureIcon } from "lucide-react";
 
 export const breadcrumbs: BreadcrumbItem[] = [
   { label: "Mekari Help Center", href: "/hc/id" },
@@ -576,5 +558,14 @@ export const relatedArticles: RelatedArticle[] = [
   {
     title: "Bagaimana Cara Daftar Akun di Mekari Sign",
     href: "#",
+  },
+];
+
+export const dataHomeTopics: Topics[] = [
+  {
+    title: "Getting Started",
+    href: "/category/",
+    icon: <SignatureIcon />,
+    desc: "Video pengantar untuk pengguna talenta baru.",
   },
 ];

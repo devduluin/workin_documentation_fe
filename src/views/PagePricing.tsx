@@ -54,14 +54,14 @@ export default function HargaPage() {
       <MekariNavbar />
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800" />
+        <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-slate-900 to-slate-800" />
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-600/15 rounded-full blur-[100px]" />
+          <div className="absolute top-0 left-1/3 w-125 h-125 bg-indigo-600/20 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-violet-600/15 rounded-full blur-[100px]" />
         </div>
         <div className="absolute inset-0 dot-pattern opacity-30" />
 
-        <div className="relative max-w-[1360px] mx-auto px-5 sm:px-8 py-20 md:py-28">
+        <div className="relative max-w-340 mx-auto px-5 sm:px-8 py-20 md:py-28">
           <div className="text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.08] border border-white/[0.08] rounded-full mb-6 backdrop-blur-sm">
               <Sparkles className="h-3.5 w-3.5 text-amber-400" />
@@ -77,10 +77,10 @@ export default function HargaPage() {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-slate-600/30 to-transparent" />
       </section>
       <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
+        <div className="max-w-340 mx-auto px-5 sm:px-8">
           <h2 className="text-[22px] md:text-[28px] font-extrabold text-slate-900 text-center mb-12 tracking-tight">
             Penawaran pembelian bundle dan kustom sesuai kebutuhan Anda
           </h2>
@@ -209,7 +209,7 @@ export default function HargaPage() {
       </section>
       {/* product tab */}
       <section className="py-16 md:py-20 bg-slate-50/30 mesh-bg">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
+        <div className="max-w-340 mx-auto px-5 sm:px-8">
           <h2 className="text-[22px] md:text-[28px] font-extrabold text-slate-900 text-center mb-3 tracking-tight">
             Penawaran produk dan layanan secara terpisah
           </h2>
@@ -256,7 +256,7 @@ export default function HargaPage() {
                       target="_blank"
                       className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200/60 hover:border-blue-200 hover:bg-blue-50/30 transition-all"
                     >
-                      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200/60 flex items-center justify-center text-[10px] font-bold text-slate-500 group-hover:from-blue-50 group-hover:to-indigo-50 group-hover:text-blue-600 group-hover:border-blue-200 transition-all">
+                      <div className="w-7 h-7 rounded-lg bg-linear-to-br from-slate-100 to-slate-50 border border-slate-200/60 flex items-center justify-center text-[10px] font-bold text-slate-500 group-hover:from-blue-50 group-hover:to-indigo-50 group-hover:text-blue-600 group-hover:border-blue-200 transition-all">
                         {product.initial}
                       </div>
                       <span className="text-[13px] font-semibold text-slate-700 group-hover:text-blue-700 transition-colors flex-1">
@@ -268,12 +268,10 @@ export default function HargaPage() {
                 </div>
               </div>
               <div className="hidden lg:flex items-center justify-center">
-                <div className="w-full max-w-sm aspect-square bg-gradient-to-br from-slate-100 to-indigo-50 rounded-3xl flex items-center justify-center">
+                <div className="w-full max-w-sm aspect-square bg-linear-to-br from-slate-100 to-indigo-50 rounded-3xl flex items-center justify-center">
                   <div className="text-center">
                     <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl font-black gradient-text">
-                        M
-                      </span>
+                      <span className="text-2xl font-black linear-text">M</span>
                     </div>
                     <p className="text-[13px] font-semibold text-slate-500">
                       Ekosistem Mekari
@@ -288,7 +286,7 @@ export default function HargaPage() {
 
       {/* Features */}
       <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
+        <div className="max-w-340 mx-auto px-5 sm:px-8">
           <h2 className="text-[22px] md:text-[28px] font-extrabold text-slate-900 text-center mb-12 tracking-tight">
             Platform bisnis dalam ekosistem terbaik dan teraman
           </h2>
@@ -300,7 +298,7 @@ export default function HargaPage() {
                   key={card.title}
                   className="card-interactive p-6 !rounded-2xl"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-100 to-indigo-50 border border-slate-200/60 flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-slate-100 to-indigo-50 border border-slate-200/60 flex items-center justify-center mb-5">
                     <Icon className="h-5 w-5 text-indigo-600" />
                   </div>
                   <h3 className="text-[15px] font-bold text-slate-900 mb-2">
@@ -374,7 +372,7 @@ export default function HargaPage() {
 
       {/* FAQ */}
       <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-8">
+        <div className="max-w-340 mx-auto px-5 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Left */}
             <div className="lg:col-span-4">
@@ -432,9 +430,9 @@ export default function HargaPage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 bg-gradient-to-b from-white to-slate-50/50">
+      <section className="py-20 bg-linear-to-b from-white to-slate-50/50">
         <div className="max-w-lg mx-auto px-5 sm:px-8 text-center">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <span className="text-white font-black text-lg">M</span>
           </div>
           <h2 className="text-[22px] md:text-[28px] font-extrabold text-slate-900 tracking-tight mb-3">
@@ -449,7 +447,7 @@ export default function HargaPage() {
             target="_blank"
             className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-[14px] font-bold text-white rounded-2xl transition-all duration-300"
             style={{
-              background: "linear-gradient(135deg, #22c55e, #16a34a)",
+              background: "linear-linear(135deg, #22c55e, #16a34a)",
               boxShadow:
                 "0 1px 2px rgba(0,0,0,0.1), 0 8px 32px rgba(34,197,94,0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
             }}

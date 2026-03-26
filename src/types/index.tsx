@@ -52,3 +52,10 @@ export interface RelatedArticle {
   title: string;
   href: string;
 }
+
+export interface Topics {
+  title: string;
+  href: string;
+  icon: any;
+  desc: string;
+}

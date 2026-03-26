@@ -18,7 +18,6 @@ import {
   User2,
   MessageCircle,
 } from "lucide-react";
-import { navProducts } from "@/lib/data";
 import { useSidebarStore } from "@/stores/useSidebar";
 import { useAuthStore } from "@/stores/useAuth";
 
@@ -133,71 +132,40 @@ export default function MekariNavbar() {
           <div className="hidden lg:flex items-center gap-1">
             {/* Produk Dropdown */}
             <div ref={productRef} className="relative">
-              <button
-                onClick={toggleProductDropdown}
-                className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
-              >
-                Produk
-                <ChevronDown
-                  className={`h-3.5 w-3.5 transition-transform ${
-                    isProductDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {isProductDropdownOpen && (
-                <div className="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-xl border border-gray-200 p-2 min-w-55 animate-slide-down z-50">
-                  {navProducts.map((product) => (
-                    <Link
-                      key={product.name}
-                      href={product.href}
-                      target="_blank"
-                      className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
-                      onClick={closeProductDropdown}
-                    >
-                      <div className="w-6 h-6 bg-linear-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center">
-                        <span className="text-[10px] font-bold text-blue-600">
-                          {product.name.split(" ").pop()?.charAt(0)}
-                        </span>
-                      </div>
-                      {product.name}
-                      <ExternalLink className="h-3 w-3 ml-auto text-gray-400" />
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <Link href="https://workin.duluin.com/#feature" target="_blank">
+                <button
+                  onClick={toggleProductDropdown}
+                  className="flex items-center gap-1 px-3 py-2 text-sm cursor-pointer text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+                >
+                  Fitur
+                </button>
+              </Link>
             </div>
 
             <Link
-              href="https://help-center.mekari.com/hc/id/articles/18341184943257"
+              href="https://workin.duluin.com/price-package"
               target="_blank"
-              className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
-            >
-              Release log
-            </Link>
-            <Link
-              href="/harga"
               className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
             >
               Harga
             </Link>
             <Link
-              href="/discuss"
+              href="/harga"
               className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
             >
-              Diskusi
+              Workin by Duluin
             </Link>
             <Link
-              href="https://api.whatsapp.com/send/?phone=6285174314286"
-              target="_blank"
+              href="https://api.whatsapp.com/send/?phone=6285165555987&text&type=phone_number&app_absent=0"
               className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
             >
-              Mekari Customer Care
+              Workin Customer Care
             </Link>
 
             <div className="w-px h-6 bg-gray-200 mx-1" />
 
             {/* Auth Section */}
-            {authLoading ? (
+            {/* {authLoading ? (
               <div className="w-8 h-8 rounded-full bg-gray-100 animate-pulse" />
             ) : user ? (
               <div ref={userMenuRef} className="relative">
@@ -205,7 +173,6 @@ export default function MekariNavbar() {
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 transition-all"
                 >
-                  {/* Avatar */}
                   <div className="w-8 h-8 bg-linear-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-xs font-bold">
                       {getUserInitials(user.name)}
@@ -226,10 +193,8 @@ export default function MekariNavbar() {
                   />
                 </button>
 
-                {/* User Dropdown Menu */}
                 {isUserMenuOpen && (
                   <div className="absolute top-full right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-200 py-1 min-w-55 animate-slide-down z-50">
-                    {/* User Info Header */}
                     <div className="px-4 py-3 border-b border-gray-100">
                       <p className="text-sm font-semibold text-gray-900 truncate">
                         {user.name}
@@ -244,7 +209,6 @@ export default function MekariNavbar() {
                       )}
                     </div>
 
-                    {/* Menu Links */}
                     <div className="py-1">
                       <Link
                         href="/dashboard"
@@ -264,7 +228,6 @@ export default function MekariNavbar() {
                       </Link>
                     </div>
 
-                    {/* Logout */}
                     <div className="border-t border-gray-100 py-1">
                       <button
                         onClick={handleLogout}
@@ -293,10 +256,9 @@ export default function MekariNavbar() {
                   Sign Up
                 </Link>
               </div>
-            )}
+            )} */}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
             className="lg:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
@@ -309,7 +271,6 @@ export default function MekariNavbar() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-gray-100 py-3 animate-slide-down">
             <div className="space-y-1">
@@ -371,7 +332,6 @@ export default function MekariNavbar() {
                 <Headphones className="h-4 w-4" /> Mekari Customer Care
               </Link>
 
-              {/* Auth links (mobile) */}
               {user ? (
                 <div className="pt-2 border-t border-gray-100 mt-2 space-y-1">
                   <Link

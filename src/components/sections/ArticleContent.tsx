@@ -18,8 +18,19 @@ import {
   recentArticles,
   relatedArticles,
 } from "@/lib/data";
+import { useParams } from "next/navigation";
 
-export default function ArticleContent() {
+export default function ArticleContent(props: any) {
+  const { categories } = props;
+  const { categorySlug } = useParams();
+
+  const section = categories
+    ?.flatMap((cat: any) => cat?.Documents || [])
+    ?.flatMap((doc: any) => doc?.sections || [])
+    ?.find((sec: any) => sec.id.toString() === categorySlug);
+
+  if (!section) return <div>Loading...</div>;
+
   return (
     <article className="min-w-0">
       {/* Breadcrumb */}
@@ -84,6 +95,16 @@ export default function ArticleContent() {
           </div>
         </div>
       </header>
+
+      <div>
+        {/* <h3>{section.title}</h3> */}
+
+        <div
+          dangerouslySetInnerHTML={{
+            __html: section.content,
+          }}
+        />
+      </div>
 
       {/* Article Body */}
       <section className="prose prose-sm max-w-none mb-8">

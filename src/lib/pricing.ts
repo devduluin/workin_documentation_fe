@@ -75,15 +75,15 @@ export const bundleProducts: BundleProduct[] = [
 
 export const productTabs: ProductTab[] = [
   {
-    id: "produk1",
-    label: "Produk utama",
-    title: "Inovasi produk SaaS terbaik untuk bisnis Anda",
+    id: "artikel",
+    label: "Artikel",
+    title: "Semua Topik",
     description:
-      "Dengan klik masing-masing pilihan produk, Anda akan diarahkan ke halaman harga terpisah tiap produk.",
+      "Temukan solusi lebih cepat dengan memilih topik yang paling sesuai dengan pertanyaan atau masalah yang Anda alami di Workin by Duluin",
     products: [
       {
-        name: "Mekari Talenta",
-        href: "https://www.talenta.co/harga/",
+        name: "Quick Overview",
+        href: "/categories/1",
         initial: "T",
       },
       {

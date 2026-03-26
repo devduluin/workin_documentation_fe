@@ -17,7 +17,7 @@ export const usePricingStore = create<PricingState>((set) => ({
         ? s.selectedBundles.filter((b) => b !== id)
         : [...s.selectedBundles, id],
     })),
-  activeTab: "produk1",
+  activeTab: "video",
   setActiveTab: (tab) => set({ activeTab: tab }),
   openFaqIndex: 0,
   toggleFaq: (index) =>

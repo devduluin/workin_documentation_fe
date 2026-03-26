@@ -22,9 +22,9 @@ export default function VideoTutorialPage() {
       {/* Hero (video variant) */}
       <section className="relative overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800" />
+        <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-slate-900 to-slate-800" />
 
-        {/* Mesh Gradient */}
+        {/* Mesh linear */}
         <div className="absolute inset-0">
           <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-violet-600/20 rounded-full blur-[120px]" />
           <div className="absolute top-20 left-1/4 w-[400px] h-[400px] bg-blue-600/15 rounded-full blur-[100px]" />
@@ -48,7 +48,7 @@ export default function VideoTutorialPage() {
 
             <h1 className="text-3xl md:text-[42px] md:leading-[1.15] font-extrabold text-white mb-4 tracking-tight text-balance">
               Ada yang bisa kami{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400">
+              <span className="bg-clip-text text-transparent bg-linear-to-r from-violet-400 via-blue-400 to-cyan-400">
                 bantu?
               </span>
             </h1>
@@ -97,7 +97,7 @@ export default function VideoTutorialPage() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-slate-600/30 to-transparent" />
       </section>
 
       {/* Tab Selector (video active) */}
@@ -121,7 +121,7 @@ export default function VideoTutorialPage() {
                 <Video className="h-3.5 w-3.5 text-violet-600" />
               </div>
               <span>Video tutorial</span>
-              <div className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full" />
+              <div className="absolute bottom-0 left-2 right-2 h-[2px] bg-linear-to-r from-violet-600 to-indigo-600 rounded-full" />
             </button>
           </div>
         </div>

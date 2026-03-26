@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import {
   ChevronRight,
@@ -8,14 +7,12 @@ import {
   FolderClosed,
   FolderOpen,
   FileText,
-  Hash,
 } from "lucide-react";
-import { sidebarCategories } from "@/lib/data";
 import { useSidebarStore } from "@/stores/useSidebar";
 
-export default function ArticleSidebar() {
-  const { openCategoryId, toggleCategory, openSectionId, toggleSection } =
-    useSidebarStore();
+export default function ArticleSidebar(props: any) {
+  const { categories } = props;
+  const { openCategoryId, toggleCategory } = useSidebarStore();
 
   return (
     <aside className="space-y-3">
@@ -37,9 +34,9 @@ export default function ArticleSidebar() {
       </div>
 
       {/* Categories */}
-      <div className="card-elevated !rounded-xl overflow-hidden">
+      <div className="card-elevated rounded-xl! overflow-hidden">
         <div className="max-h-[calc(100vh-280px)] overflow-y-auto">
-          {sidebarCategories.map((category) => {
+          {categories.map((category: any) => {
             const isCatOpen = openCategoryId === category.id;
             return (
               <div
@@ -47,76 +44,91 @@ export default function ArticleSidebar() {
                 className="border-b border-slate-100/80 last:border-b-0"
               >
                 {/* Category */}
-                <button
-                  onClick={() => toggleCategory(category.id)}
-                  className={`w-full flex items-center gap-2.5 px-4 py-3 text-[12px] font-semibold transition-all duration-200 ${
-                    isCatOpen
-                      ? "text-blue-700 bg-gradient-to-r from-blue-50/80 to-indigo-50/40"
-                      : "text-slate-700 hover:bg-slate-50"
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-all ${
+                {category.Documents.length > 1 ? (
+                  <button
+                    onClick={() => toggleCategory(category.id)}
+                    className={`w-full flex items-center gap-2.5 px-4 py-3 text-[12px] font-semibold transition-all duration-200 ${
                       isCatOpen
-                        ? "bg-blue-100 text-blue-600"
-                        : "bg-slate-100 text-slate-400"
+                        ? "text-blue-700 bg-linear-to-r from-blue-50/80 to-indigo-50/40"
+                        : "text-slate-700 hover:bg-slate-50"
                     }`}
                   >
-                    {isCatOpen ? (
-                      <FolderOpen className="h-3 w-3" />
-                    ) : (
-                      <FolderClosed className="h-3 w-3" />
-                    )}
-                  </div>
-                  <span className="flex-1 text-left truncate">
-                    {category.title}
-                  </span>
-                  <ChevronRight
-                    className={`h-3 w-3 shrink-0 transition-transform duration-200 ${
-                      isCatOpen ? "rotate-90 text-blue-500" : "text-slate-300"
-                    }`}
-                  />
-                </button>
+                    <div
+                      className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-all ${
+                        isCatOpen
+                          ? "bg-blue-100 text-blue-600"
+                          : "bg-slate-100 text-slate-400"
+                      }`}
+                    >
+                      {isCatOpen ? (
+                        <FolderOpen className="h-3 w-3" />
+                      ) : (
+                        <FolderClosed className="h-3 w-3" />
+                      )}
+                    </div>
+                    <span className="flex-1 text-left truncate">
+                      {category.name}
+                    </span>
+                    <ChevronRight
+                      className={`h-3 w-3 shrink-0 transition-transform duration-200 ${
+                        isCatOpen ? "rotate-90 text-blue-500" : "text-slate-300"
+                      }`}
+                    />
+                  </button>
+                ) : (
+                  <Link href={category.Documents[0].id.toString()}>
+                    <button
+                      className={`w-full flex items-center gap-2.5 px-4 py-3 text-[12px] font-semibold transition-all duration-200
+                          text-slate-700 hover:bg-slate-50"
+                      `}
+                    >
+                      <div
+                        className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-all
+                            bg-slate-100 text-slate-400"
+                        `}
+                      >
+                        <FolderClosed className="h-3 w-3" />
+                      </div>
+                      <span className="flex-1 text-left truncate">
+                        {category.Documents[0].title}
+                      </span>
+                    </button>
+                  </Link>
+                )}
 
                 {/* Sections */}
                 {isCatOpen && (
                   <div className="bg-slate-50/40 animate-fade-in">
-                    {category.sections.map((section) => {
-                      const isSecOpen = openSectionId === section.id;
+                    {category.Documents.map((section: any) => {
                       return (
                         <div key={section.id}>
-                          <button
-                            onClick={() => toggleSection(section.id)}
-                            className={`w-full flex items-center gap-2 pl-10 pr-4 py-2 text-[11px] font-medium transition-all ${
-                              isSecOpen
-                                ? "text-blue-600 bg-blue-50/50"
-                                : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                          <Link
+                            href={section.id.toString()}
+                            className={`flex items-start gap-2 pl-8 pr-4 py-1.5 text-[12px] leading-relaxed transition-all duration-200 ${
+                              section.isActive
+                                ? "text-blue-700 bg-blue-50/80 font-semibold border-r-[3px] border-blue-600"
+                                : "text-slate-500 hover:text-slate-700 hover:bg-white"
                             }`}
                           >
-                            <Hash
-                              className={`h-2.5 w-2.5 shrink-0 ${
-                                isSecOpen ? "text-blue-400" : "text-slate-300"
-                              }`}
-                            />
-                            <span className="flex-1 text-left truncate">
-                              {section.title}
-                            </span>
-                            <ChevronRight
-                              className={`h-2.5 w-2.5 shrink-0 transition-transform duration-200 ${
-                                isSecOpen
-                                  ? "rotate-90 text-blue-400"
+                            <FileText
+                              className={`h-3 w-3 shrink-0 mt-px ${
+                                section.isActive
+                                  ? "text-blue-500"
                                   : "text-slate-300"
                               }`}
                             />
-                          </button>
+                            <span className="line-clamp-2">
+                              {section.title}
+                            </span>
+                          </Link>
 
                           {/* Articles */}
-                          {isSecOpen && (
+                          {/* {isSecOpen && (
                             <ul className="animate-fade-in py-0.5">
-                              {section.articles.map((article) => (
+                              {section.sections.map((article) => (
                                 <li key={article.id}>
                                   <Link
-                                    href={article.href}
+                                    href={article.id.toString()}
                                     className={`flex items-start gap-2 pl-14 pr-4 py-1.5 text-[11px] leading-relaxed transition-all duration-200 ${
                                       article.isActive
                                         ? "text-blue-700 bg-blue-50/80 font-semibold border-r-[3px] border-blue-600"
@@ -124,7 +136,7 @@ export default function ArticleSidebar() {
                                     }`}
                                   >
                                     <FileText
-                                      className={`h-3 w-3 shrink-0 mt-[1px] ${
+                                      className={`h-3 w-3 shrink-0 mt-px ${
                                         article.isActive
                                           ? "text-blue-500"
                                           : "text-slate-300"
@@ -137,7 +149,7 @@ export default function ArticleSidebar() {
                                 </li>
                               ))}
                             </ul>
-                          )}
+                          )} */}
                         </div>
                       );
                     })}
