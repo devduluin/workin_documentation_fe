@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { discussApi } from "@/lib/discussAPI";
 import { useAuthStore } from "@/stores/useAuth";
-import MekariNavbar from "@/components/layouts/Navbar";
+import WorkinNavbar from "@/components/layouts/Navbar";
 
 export default function DiscussPage() {
   const { user, loadUser, loading: authLoading } = useAuthStore();
@@ -56,7 +56,7 @@ export default function DiscussPage() {
 
   return (
     <>
-      <MekariNavbar />
+      <WorkinNavbar />
       <div className="min-h-screen bg-slate-50/30">
         <div className="max-w-340 mx-auto px-5 sm:px-8 py-8">
           {/* Header */}

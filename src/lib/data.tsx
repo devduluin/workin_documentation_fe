@@ -10,7 +10,7 @@ import {
 import { SignatureIcon } from "lucide-react";
 
 export const breadcrumbs: BreadcrumbItem[] = [
-  { label: "Mekari Help Center", href: "/hc/id" },
+  { label: "Workin Help Center", href: "/hc/id" },
   { label: "General", href: "/hc/id/categories/20043365335833-General" },
   {
     label: "Guidebook Release Log",
@@ -28,7 +28,7 @@ export const releaseLogEntries: ReleaseLogEntry[] = [
     publishedDate: "25/2/2025",
     featureName: "Keamanan",
     guidebookTitle:
-      "Bagaimana Cara Mengaktifkan Fitur Account Lockout di Mekari",
+      "Bagaimana Cara Mengaktifkan Fitur Account Lockout di Workin",
     guidebookHref: "/hc/id/articles/55467657227929",
     featureStatus: "New",
     description: "Penjelasan scara mengaktifkan fitur penguncian akun.",
@@ -42,12 +42,12 @@ export const sidebarCategories: SidebarCategory[] = [
     sections: [
       {
         id: "sec-product-release",
-        title: "Mekari Products Release Log",
+        title: "Workin Products Release Log",
         articles: [
           {
             id: "art-1",
-            title: "Mekari Products Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/18341184943257-Mekari-Products-Release-Log",
+            title: "Workin Products Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/18341184943257-Workin-Products-Release-Log",
           },
         ],
       },
@@ -57,44 +57,44 @@ export const sidebarCategories: SidebarCategory[] = [
         articles: [
           {
             id: "art-2",
-            title: "Mekari Account - Guidebook Release Log",
+            title: "Workin Account - Guidebook Release Log",
             href: "#",
             isActive: true,
           },
           {
             id: "art-3",
-            title: "Mekari Flex - Guidebook Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/20043431490585",
+            title: "Workin Flex - Guidebook Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/20043431490585",
           },
           {
             id: "art-4",
             title: "Flex Savings - Guidebook Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/51235042353817",
+            href: "https://help-center.Workin.com/hc/id/articles/51235042353817",
           },
           {
             id: "art-5",
-            title: "Mekari Sign - Guidebook Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/20043582871705",
+            title: "Workin Sign - Guidebook Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/20043582871705",
           },
           {
             id: "art-6",
-            title: "Mekari Expense - Guidebook Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/20043673497881",
+            title: "Workin Expense - Guidebook Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/20043673497881",
           },
           {
             id: "art-7",
-            title: "Mekari Partners Platform - Guidebook Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/25732922429337",
+            title: "Workin Partners Platform - Guidebook Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/25732922429337",
           },
           {
             id: "art-8",
-            title: "Mekari Officeless - Guidebook Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/34339538913689",
+            title: "Workin Officeless - Guidebook Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/34339538913689",
           },
           {
             id: "art-9",
-            title: "Mekari POS - Guidebook Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/55471117475097",
+            title: "Workin POS - Guidebook Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/55471117475097",
           },
         ],
       },
@@ -104,59 +104,59 @@ export const sidebarCategories: SidebarCategory[] = [
         articles: [
           {
             id: "art-10",
-            title: "Mekari Flex - Tutorial Video Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/20044056349593",
+            title: "Workin Flex - Tutorial Video Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/20044056349593",
           },
           {
             id: "art-11",
-            title: "Mekari Expense - Tutorial Video Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/20044239293337",
+            title: "Workin Expense - Tutorial Video Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/20044239293337",
           },
           {
             id: "art-12",
-            title: "Mekari Sign - Tutorial Video Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/32293589704857",
+            title: "Workin Sign - Tutorial Video Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/32293589704857",
           },
           {
             id: "art-13",
-            title: "Mekari Stream - Tutorial Video Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/36264493677081",
+            title: "Workin Stream - Tutorial Video Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/36264493677081",
           },
           {
             id: "art-14",
-            title: "Mekari POS - Tutorial Video Release Log",
-            href: "https://help-center.mekari.com/hc/id/articles/55938336047385",
+            title: "Workin POS - Tutorial Video Release Log",
+            href: "https://help-center.Workin.com/hc/id/articles/55938336047385",
           },
         ],
       },
     ],
   },
   {
-    id: "cat-mekari-account",
-    title: "Mekari Account",
+    id: "cat-Workin-account",
+    title: "Workin Account",
     sections: [
       {
         id: "sec-faq",
         title: "Frequently Asked Questions",
         articles: [
-          { id: "art-15", title: "FAQs Mekari Account", href: "#" },
+          { id: "art-15", title: "FAQs Workin Account", href: "#" },
           { id: "art-16", title: "FAQs SAML", href: "#" },
-          { id: "art-17", title: "FAQs Mekari Appstudio", href: "#" },
+          { id: "art-17", title: "FAQs Workin Appstudio", href: "#" },
         ],
       },
       {
         id: "sec-mulai",
-        title: "Mulai dengan Mekari Account",
+        title: "Mulai dengan Workin Account",
         articles: [
           {
             id: "art-18",
-            title: "Bagaimana Cara Sign in ke Mekari Account",
+            title: "Bagaimana Cara Sign in ke Workin Account",
             href: "#",
           },
           {
             id: "art-19",
             title:
-              "Bagaimana Cara Sign In dengan Employee ID pada Mekari Account",
+              "Bagaimana Cara Sign In dengan Employee ID pada Workin Account",
             href: "#",
           },
           {
@@ -167,29 +167,29 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-21",
             title:
-              "Bagaimana Cara Sign In dengan Nomor Telepon pada Mekari Account",
+              "Bagaimana Cara Sign In dengan Nomor Telepon pada Workin Account",
             href: "#",
           },
           {
             id: "art-22",
-            title: "Bagaimana Cara Sign In dengan SAML SSO pada Mekari Account",
+            title: "Bagaimana Cara Sign In dengan SAML SSO pada Workin Account",
             href: "#",
           },
           {
             id: "art-23",
             title:
-              "Bagaimana Cara Memantau Aktivitas dan Riwayat Sign-in pada Mekari Account",
+              "Bagaimana Cara Memantau Aktivitas dan Riwayat Sign-in pada Workin Account",
             href: "#",
           },
           {
             id: "art-24",
-            title: "Ketentuan Penggunaan Produk Mekari",
+            title: "Ketentuan Penggunaan Produk Workin",
             href: "#",
           },
           {
             id: "art-25",
             title:
-              "Bagaimana Cara Mengaktifkan Pengelolaan Kata Sandi Perusahaan pada Mekari Access",
+              "Bagaimana Cara Mengaktifkan Pengelolaan Kata Sandi Perusahaan pada Workin Access",
             href: "#",
           },
           {
@@ -200,13 +200,13 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-27",
             title:
-              "Bagaimana Cara Mengganti Password/Kata Sandi pada Mekari Account",
+              "Bagaimana Cara Mengganti Password/Kata Sandi pada Workin Account",
             href: "#",
           },
           {
             id: "art-28",
             title:
-              "Bagaimana Jika Kita Lupa Password/Kata Sandi Mekari Account",
+              "Bagaimana Jika Kita Lupa Password/Kata Sandi Workin Account",
             href: "#",
           },
         ],
@@ -218,13 +218,13 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-29",
             title:
-              "Bagaimana Cara Menggunakan Support Center pada Mekari Account",
+              "Bagaimana Cara Menggunakan Support Center pada Workin Account",
             href: "#",
           },
           {
             id: "art-30",
             title:
-              "Penjelasan Tahapan Subscriptions pada Support Center Mekari",
+              "Penjelasan Tahapan Subscriptions pada Support Center Workin",
             href: "#",
           },
         ],
@@ -235,7 +235,7 @@ export const sidebarCategories: SidebarCategory[] = [
         articles: [
           {
             id: "art-31",
-            title: "Bagaimana Cara Mencoba Produk Lain Pada Mekari Account",
+            title: "Bagaimana Cara Mencoba Produk Lain Pada Workin Account",
             href: "#",
           },
         ],
@@ -246,13 +246,13 @@ export const sidebarCategories: SidebarCategory[] = [
         articles: [
           {
             id: "art-32",
-            title: "Bagaimana Cara Mengubah Info Pribadi Mekari Account",
+            title: "Bagaimana Cara Mengubah Info Pribadi Workin Account",
             href: "#",
           },
           {
             id: "art-33",
             title:
-              "Bagaimana Cara Melakukan Verifikasi atau Perubahan pada Nomor Telepon di Mekari Account",
+              "Bagaimana Cara Melakukan Verifikasi atau Perubahan pada Nomor Telepon di Workin Account",
             href: "#",
           },
         ],
@@ -264,7 +264,7 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-34",
             title:
-              "Bagaimana Cara Mengubah Info Perusahaan dari Mekari Account",
+              "Bagaimana Cara Mengubah Info Perusahaan dari Workin Account",
             href: "#",
           },
         ],
@@ -276,7 +276,7 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-35",
             title:
-              "Bagaimana Cara Mengaktifkan Fitur Account Lockout di Mekari",
+              "Bagaimana Cara Mengaktifkan Fitur Account Lockout di Workin",
             href: "#",
           },
           {
@@ -286,7 +286,7 @@ export const sidebarCategories: SidebarCategory[] = [
           },
           {
             id: "art-37",
-            title: "Bagaimana Cara Mengaktifkan 2FA pada Mekari Account",
+            title: "Bagaimana Cara Mengaktifkan 2FA pada Workin Account",
             href: "#",
           },
         ],
@@ -297,7 +297,7 @@ export const sidebarCategories: SidebarCategory[] = [
         articles: [
           {
             id: "art-38",
-            title: "Bagaimana Cara Menggunakan Marketplace pada Mekari Account",
+            title: "Bagaimana Cara Menggunakan Marketplace pada Workin Account",
             href: "#",
           },
         ],
@@ -328,29 +328,29 @@ export const sidebarCategories: SidebarCategory[] = [
   },
   {
     id: "cat-flex-company",
-    title: "Mekari Flex for Company",
+    title: "Workin Flex for Company",
     sections: [
       {
         id: "sec-about-flex",
-        title: "Tentang Mekari Flex for Company",
+        title: "Tentang Workin Flex for Company",
         articles: [
           {
             id: "art-42",
             title: "Flex for Company Frequently Asked Questions (FAQ)",
             href: "#",
           },
-          { id: "art-43", title: "Apa itu Mekari Flex?", href: "#" },
+          { id: "art-43", title: "Apa itu Workin Flex?", href: "#" },
         ],
       },
     ],
   },
   {
     id: "cat-flex-individual",
-    title: "Mekari Flex for Individual Employee",
+    title: "Workin Flex for Individual Employee",
     sections: [
       {
         id: "sec-about-flex-individual",
-        title: "Tentang Mekari Flex for Individual Employee",
+        title: "Tentang Workin Flex for Individual Employee",
         articles: [
           {
             id: "art-44",
@@ -372,7 +372,7 @@ export const sidebarCategories: SidebarCategory[] = [
         articles: [
           {
             id: "art-45",
-            title: "Mekari Flex Savings Frequently Asked Questions (FAQ)",
+            title: "Workin Flex Savings Frequently Asked Questions (FAQ)",
             href: "#",
           },
         ],
@@ -381,20 +381,20 @@ export const sidebarCategories: SidebarCategory[] = [
   },
   {
     id: "cat-sign",
-    title: "Mekari Sign",
+    title: "Workin Sign",
     sections: [
       {
         id: "sec-mulai-sign",
-        title: "Mulai dengan Mekari Sign",
+        title: "Mulai dengan Workin Sign",
         articles: [
           {
             id: "art-46",
-            title: "Bagaimana Cara Daftar Akun di Mekari Sign",
+            title: "Bagaimana Cara Daftar Akun di Workin Sign",
             href: "#",
           },
           {
             id: "art-47",
-            title: "Bagaimana Cara Sign in ke Mekari Sign",
+            title: "Bagaimana Cara Sign in ke Workin Sign",
             href: "#",
           },
         ],
@@ -403,7 +403,7 @@ export const sidebarCategories: SidebarCategory[] = [
   },
   {
     id: "cat-expense",
-    title: "Mekari Expense",
+    title: "Workin Expense",
     sections: [
       {
         id: "sec-home-expense",
@@ -413,7 +413,7 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-49",
             title:
-              "Bagaimana Cara Melakukan Top Up Saldo Mekari Expense Balance",
+              "Bagaimana Cara Melakukan Top Up Saldo Workin Expense Balance",
             href: "#",
           },
         ],
@@ -422,16 +422,16 @@ export const sidebarCategories: SidebarCategory[] = [
   },
   {
     id: "cat-partners",
-    title: "Mekari Partners Platform",
+    title: "Workin Partners Platform",
     sections: [
       {
         id: "sec-partners",
-        title: "Mekari Partners Platform",
+        title: "Workin Partners Platform",
         articles: [
-          { id: "art-50", title: "FAQs Mekari Partner Platform", href: "#" },
+          { id: "art-50", title: "FAQs Workin Partner Platform", href: "#" },
           {
             id: "art-51",
-            title: "Bagaimana Cara Mendaftar Akun di Mekari Partner Platform",
+            title: "Bagaimana Cara Mendaftar Akun di Workin Partner Platform",
             href: "#",
           },
         ],
@@ -440,20 +440,20 @@ export const sidebarCategories: SidebarCategory[] = [
   },
   {
     id: "cat-officeless",
-    title: "Mekari Officeless",
+    title: "Workin Officeless",
     sections: [
       {
         id: "sec-mulai-officeless",
-        title: "Mulai dengan Mekari Officeless",
+        title: "Mulai dengan Workin Officeless",
         articles: [
           {
             id: "art-52",
-            title: "Mulai Menggunakan Mekari Officeless",
+            title: "Mulai Menggunakan Workin Officeless",
             href: "#",
           },
           {
             id: "art-53",
-            title: "Bagaimana Cara Sign in ke Mekari Officeless",
+            title: "Bagaimana Cara Sign in ke Workin Officeless",
             href: "#",
           },
         ],
@@ -462,20 +462,20 @@ export const sidebarCategories: SidebarCategory[] = [
   },
   {
     id: "cat-pos",
-    title: "Mekari POS",
+    title: "Workin POS",
     sections: [
       {
         id: "sec-mulai-pos",
-        title: "Mulai dengan Mekari POS F&B",
+        title: "Mulai dengan Workin POS F&B",
         articles: [
           {
             id: "art-54",
-            title: "Mulai Menggunakan Mekari POS F&B",
+            title: "Mulai Menggunakan Workin POS F&B",
             href: "#",
           },
           {
             id: "art-55",
-            title: "Bagaimana Cara Mendaftar Akun Mekari POS F&B",
+            title: "Bagaimana Cara Mendaftar Akun Workin POS F&B",
             href: "#",
           },
         ],
@@ -488,36 +488,36 @@ export const infoCards: InfoCard[] = [
   {
     title: "Pelatihan",
     description:
-      "Ingin mempelajari pengoperasian produk-produk Mekari? Anda dapat mengikuti sesi pelatihan khusus bersama para trainer berpengalaman.",
-    href: "https://community.mekari.com/mekari-training/mekari/",
+      "Ingin mempelajari pengoperasian produk-produk Workin? Anda dapat mengikuti sesi pelatihan khusus bersama para trainer berpengalaman.",
+    href: "https://community.Workin.com/Workin-training/Workin/",
     image: "🎓",
   },
   {
-    title: "Mekari University",
+    title: "Workin University",
     description:
       "Persaingan semakin ketat! Khawatir karier dan bisnis tidak berkembang pesat? Perkaya wawasan dan asah keterampilan Anda melalui kursus bersertifikat dari para ahli.",
-    href: "https://univ.mekari.com/",
+    href: "https://univ.Workin.com/",
     image: "🏫",
   },
   {
-    title: "Mekari Community",
+    title: "Workin Community",
     description:
-      "Dapatkan informasi menarik dan terbaru dari berbagai lini bisnis dengan para praktisi dan profesional di grup Komunitas Mekari.",
-    href: "https://community.mekari.com/",
+      "Dapatkan informasi menarik dan terbaru dari berbagai lini bisnis dengan para praktisi dan profesional di grup Komunitas Workin.",
+    href: "https://community.Workin.com/",
     image: "👥",
   },
   {
-    title: "Mekari Customer Care",
+    title: "Workin Customer Care",
     description:
       "Kami peduli dengan keluhan Anda. Segera terhubung dengan tim kami untuk solusi kendala produk, perpanjangan berlangganan, dan lainnya.",
     href: "https://api.whatsapp.com/send/?phone=6285174314286&text&type=phone_number&app_absent=0",
     image: "💬",
   },
   {
-    title: "Blog Mekari",
+    title: "Blog Workin",
     description:
-      "Dapatkan informasi terkini seputar teknologi digital, bisnis, dan karier dengan mengunjungi blog Mekari, yang menyediakan artikel-artikel informatif dan terkini dalam bidang tersebut.",
-    href: "https://mekari.com/blog/",
+      "Dapatkan informasi terkini seputar teknologi digital, bisnis, dan karier dengan mengunjungi blog Workin, yang menyediakan artikel-artikel informatif dan terkini dalam bidang tersebut.",
+    href: "https://Workin.com/blog/",
     image: "📝",
   },
 ];
@@ -528,11 +528,11 @@ export const recentArticles: RelatedArticle[] = [
     href: "/hc/id/articles/6766675891865",
   },
   {
-    title: "Mekari Products Release Log",
+    title: "Workin Products Release Log",
     href: "/hc/id/articles/18341184943257",
   },
   {
-    title: "Apa itu Mekari Flex?",
+    title: "Apa itu Workin Flex?",
     href: "/hc/id/articles/6753887495193",
   },
 ];
@@ -543,20 +543,20 @@ export const relatedArticles: RelatedArticle[] = [
     href: "#",
   },
   {
-    title: "Mekari Sign - Guidebook Release Log",
+    title: "Workin Sign - Guidebook Release Log",
     href: "#",
   },
   {
-    title: "FAQs Mekari Appstudio",
+    title: "FAQs Workin Appstudio",
     href: "#",
   },
   {
     title:
-      "Bagaimana Cara Mengintegrasikan Mekari Expense dengan Mekari Jurnal",
+      "Bagaimana Cara Mengintegrasikan Workin Expense dengan Workin Jurnal",
     href: "#",
   },
   {
-    title: "Bagaimana Cara Daftar Akun di Mekari Sign",
+    title: "Bagaimana Cara Daftar Akun di Workin Sign",
     href: "#",
   },
 ];

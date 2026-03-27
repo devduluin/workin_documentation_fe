@@ -1,14 +1,27 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, Sparkles } from "lucide-react";
+import { FileText, Search, Sparkles } from "lucide-react";
+import { useSidebarStore } from "@/stores/useSidebar";
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import { useCategoryStore } from "@/stores/useCategory";
 
-export default function HeroSection() {
+export default function HeroSection(props: any) {
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const { openCategoryId, toggleCategory } = useSidebarStore();
+  const { categorySlug } = useParams();
+  const { categories } = useCategoryStore();
+
+  const documents = categories?.flatMap((cat: any) => cat?.Documents || []);
+
+  const results = documents?.filter((doc: any) =>
+    doc.title.toLowerCase().includes(query.toLowerCase()),
+  );
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800" />
 
@@ -32,20 +45,20 @@ export default function HeroSection() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.08] border border-white/[0.08] rounded-full mb-6 backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-blue-400" />
             <span className="text-[12px] font-medium text-blue-200/90">
-              Pusat Bantuan Mekari
+              Pusat Bantuan Workin
             </span>
           </div>
 
           <h2 className="text-3xl md:text-[42px] md:leading-[1.15] font-extrabold text-white mb-4 tracking-tight text-balance">
             Panduan pengguna{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400">
-              Mekari
+              Workin
             </span>
           </h2>
 
           <p className="text-slate-400 text-sm md:text-base mb-8 max-w-lg mx-auto">
             Temukan panduan lengkap untuk mengoptimalkan penggunaan semua produk
-            Mekari
+            Workin
           </p>
 
           {/* Search */}
@@ -61,7 +74,7 @@ export default function HeroSection() {
                 <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                   <Search
                     className={`h-[18px] w-[18px] transition-colors duration-200 ${
-                      isFocused ? "text-indigo-400" : "text-slate-500"
+                      isFocused ? "text-white" : "text-white"
                     }`}
                   />
                 </div>
@@ -71,19 +84,47 @@ export default function HeroSection() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
+                  onBlur={() => setTimeout(() => setIsFocused(false), 200)}
                   placeholder="Temukan panduan di sini..."
                   className="w-full pl-13 pr-5 py-4 bg-white/[0.07] backdrop-blur-xl text-white placeholder-slate-500 rounded-2xl border border-white/[0.08] focus:bg-white/[0.1] focus:border-indigo-500/40 focus:outline-none text-[15px] transition-all"
                   autoComplete="off"
                 />
+                {isFocused && query && results?.length > 0 && (
+                  <div className="absolute top-full mt-3 w-full bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-50">
+                    <div className="max-h-72 overflow-auto">
+                      {results.slice(0, 8).map((item: any) => (
+                        <Link
+                          key={item.id}
+                          href={`/categories/${item.id}#content`}
+                          onClick={() => {
+                            setQuery("");
+                            if (item.categoryId !== openCategoryId)
+                              toggleCategory(item.categoryId);
+                          }}
+                          className="flex items-start gap-3 px-4 py-3 text-sm hover:bg-slate-50 transition"
+                        >
+                          <FileText className="h-4 w-4 mt-1 text-slate-400" />
+                          <span className="text-slate-700">{item.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {isFocused && query && results?.length === 0 && (
+                  <div className="absolute top-full mt-3 w-full bg-white rounded-2xl shadow-2xl border border-slate-200 p-4 text-sm text-slate-500 z-50">
+                    Tidak ditemukan hasil untuk "
+                    <span className="font-medium">{query}</span>"
+                  </div>
+                )}
               </div>
 
               {/* Keyboard hint */}
-              <div className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 items-center gap-1">
+              {/* <div className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 items-center gap-1">
                 <kbd className="px-2 py-0.5 text-[10px] font-medium text-slate-500 bg-white/[0.06] border border-white/[0.08] rounded-md">
-                  ⌘ K
+                  <Search className="h-3.5 w-3.5" />
                 </kbd>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

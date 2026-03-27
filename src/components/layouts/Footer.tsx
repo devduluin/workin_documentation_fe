@@ -10,37 +10,37 @@ import {
 } from "lucide-react";
 
 const footerMenus = {
-  "Mengapa Mekari": [
-    { label: "Dukungan purna jual", href: "https://mekari.com/customer-care/" },
-    { label: "Klien kami", href: "https://mekari.com/klien-kami/" },
+  "Mengapa Workin": [
+    { label: "Dukungan purna jual", href: "https://workin.com/customer-care/" },
+    { label: "Klien kami", href: "https://workin.com/klien-kami/" },
   ],
   Produk: [
-    { label: "Mekari Talenta", href: "https://mekari.com/produk/talenta/" },
-    { label: "Mekari Jurnal", href: "https://mekari.com/produk/jurnal/" },
-    { label: "Mekari Qontak", href: "https://mekari.com/produk/qontak/" },
-    { label: "Mekari Klikpajak", href: "https://mekari.com/produk/klikpajak/" },
-    { label: "Mekari Flex", href: "https://mekari.com/produk/flex/" },
-    { label: "Mekari Sign", href: "https://mekari.com/produk/sign/" },
-    { label: "Mekari Expense", href: "https://mekari.com/produk/expense/" },
+    { label: "workin Talenta", href: "https://workin.com/produk/talenta/" },
+    { label: "workin Jurnal", href: "https://workin.com/produk/jurnal/" },
+    { label: "workin Qontak", href: "https://workin.com/produk/qontak/" },
+    { label: "workin Klikpajak", href: "https://workin.com/produk/klikpajak/" },
+    { label: "workin Flex", href: "https://workin.com/produk/flex/" },
+    { label: "workin Sign", href: "https://workin.com/produk/sign/" },
+    { label: "workin Expense", href: "https://workin.com/produk/expense/" },
   ],
   Solusi: [
-    { label: "Software ERP", href: "https://mekari.com/sistem-software-erp/" },
-    { label: "Integrasi", href: "https://mekari.com/integrasi/" },
-    { label: "Harga", href: "https://mekari.com/harga/" },
+    { label: "Software ERP", href: "https://workin.com/sistem-software-erp/" },
+    { label: "Integrasi", href: "https://workin.com/integrasi/" },
+    { label: "Harga", href: "https://workin.com/harga/" },
   ],
   Perusahaan: [
-    { label: "Tentang Mekari", href: "https://mekari.com/tentang-mekari/" },
-    { label: "Mekari University", href: "https://univ.mekari.com/" },
+    { label: "Tentang workin", href: "https://workin.com/tentang-workin/" },
+    { label: "workin University", href: "https://univ.workin.com/" },
     {
       label: "Karir",
-      href: "https://mekari.com/careers/",
+      href: "https://workin.com/careers/",
       badge: "We're Hiring!",
     },
-    { label: "Hubungi kami", href: "https://mekari.com/hubungi-kami/" },
-    { label: "Pusat bantuan", href: "https://mekari.com/customer-service/" },
-    { label: "Kebijakan Privasi", href: "https://mekari.com/privacy/" },
-    { label: "Blog", href: "https://mekari.com/blog/" },
-    { label: "Sitemap", href: "https://mekari.com/sitemap/" },
+    { label: "Hubungi kami", href: "https://workin.com/hubungi-kami/" },
+    { label: "Pusat bantuan", href: "https://workin.com/customer-service/" },
+    { label: "Kebijakan Privasi", href: "https://workin.com/privacy/" },
+    { label: "Blog", href: "https://workin.com/blog/" },
+    { label: "Sitemap", href: "https://workin.com/sitemap/" },
   ],
 };
 
@@ -53,8 +53,9 @@ const offices = [
   },
   {
     city: "Bandung",
-    address: "JL. Jenderal Ahmad Yani No. 271 A, Bandung",
-    tel: "1500 069",
+    address:
+      "Jl. Batununggal Indah Raya No.365, Batununggal, Kec. Bandung Kidul, Kota Bandung, Jawa Barat 40266",
+    tel: "085-165-555-987",
   },
   {
     city: "Surabaya",
@@ -66,18 +67,18 @@ const offices = [
 const socialLinks = [
   {
     icon: Linkedin,
-    href: "https://id.linkedin.com/company/mekari",
+    href: "https://id.linkedin.com/company/workin",
     label: "LinkedIn",
   },
   {
     icon: Instagram,
-    href: "https://www.instagram.com/mekaricom/",
+    href: "https://www.instagram.com/workincom/",
     label: "Instagram",
   },
-  { icon: Twitter, href: "https://twitter.com/mekaricom", label: "X" },
+  { icon: Twitter, href: "https://twitter.com/workincom", label: "X" },
   {
     icon: Facebook,
-    href: "https://www.facebook.com/mekaricom",
+    href: "https://www.facebook.com/workincom",
     label: "Facebook",
   },
   {
@@ -87,7 +88,7 @@ const socialLinks = [
   },
 ];
 
-export default function MekariFooter() {
+export default function WorkinFooter() {
   return (
     <footer className="bg-slate-950 text-slate-400 relative overflow-hidden">
       {/* Top linear line */}
@@ -98,13 +99,9 @@ export default function MekariFooter() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
-                <span className="text-white font-black text-sm">M</span>
-              </div>
-              <span className="text-[17px] font-bold text-white tracking-tight">
-                Mekari
-              </span>
+              <img src={"/images/logo-workin-white.svg"} className="w-40" />
             </div>
+
             <p className="text-[12px] text-slate-500 leading-relaxed max-w-50">
               Solusi SaaS terdepan untuk bisnis di Indonesia.
             </p>

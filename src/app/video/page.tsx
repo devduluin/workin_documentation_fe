@@ -1,15 +1,15 @@
 "use client";
 import CTASection from "@/components/sections/CTASection";
 import BackToTop from "@/components/sections/BackToTop";
-import MekariNavbar from "@/components/layouts/Navbar";
 import { useState } from "react";
 import Link from "next/link";
 import { FileText, Play, Search, Video } from "lucide-react";
 import VideoSidebar from "@/components/sections/videos/VideoSidebar";
 import VideoContent from "@/components/sections/videos/VideoContent";
 import InfoSection from "@/components/sections/InfoSection";
-import MekariFooter from "@/components/layouts/Footer";
 import MobileSidebarToggle from "@/components/sections/ToggleSidebar";
+import WorkinNavbar from "@/components/layouts/Navbar";
+import WorkinFooter from "@/components/layouts/Footer";
 
 export default function VideoTutorialPage() {
   const [query, setQuery] = useState("");
@@ -17,7 +17,7 @@ export default function VideoTutorialPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Shared: Navbar */}
-      <MekariNavbar />
+      <WorkinNavbar />
 
       {/* Hero (video variant) */}
       <section className="relative overflow-hidden">
@@ -42,7 +42,7 @@ export default function VideoTutorialPage() {
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.08] border border-white/[0.08] rounded-full mb-6 backdrop-blur-sm">
               <Play className="h-3.5 w-3.5 text-violet-400" />
               <span className="text-[12px] font-medium text-violet-200/90">
-                Video Tutorial Mekari
+                Video Tutorial Workin
               </span>
             </div>
 
@@ -55,7 +55,7 @@ export default function VideoTutorialPage() {
 
             <p className="text-slate-400 text-sm md:text-base mb-8 max-w-lg mx-auto">
               Temukan video tutorial lengkap untuk memandu Anda menggunakan
-              produk Mekari
+              produk Workin
             </p>
 
             {/* Search */}
@@ -106,7 +106,7 @@ export default function VideoTutorialPage() {
           <div className="flex items-center gap-0">
             {/* Artikel panduan - Inactive */}
             <Link
-              href="/"
+              href="/categories/1"
               className="relative flex items-center gap-2.5 px-5 py-3.5 text-[13px] font-medium text-slate-400 hover:text-slate-600 transition-colors group"
             >
               <div className="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-slate-200/70 flex items-center justify-center transition-colors">
@@ -168,7 +168,7 @@ export default function VideoTutorialPage() {
       <CTASection />
 
       {/* Shared: Footer */}
-      <MekariFooter />
+      <WorkinFooter />
 
       {/* Shared: Back to Top */}
       <BackToTop />

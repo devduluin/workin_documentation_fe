@@ -3,13 +3,16 @@ import HeroSection from "@/components/sections/HeroSection";
 import InfoSection from "@/components/sections/InfoSection";
 import CTASection from "@/components/sections/CTASection";
 import BackToTop from "@/components/sections/BackToTop";
-import MekariNavbar from "@/components/layouts/Navbar";
-import MekariFooter from "@/components/layouts/Footer";
 import MobileSidebarToggle from "@/components/sections/ToggleSidebar";
 import { usePricingStore } from "@/stores/usePricing";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ArticleData } from "@/lib/articleData";
+import WorkinNavbar from "@/components/layouts/Navbar";
+import WorkinFooter from "@/components/layouts/Footer";
+import { useCategoryStore } from "@/stores/useCategory";
+import { useEffect } from "react";
+import { ApiHrms } from "@/lib/API-hrms";
 
 export default function ArticlePage() {
   const { activeTab, setActiveTab } = usePricingStore();
@@ -17,10 +20,18 @@ export default function ArticlePage() {
   const currents =
     ArticleData.find((t) => t.id === activeTab) ?? ArticleData[0];
 
+  const { setCategories, categories } = useCategoryStore();
+
+  useEffect(() => {
+    Promise.all([ApiHrms.getCategory()]).then(([c]) => {
+      setCategories(c);
+    });
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      <MekariNavbar />
-      <HeroSection />
+      <WorkinNavbar />
+      <HeroSection categories={categories} />
       {/* product tab */}
       <section className="py-16 md:py-20 bg-slate-50/30 mesh-bg">
         <div className="max-w-340 mx-auto px-5 sm:px-8">
@@ -30,7 +41,7 @@ export default function ArticlePage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 ${
+                className={`px-5 py-2.5 rounded-xl text-[13px] font-semibold cursor-pointer transition-all duration-200 ${
                   activeTab === tab.id
                     ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20"
                     : "bg-white text-slate-600 border border-slate-200/60 hover:bg-slate-50"
@@ -51,7 +62,7 @@ export default function ArticlePage() {
 
           {/* Content */}
           <div
-            className=" rounded-2xl! p-8 md:px-12 md:py-8 animate-fade-in"
+            className=" rounded-2xl! p-8 bg-white md:px-12 md:py-8 animate-fade-in"
             key={currents.id}
           >
             <div className="grid grid-cols-1 gap-10 items-center">
@@ -88,7 +99,7 @@ export default function ArticlePage() {
 
       <InfoSection />
       <CTASection />
-      <MekariFooter />
+      <WorkinFooter />
       <BackToTop />
       <MobileSidebarToggle />
     </div>

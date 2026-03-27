@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { List, MessageSquareMore, ArrowUpRight } from "lucide-react";
 import { tableOfContents } from "@/lib/data";

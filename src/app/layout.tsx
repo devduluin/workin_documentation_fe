@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mekari Help Center - Panduan Pengguna",
+  title: "Workin by Duluin Help Center - Panduan Pengguna",
   description:
-    "Pusat Bantuan Mekari Help Center - Temukan artikel panduan sesuai kebutuhan Anda",
+    "Pusat Bantuan Workin by Duluin Help Center - Temukan artikel panduan sesuai kebutuhan Anda",
 };
 
 export default function RootLayout({

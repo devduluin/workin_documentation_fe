@@ -54,9 +54,7 @@ export default function ArticleContent(props: any) {
 
       {/* Article Header */}
       <header className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight mb-4">
-          Mekari Account - Guidebook Release Log
-        </h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight mb-4"></h1>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           {/* Author Info */}
@@ -66,7 +64,7 @@ export default function ArticleContent(props: any) {
             </div>
             <div>
               <p className="text-sm font-medium text-gray-900">
-                Learning Center Mekari
+                Learning Center Workin
               </p>
               <div className="flex items-center gap-1.5 text-xs text-gray-500">
                 <Clock className="h-3 w-3" />
@@ -85,7 +83,7 @@ export default function ArticleContent(props: any) {
               PDF
             </button>
             <Link
-              href="https://community.mekari.com/mekari-training/mekari/"
+              href="https://community.Workin.com/Workin-training/Workin/"
               target="_blank"
               className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-linear-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 rounded-lg transition-all shadow-sm"
             >
@@ -97,7 +95,9 @@ export default function ArticleContent(props: any) {
       </header>
 
       <div>
-        {/* <h3>{section.title}</h3> */}
+        <h3 className="text-2xl font-bold text-gray-900 mb-3">
+          {section.title}
+        </h3>
 
         <div
           dangerouslySetInnerHTML={{
@@ -110,10 +110,10 @@ export default function ArticleContent(props: any) {
       <section className="prose prose-sm max-w-none mb-8">
         <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-5 mb-8">
           <p className="text-sm text-gray-700 leading-relaxed m-0">
-            Kumpulan catatan rilis (release log) artikel panduan mengenai Mekari
+            Kumpulan catatan rilis (release log) artikel panduan mengenai Workin
             Account untuk melakukan berbagai pengaturan pengoperasian penggunaan
-            sistem Mekari Account. Halaman ini berisi daftar artikel panduan
-            Mekari Account baru atau yang diperbarui pada tahun tertera
+            sistem Workin Account. Halaman ini berisi daftar artikel panduan
+            Workin Account baru atau yang diperbarui pada tahun tertera
             berdasarkan fitur yang telah dirilis per bulannya.
           </p>
         </div>

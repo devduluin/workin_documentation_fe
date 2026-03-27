@@ -25,11 +25,11 @@ export default function CTASection() {
           Tidak menemukan informasi yang Anda cari?
         </h2>
         <p className="text-[14px] text-slate-500 mb-8">
-          Silahkan hubungi tim kami melalui Mekari Customer Care
+          Silahkan hubungi tim kami melalui Workin Customer Care
         </p>
 
         <Link
-          href="https://api.whatsapp.com/send/?phone=6285174314286&text&type=phone_number&app_absent=0"
+          href="https://api.whatsapp.com/send/?phone=6285165555987&text&type=phone_number&app_absent=0"
           target="_blank"
           className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-[14px] font-bold text-white rounded-2xl transition-all duration-300"
           style={{
@@ -39,7 +39,7 @@ export default function CTASection() {
           }}
         >
           <MessageCircle className="h-5 w-5" />
-          Mekari Customer Care
+          Workin Customer Care
           <ArrowUpRight className="h-4 w-4 opacity-60 group-hover:opacity-100 transition-opacity" />
         </Link>
       </div>

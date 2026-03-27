@@ -21,7 +21,7 @@ import {
 import { useSidebarStore } from "@/stores/useSidebar";
 import { useAuthStore } from "@/stores/useAuth";
 
-export default function MekariNavbar() {
+export default function WorkinNavbar() {
   const router = useRouter();
   const {
     isMobileMenuOpen,
@@ -125,7 +125,8 @@ export default function MekariNavbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-lg font-bold text-gray-900">Mekari </span>
+            {/* <span className="text-lg font-bold text-gray-900">Workin </span> */}
+            <img src={"/images/logo-workin.svg"} className="w-40 h-40" />
           </Link>
 
           {/* Desktop Nav */}
@@ -150,7 +151,7 @@ export default function MekariNavbar() {
               Harga
             </Link>
             <Link
-              href="/harga"
+              href="#"
               className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
             >
               Workin by Duluin
@@ -329,7 +330,7 @@ export default function MekariNavbar() {
                 onClick={closeMobileMenu}
                 className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
               >
-                <Headphones className="h-4 w-4" /> Mekari Customer Care
+                <Headphones className="h-4 w-4" /> Workin Customer Care
               </Link>
 
               {user ? (
