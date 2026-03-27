@@ -26,7 +26,7 @@ export default function HeroSection(props: any) {
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800" />
 
       {/* Mesh Gradient Overlays */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]" />
         <div className="absolute top-20 right-1/4 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[100px]" />
         <div className="absolute -bottom-20 left-1/2 w-[600px] h-[300px] bg-violet-600/10 rounded-full blur-[100px]" />
