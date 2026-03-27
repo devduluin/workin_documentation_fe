@@ -71,7 +71,7 @@ export default function TableOfContents() {
 
       {/* Discuss CTA */}
       <Link
-        href="https://community.mekari.com/discuss/"
+        href="#"
         target="_blank"
         className="group flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl text-[13px] font-semibold text-white transition-all duration-300"
         style={{

@@ -297,26 +297,28 @@ export default function WorkinNavbar() {
                   )}
                 </div>
               )}
+              <Link href={"https://workin.duluin.com/#feature"}>
+                <button className="w-full flex items-center justify-between px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span className="flex items-center gap-2">
+                    <Tag className="h-4 w-4" /> Fitur
+                  </span>
+                  {/* <ChevronDown className="h-4 w-4" /> */}
+                </button>
+              </Link>
 
-              <button className="w-full flex items-center justify-between px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-lg">
-                <span className="flex items-center gap-2">
-                  <Tag className="h-4 w-4" /> Produk
-                </span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
+              <Link
+                href="https://workin.duluin.com/price-package"
+                onClick={closeMobileMenu}
+                className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
+              >
+                <ExternalLink className="h-4 w-4" /> Harga
+              </Link>
               <Link
                 href="#"
                 onClick={closeMobileMenu}
                 className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
               >
-                <ExternalLink className="h-4 w-4" /> Release log
-              </Link>
-              <Link
-                href="/harga"
-                onClick={closeMobileMenu}
-                className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
-              >
-                <Tag className="h-4 w-4" /> Harga
+                <Tag className="h-4 w-4" /> Workin by Duluin
               </Link>
               <Link
                 href="/discuss"
@@ -326,13 +328,13 @@ export default function WorkinNavbar() {
                 <MessageSquare className="h-4 w-4" /> Diskusi
               </Link>
               <Link
-                href="#"
+                href="https://api.whatsapp.com/send/?phone=6285165555987&text&type=phone_number&app_absent=0"
                 onClick={closeMobileMenu}
                 className="flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-lg"
               >
                 <Headphones className="h-4 w-4" /> Workin Customer Care
               </Link>
-
+              {/* 
               {user ? (
                 <div className="pt-2 border-t border-gray-100 mt-2 space-y-1">
                   <Link
@@ -373,7 +375,7 @@ export default function WorkinNavbar() {
                     <LogIn className="h-4 w-4" /> Sign Up
                   </Link>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         )}

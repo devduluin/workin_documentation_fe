@@ -9,132 +9,130 @@ export interface VideoCategory {
   name: string;
   videos: VideoItem[];
 }
-
 export const videoCategories: VideoCategory[] = [
   {
-    id: "mekari-flex",
-    name: "Mekari Flex",
+    id: "workin-flex",
+    name: "Workin Flex",
     videos: [
       {
         id: "flex-1",
-        title: "Pengenalan dan Cara Menggunakan Mekari Flex",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Pengenalan dan Cara Menggunakan Workin Flex",
+        youtubeId: "Kp4PvmHAG64?si=ZJgLHjIP7NLFZdyS",
       },
       {
         id: "flex-2",
-        title: "Cara Mengakses Earned Wage Access (EWA) pada Mekari Flex",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Mengakses Earned Wage Access (EWA) pada Workin Flex",
+        youtubeId: "Kp4PvmHAG64?si=ZJgLHjIP7NLFZdyS",
       },
       {
         id: "flex-3",
-        title: "Cara Memilih dan Menggunakan Benefit pada Mekari Flex",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Memilih dan Menggunakan Benefit pada Workin Flex",
+        youtubeId: "Kp4PvmHAG64?si=ZJgLHjIP7NLFZdyS",
       },
       {
         id: "flex-4",
-        title: "Cara Mengajukan Reimbursement pada Mekari Flex",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Mengajukan Reimbursement pada Workin Flex",
+        youtubeId: "Kp4PvmHAG64?si=ZJgLHjIP7NLFZdyS",
       },
     ],
   },
   {
-    id: "mekari-expense",
-    name: "Mekari Expense",
+    id: "workin-expense",
+    name: "Workin Expense",
     videos: [
       {
         id: "expense-1",
-        title: "Melakukan Pengajuan Reimbursement pada Mekari Expense",
-        youtubeId: "A1OGc_fmbiw",
+        title: "Fitur KPI and tools Workin by Duluin",
+        youtubeId: "Kp4PvmHAG64?si=ZJgLHjIP7NLFZdyS",
       },
       {
         id: "expense-2",
-        title: "Melakukan Pengajuan Cash Advance pada Mekari Expense",
-        youtubeId: "rTUVvMxkCY8",
+        title: "Fitur employe onboarding Workin by Duluin",
+        youtubeId: "H2RjPMPhE0k?si=HO0eb-VD_gqe7HHC",
       },
       {
         id: "expense-3",
-        title: "Membuat Policy dan Workflow untuk Kebijakan Business Trip",
-        youtubeId: "Q3I5MdGne5o",
+        title: "Fitur Employe Dashboard Workin by Duluin",
+        youtubeId: "QX_ak-PJsYo?si=tQm4nMHwWXg_a0TP",
       },
       {
         id: "expense-4",
-        title:
-          "Membuat Pengajuan dan Laporan pada Reimbursement dan Cash Advance Business Trip",
-        youtubeId: "30pirhq5Ap4",
+        title: "Fitur Attendence Mobile Workin by Duluin",
+        youtubeId: "iTZqRsU4ges?si=AFuAwihs9TvUPV6m",
       },
       {
         id: "expense-5",
-        title: "Membuat Pengajuan Reimbursement dan Cash Advance versi Website",
-        youtubeId: "BfmRQY5Cris",
+        title: "Fitur Presensi Mobile Workin by Duluin",
+        youtubeId: "hXjagyrFiBk?si=Kd1BBKlNglOhi-CY",
       },
     ],
   },
   {
-    id: "mekari-partner",
-    name: "Mekari Partner",
+    id: "workin-partner",
+    name: "Workin Partner",
     videos: [
       {
         id: "partner-1",
-        title: "Cara Mendaftar dan Menggunakan Mekari Partner Platform",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Mendaftar dan Menggunakan Workin Partner Platform",
+        youtubeId: "H2RjPMPhE0k?si=HO0eb-VD_gqe7HHC",
       },
       {
         id: "partner-2",
-        title: "Sekilas Menu Dashboard pada Mekari Partner Platform",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Sekilas Menu Dashboard pada Workin Partner Platform",
+        youtubeId: "H2RjPMPhE0k?si=HO0eb-VD_gqe7HHC",
       },
     ],
   },
   {
-    id: "mekari-sign",
-    name: "Mekari Sign",
+    id: "workin-sign",
+    name: "workin Sign",
     videos: [
       {
         id: "sign-1",
-        title: "Cara Mengunggah dan Mengirimkan Dokumen pada Mekari Sign",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Mengunggah dan Mengirimkan Dokumen pada workin Sign",
+        youtubeId: "QX_ak-PJsYo?si=tQm4nMHwWXg_a0TP",
       },
       {
         id: "sign-2",
-        title: "Cara Memberikan eSignature melalui Website Mekari Sign",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Memberikan eSignature melalui Website workin Sign",
+        youtubeId: "QX_ak-PJsYo?si=tQm4nMHwWXg_a0TP",
       },
       {
         id: "sign-3",
-        title: "Cara Membuat Template Dokumen pada Mekari Sign",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Membuat Template Dokumen pada workin Sign",
+        youtubeId: "QX_ak-PJsYo?si=tQm4nMHwWXg_a0TP",
       },
     ],
   },
   {
-    id: "mekari-stream",
-    name: "Mekari Stream",
+    id: "workin-stream",
+    name: "workin Stream",
     videos: [
       {
         id: "stream-1",
-        title: "Pengenalan Mekari Stream dan Cara Berlangganan",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Pengenalan workin Stream dan Cara Berlangganan",
+        youtubeId: "iTZqRsU4ges?si=AFuAwihs9TvUPV6m",
       },
       {
         id: "stream-2",
-        title: "Cara Menggunakan Fitur Utama Mekari Stream",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Menggunakan Fitur Utama workin Stream",
+        youtubeId: "iTZqRsU4ges?si=AFuAwihs9TvUPV6m",
       },
     ],
   },
   {
-    id: "mekari-officeless",
-    name: "Mekari Officeless",
+    id: "workin-officeless",
+    name: "workin Officeless",
     videos: [
       {
         id: "officeless-1",
-        title: "Mulai Menggunakan Mekari Officeless",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Mulai Menggunakan workin Officeless",
+        youtubeId: "hXjagyrFiBk?si=Kd1BBKlNglOhi-CY",
       },
       {
         id: "officeless-2",
-        title: "Cara Membuat Aplikasi di Mekari Officeless",
-        youtubeId: "dQw4w9WgXcQ",
+        title: "Cara Membuat Aplikasi di workin Officeless",
+        youtubeId: "hXjagyrFiBk?si=Kd1BBKlNglOhi-CY",
       },
     ],
   },

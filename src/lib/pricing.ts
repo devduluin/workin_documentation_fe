@@ -38,39 +38,39 @@ export interface FAQItem {
 }
 
 export const bundleProducts: BundleProduct[] = [
-  { id: "cbundle_1", name: "Mekari Talenta", initial: "T", price: null },
+  { id: "cbundle_1", name: "Workin Talenta", initial: "T", price: null },
   {
     id: "cbundle_2",
-    name: "Mekari Jurnal",
+    name: "Workin Jurnal",
     initial: "J",
     price: "Rp 399.000",
     priceLabel: "Mulai dari",
   },
   {
     id: "cbundle_3",
-    name: "Mekari Klikpajak",
+    name: "Workin Klikpajak",
     initial: "K",
     price: "Rp 250.000",
     priceLabel: "Mulai dari",
   },
   {
     id: "cbundle_4",
-    name: "Mekari Qontak",
+    name: "Workin Qontak",
     initial: "Q",
     price: "Rp 750.000",
     priceLabel: "Mulai dari",
   },
   {
     id: "cbundle_5",
-    name: "Mekari Sign",
+    name: "Workin Sign",
     initial: "S",
     price: "Rp 465.000",
     priceLabel: "Mulai dari",
   },
-  { id: "cbundle_6", name: "Mekari Flex", initial: "F", price: null },
-  { id: "cbundle_7", name: "Mekari Capital", initial: "C", price: null },
-  { id: "cbundle_8", name: "Mekari Pay", initial: "P", price: null },
-  { id: "cbundle_9", name: "Mekari Expense", initial: "E", price: null },
+  { id: "cbundle_6", name: "Workin Flex", initial: "F", price: null },
+  { id: "cbundle_7", name: "Workin Capital", initial: "C", price: null },
+  { id: "cbundle_8", name: "Workin Pay", initial: "P", price: null },
+  { id: "cbundle_9", name: "Workin Expense", initial: "E", price: null },
 ];
 
 export const productTabs: ProductTab[] = [
@@ -87,48 +87,48 @@ export const productTabs: ProductTab[] = [
         initial: "T",
       },
       {
-        name: "Mekari Qontak",
+        name: "Workin Qontak",
         href: "https://qontak.com/harga/",
         initial: "Q",
       },
       {
-        name: "Mekari Jurnal",
+        name: "Workin Jurnal",
         href: "https://www.jurnal.id/id/harga/",
         initial: "J",
       },
       {
-        name: "Mekari Klikpajak",
+        name: "Workin Klikpajak",
         href: "https://klikpajak.id/harga/",
         initial: "K",
       },
       {
-        name: "Mekari Flex",
-        href: "https://mekari.com/produk/flex/",
+        name: "Workin Flex",
+        href: "https://Workin.com/produk/flex/",
         initial: "F",
       },
       {
-        name: "Mekari Expense",
-        href: "https://mekari.com/produk/expense/",
+        name: "Workin Expense",
+        href: "https://Workin.com/produk/expense/",
         initial: "E",
       },
       {
-        name: "Mekari Sign",
-        href: "https://mekarisign.com/id/harga/",
+        name: "Workin Sign",
+        href: "https://Workinsign.com/id/harga/",
         initial: "S",
       },
       {
-        name: "Mekari Stream",
-        href: "https://mekari.com/produk/stream/",
+        name: "Workin Stream",
+        href: "https://Workin.com/produk/stream/",
         initial: "St",
       },
       {
-        name: "Mekari Capital",
-        href: "https://mekari.com/produk/capital/",
+        name: "Workin Capital",
+        href: "https://Workin.com/produk/capital/",
         initial: "C",
       },
       {
-        name: "Mekari Pay",
-        href: "https://mekari.com/produk/pay/",
+        name: "Workin Pay",
+        href: "https://Workin.com/produk/pay/",
         initial: "P",
       },
     ],
@@ -141,8 +141,8 @@ export const productTabs: ProductTab[] = [
       "Dengan klik masing-masing pilihan produk, Anda akan diarahkan ke halaman harga terpisah tiap produk.",
     products: [
       {
-        name: "Mekari University",
-        href: "https://univ.mekari.com/",
+        name: "Workin University",
+        href: "https://univ.Workin.com/",
         initial: "U",
       },
     ],
@@ -150,28 +150,28 @@ export const productTabs: ProductTab[] = [
   {
     id: "produk3",
     label: "Inovasi pendukung",
-    title: "Dukungan inovasi untuk produk utama di ekosistem Mekari",
+    title: "Dukungan inovasi untuk produk utama di ekosistem Workin",
     description:
       "Dengan klik masing-masing pilihan produk, Anda akan diarahkan ke halaman harga terpisah tiap produk.",
     products: [
       {
-        name: "Mekari Flow",
-        href: "https://mekari.com/produk/flow/",
+        name: "Workin Flow",
+        href: "https://Workin.com/produk/flow/",
         initial: "Fl",
       },
       {
-        name: "Mekari Access",
-        href: "https://mekari.com/produk/access/",
+        name: "Workin Access",
+        href: "https://Workin.com/produk/access/",
         initial: "A",
       },
       {
-        name: "Mekari Airene",
-        href: "https://mekari.com/produk/airene/",
+        name: "Workin Airene",
+        href: "https://Workin.com/produk/airene/",
         initial: "Ai",
       },
       {
-        name: "Mekari Officeless",
-        href: "https://mekari.com/produk/officeless/",
+        name: "Workin Officeless",
+        href: "https://Workin.com/produk/officeless/",
         initial: "O",
       },
     ],
@@ -202,7 +202,7 @@ export const featureCards: FeatureCard[] = [
   {
     title: "Program Inspiratif Komunitas",
     description:
-      "Berbagai event, networking, dan kolaborasi dengan berbagai praktisi ahli di Mekari Community dan Mekari Event.",
+      "Berbagai event, networking, dan kolaborasi dengan berbagai praktisi ahli di Workin Community dan Workin Event.",
   },
   {
     title: "Bebas Maintenance & Ramah Aturan",
@@ -214,7 +214,7 @@ export const featureCards: FeatureCard[] = [
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Setelah menggunakan Mekari Talenta dan Mekari Jurnal, terasa sekali bahwa ROI sistem ini bagus. Saya rasa kita telah menghemat paling tidak 30% dari waktu yang biasa terbuang untuk FAT dan juga talent management.",
+      "Setelah menggunakan Workin Talenta dan Workin Jurnal, terasa sekali bahwa ROI sistem ini bagus. Saya rasa kita telah menghemat paling tidak 30% dari waktu yang biasa terbuang untuk FAT dan juga talent management.",
     name: "Ellen Pranata",
     title: "CEO, KLAR Smile",
     company: "KLAR",
@@ -230,9 +230,9 @@ export const testimonials: Testimonial[] = [
 
 export const faqItems: FAQItem[] = [
   {
-    question: "Apa manfaat menggunakan produk Mekari?",
+    question: "Apa manfaat menggunakan produk Workin?",
     answer:
-      "Produk Mekari menawarkan sejumlah manfaat, termasuk: Efisiensi dan produktivitas yang meningkat, Pengurangan biaya, Kepatuhan yang ditingkatkan, dan Skalabilitas yang ditingkatkan.",
+      "Produk Workin menawarkan sejumlah manfaat, termasuk: Efisiensi dan produktivitas yang meningkat, Pengurangan biaya, Kepatuhan yang ditingkatkan, dan Skalabilitas yang ditingkatkan.",
   },
   {
     question: "Apakah Anda menawarkan uji coba atau demo gratis?",
@@ -252,7 +252,7 @@ export const faqItems: FAQItem[] = [
   },
   {
     question:
-      "Apa yang terjadi jika saya membutuhkan dukungan atau pelatihan tambahan platform Mekari?",
+      "Apa yang terjadi jika saya membutuhkan dukungan atau pelatihan tambahan platform Workin?",
     answer:
       "Kami sudah menyiapkan semuanya! Layanan Profesional kami, tersedia untuk memberikan dukungan dan pelatihan yang Anda butuhkan untuk implementasi dan penggunaan yang lancar.",
   },

@@ -1,9 +1,7 @@
 "use client";
 
-import React from "react";
 import { List, X } from "lucide-react";
 import ArticleSidebar from "./ArticleSidebar";
-import { useSidebarStore } from "@/stores/useSidebarStore";
 import { useSidebarStore } from "@/stores/useSidebar";
 
 export default function MobileSidebarToggle() {

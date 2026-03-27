@@ -65,7 +65,7 @@ export default function VideoContent() {
         </div>
 
         <a
-          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(activeCategory.name + " tutorial")}`}
+          href={`https://www.youtube.com/@DuluinGroup`}
           target="_blank"
           rel="noopener noreferrer"
           className="hidden sm:flex items-center gap-1.5 text-[12px] font-medium text-slate-400 hover:text-violet-600 transition-colors"

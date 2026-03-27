@@ -11,7 +11,7 @@ interface VideoState {
 }
 
 export const useVideoStore = create<VideoState>((set) => ({
-  activeCategoryId: "mekari-expense",
+  activeCategoryId: "workin-expense",
   setActiveCategoryId: (id) =>
     set({ activeCategoryId: id, isMobileVideoSidebarOpen: false }),
 

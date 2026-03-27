@@ -10,11 +10,11 @@ import {
 import { SignatureIcon } from "lucide-react";
 
 export const breadcrumbs: BreadcrumbItem[] = [
-  { label: "Workin Help Center", href: "/hc/id" },
-  { label: "General", href: "/hc/id/categories/20043365335833-General" },
+  { label: "Workin Help Center", href: "/categories/1" },
+  { label: "General", href: "/categories/2" },
   {
     label: "Guidebook Release Log",
-    href: "/hc/id/sections/20043397536281-Guidebook-Release-Log",
+    href: "/categories/3",
   },
 ];
 
@@ -29,7 +29,7 @@ export const releaseLogEntries: ReleaseLogEntry[] = [
     featureName: "Keamanan",
     guidebookTitle:
       "Bagaimana Cara Mengaktifkan Fitur Account Lockout di Workin",
-    guidebookHref: "/hc/id/articles/55467657227929",
+    guidebookHref: "/categories/3",
     featureStatus: "New",
     description: "Penjelasan scara mengaktifkan fitur penguncian akun.",
   },
@@ -47,7 +47,7 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-1",
             title: "Workin Products Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/18341184943257-Workin-Products-Release-Log",
+            href: "/categories/4",
           },
         ],
       },
@@ -64,37 +64,37 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-3",
             title: "Workin Flex - Guidebook Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/20043431490585",
+            href: "/categories/7",
           },
           {
             id: "art-4",
             title: "Flex Savings - Guidebook Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/51235042353817",
+            href: "/categories/9",
           },
           {
             id: "art-5",
             title: "Workin Sign - Guidebook Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/20043582871705",
+            href: "/categories/7",
           },
           {
             id: "art-6",
             title: "Workin Expense - Guidebook Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/20043673497881",
+            href: "/categories/3",
           },
           {
             id: "art-7",
             title: "Workin Partners Platform - Guidebook Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/25732922429337",
+            href: "/categories/6",
           },
           {
             id: "art-8",
             title: "Workin Officeless - Guidebook Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/34339538913689",
+            href: "/categories/8",
           },
           {
             id: "art-9",
             title: "Workin POS - Guidebook Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/55471117475097",
+            href: "/categories/2",
           },
         ],
       },
@@ -105,27 +105,27 @@ export const sidebarCategories: SidebarCategory[] = [
           {
             id: "art-10",
             title: "Workin Flex - Tutorial Video Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/20044056349593",
+            href: "/categories/1",
           },
           {
             id: "art-11",
             title: "Workin Expense - Tutorial Video Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/20044239293337",
+            href: "/categories/1",
           },
           {
             id: "art-12",
             title: "Workin Sign - Tutorial Video Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/32293589704857",
+            href: "/categories/1",
           },
           {
             id: "art-13",
             title: "Workin Stream - Tutorial Video Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/36264493677081",
+            href: "/categories/1",
           },
           {
             id: "art-14",
             title: "Workin POS - Tutorial Video Release Log",
-            href: "https://help-center.Workin.com/hc/id/articles/55938336047385",
+            href: "/categories/1",
           },
         ],
       },
@@ -489,35 +489,35 @@ export const infoCards: InfoCard[] = [
     title: "Pelatihan",
     description:
       "Ingin mempelajari pengoperasian produk-produk Workin? Anda dapat mengikuti sesi pelatihan khusus bersama para trainer berpengalaman.",
-    href: "https://community.Workin.com/Workin-training/Workin/",
+    href: "https://workin.duluin.com/",
     image: "🎓",
   },
   {
     title: "Workin University",
     description:
       "Persaingan semakin ketat! Khawatir karier dan bisnis tidak berkembang pesat? Perkaya wawasan dan asah keterampilan Anda melalui kursus bersertifikat dari para ahli.",
-    href: "https://univ.Workin.com/",
+    href: "https://workin.duluin.com/",
     image: "🏫",
   },
   {
     title: "Workin Community",
     description:
       "Dapatkan informasi menarik dan terbaru dari berbagai lini bisnis dengan para praktisi dan profesional di grup Komunitas Workin.",
-    href: "https://community.Workin.com/",
+    href: "https://workin.duluin.com/",
     image: "👥",
   },
   {
     title: "Workin Customer Care",
     description:
       "Kami peduli dengan keluhan Anda. Segera terhubung dengan tim kami untuk solusi kendala produk, perpanjangan berlangganan, dan lainnya.",
-    href: "https://api.whatsapp.com/send/?phone=6285174314286&text&type=phone_number&app_absent=0",
+    href: "https://api.whatsapp.com/send/?phone=6285165555987&text&type=phone_number&app_absent=0",
     image: "💬",
   },
   {
     title: "Blog Workin",
     description:
       "Dapatkan informasi terkini seputar teknologi digital, bisnis, dan karier dengan mengunjungi blog Workin, yang menyediakan artikel-artikel informatif dan terkini dalam bidang tersebut.",
-    href: "https://Workin.com/blog/",
+    href: "https://workin.duluin.com/",
     image: "📝",
   },
 ];
@@ -525,15 +525,15 @@ export const infoCards: InfoCard[] = [
 export const recentArticles: RelatedArticle[] = [
   {
     title: "Flex for Company Frequently Asked Questions (FAQ)",
-    href: "/hc/id/articles/6766675891865",
+    href: "/categories/4",
   },
   {
     title: "Workin Products Release Log",
-    href: "/hc/id/articles/18341184943257",
+    href: "/categories/2",
   },
   {
     title: "Apa itu Workin Flex?",
-    href: "/hc/id/articles/6753887495193",
+    href: "/categories/8",
   },
 ];
 
@@ -564,7 +564,7 @@ export const relatedArticles: RelatedArticle[] = [
 export const dataHomeTopics: Topics[] = [
   {
     title: "Getting Started",
-    href: "/category/",
+    href: "/categories/",
     icon: <SignatureIcon />,
     desc: "Video pengantar untuk pengguna talenta baru.",
   },

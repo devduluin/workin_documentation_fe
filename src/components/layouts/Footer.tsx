@@ -14,15 +14,15 @@ const footerMenus = {
     { label: "Dukungan purna jual", href: "https://workin.com/customer-care/" },
     { label: "Klien kami", href: "https://workin.com/klien-kami/" },
   ],
-  Produk: [
-    { label: "workin Talenta", href: "https://workin.com/produk/talenta/" },
-    { label: "workin Jurnal", href: "https://workin.com/produk/jurnal/" },
-    { label: "workin Qontak", href: "https://workin.com/produk/qontak/" },
-    { label: "workin Klikpajak", href: "https://workin.com/produk/klikpajak/" },
-    { label: "workin Flex", href: "https://workin.com/produk/flex/" },
-    { label: "workin Sign", href: "https://workin.com/produk/sign/" },
-    { label: "workin Expense", href: "https://workin.com/produk/expense/" },
-  ],
+  // Produk: [
+  //   { label: "workin Talenta", href: "https://workin.com/produk/talenta/" },
+  //   { label: "workin Jurnal", href: "https://workin.com/produk/jurnal/" },
+  //   { label: "workin Qontak", href: "https://workin.com/produk/qontak/" },
+  //   { label: "workin Klikpajak", href: "https://workin.com/produk/klikpajak/" },
+  //   { label: "workin Flex", href: "https://workin.com/produk/flex/" },
+  //   { label: "workin Sign", href: "https://workin.com/produk/sign/" },
+  //   { label: "workin Expense", href: "https://workin.com/produk/expense/" },
+  // ],
   Solusi: [
     { label: "Software ERP", href: "https://workin.com/sistem-software-erp/" },
     { label: "Integrasi", href: "https://workin.com/integrasi/" },
@@ -46,44 +46,32 @@ const footerMenus = {
 
 const offices = [
   {
-    city: "Jakarta",
-    address:
-      "MidPlaza 2 Lantai 4 Jln. Jend. Sudirman Kav. 10-11 Jakarta, 10220.",
-    tel: "1500 069",
-  },
-  {
     city: "Bandung",
     address:
       "Jl. Batununggal Indah Raya No.365, Batununggal, Kec. Bandung Kidul, Kota Bandung, Jawa Barat 40266",
     tel: "085-165-555-987",
-  },
-  {
-    city: "Surabaya",
-    address: "Jl. Ngagel Jaya Selatan No 158",
-    tel: "1500 069",
   },
 ];
 
 const socialLinks = [
   {
     icon: Linkedin,
-    href: "https://id.linkedin.com/company/workin",
+    href: "https://www.linkedin.com/company/duluin/posts/?feedView=all",
     label: "LinkedIn",
   },
   {
     icon: Instagram,
-    href: "https://www.instagram.com/workincom/",
+    href: "https://www.instagram.com/duluinworkin/",
     label: "Instagram",
   },
-  { icon: Twitter, href: "https://twitter.com/workincom", label: "X" },
   {
     icon: Facebook,
-    href: "https://www.facebook.com/workincom",
+    href: "https://www.facebook.com/people/Duluin-ID/61559841304605/",
     label: "Facebook",
   },
   {
     icon: Youtube,
-    href: "https://www.youtube.com/channel/UClgJG7J-GrEbqNBSaMi-cWQ",
+    href: "https://www.youtube.com/@DuluinGroup",
     label: "YouTube",
   },
 ];
@@ -96,7 +84,7 @@ export default function WorkinFooter() {
 
       {/* Main */}
       <div className="max-w-340 mx-auto px-5 sm:px-8 pt-16 pb-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-6">
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <img src={"/images/logo-workin-white.svg"} className="w-40" />
@@ -193,7 +181,7 @@ export default function WorkinFooter() {
       <div className="border-t border-slate-800/50">
         <div className="max-w-340 mx-auto px-5 sm:px-8 py-5">
           <p className="text-center text-[11px] text-slate-600">
-            © Copyright 2024 PT Mid Solusi Nusantara.
+            © Copyright 2026 PT Duluin Solusi Kepegawaian
           </p>
         </div>
       </div>

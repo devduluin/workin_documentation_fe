@@ -1,6 +1,6 @@
 "use client";
-import MekariFooter from "@/components/layouts/Footer";
-import MekariNavbar from "@/components/layouts/Navbar";
+import WorkinFooter from "@/components/layouts/Footer";
+import WorkinNavbar from "@/components/layouts/Navbar";
 import BackToTop from "@/components/sections/BackToTop";
 import {
   bundleProducts,
@@ -40,7 +40,7 @@ export default function HargaPage() {
   const selected = bundleProducts.filter((p) => selectedBundles.includes(p.id));
 
   const waText = encodeURIComponent(
-    `Halo saya tertarik dengan produk Mekari ${selected.map((p) => p.name).join(", ")}`,
+    `Halo saya tertarik dengan produk Workin ${selected.map((p) => p.name).join(", ")}`,
   );
 
   const { activeTab, setActiveTab } = usePricingStore();
@@ -51,7 +51,7 @@ export default function HargaPage() {
   const { openFaqIndex, toggleFaq } = usePricingStore();
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      <MekariNavbar />
+      <WorkinNavbar />
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-slate-900 to-slate-800" />
@@ -274,7 +274,7 @@ export default function HargaPage() {
                       <span className="text-2xl font-black linear-text">M</span>
                     </div>
                     <p className="text-[13px] font-semibold text-slate-500">
-                      Ekosistem Mekari
+                      Ekosistem Workin
                     </p>
                   </div>
                 </div>
@@ -380,10 +380,10 @@ export default function HargaPage() {
                 Frequently Asked Questions (FAQ)
               </p>
               <h2 className="text-[22px] md:text-[28px] font-extrabold text-slate-900 tracking-tight mb-4">
-                Apa itu Mekari?
+                Apa itu Workin?
               </h2>
               <p className="text-[14px] text-slate-500 leading-relaxed">
-                Mekari adalah penyedia SaaS terkemuka di Indonesia, menawarkan
+                Workin adalah penyedia SaaS terkemuka di Indonesia, menawarkan
                 berbagai perangkat lunak berbasis cloud, layanan keuangan
                 kontekstual, dan layanan profesional untuk membantu bisnis dari
                 semua ukuran tumbuh dan sukses.
@@ -439,11 +439,11 @@ export default function HargaPage() {
             Siap untuk dunia kerja masa depan?
           </h2>
           <p className="text-[14px] text-slate-500 mb-8 max-w-md mx-auto">
-            Mekari adalah partner dan solusi digital transformasi paling
+            Workin adalah partner dan solusi digital transformasi paling
             terpercaya untuk dorong pertumbuhan bisnis Anda
           </p>
           <Link
-            href="https://api.whatsapp.com/send/?phone=6281392770506&text=Halo%20saya%20tertarik%20dengan%20solusi%20Mekari"
+            href="https://api.whatsapp.com/send/?phone=6281392770506&text=Halo%20saya%20tertarik%20dengan%20solusi%20Workin"
             target="_blank"
             className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-[14px] font-bold text-white rounded-2xl transition-all duration-300"
             style={{
@@ -458,7 +458,7 @@ export default function HargaPage() {
           </Link>
         </div>
       </section>
-      <MekariFooter />
+      <WorkinFooter />
       <BackToTop />
     </div>
   );
