@@ -48,7 +48,7 @@ export default function HeroSection() {
           <div className="max-w-xl mx-auto">
             <form action="/hc/id/search" method="get" className="relative">
               <div
-                className={`relative rounded-2xl z-50 transition-all duration-300 ${
+                className={`relative rounded-2xl z-40 transition-all duration-300 ${
                   isFocused
                     ? "shadow-[0_0_0_2px_rgba(99,102,241,0.4),0_8px_40px_rgba(99,102,241,0.15)] scale-[1.05]"
                     : "shadow-[0_4px_24px_rgba(0,0,0,0.2)]"

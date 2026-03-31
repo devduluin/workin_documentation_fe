@@ -78,7 +78,6 @@ export default function ArticlePage() {
                     <Link
                       key={product.name}
                       href={product.href}
-                      target="_blank"
                       className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200/60 hover:border-blue-200 hover:bg-blue-50/30 transition-all"
                     >
                       <div className="w-7 h-7 rounded-lg bg-linear-to-br from-slate-100 to-slate-50 border border-slate-200/60 flex items-center justify-center text-[10px] font-bold text-slate-500 group-hover:from-blue-50 group-hover:to-indigo-50 group-hover:text-blue-600 group-hover:border-blue-200 transition-all">
