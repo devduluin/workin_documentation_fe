@@ -23,4 +23,19 @@ async function fetcher<T>(
 export const ApiHrms = {
   getCategory: () => fetcher<any[]>("/categories"),
   getSection: (slug: string) => fetcher<any>(`/sections/document/${slug}`),
+  getCategoryDetails: (slug: string) => fetcher<any>(`/categories/${slug}`),
 };
+
+export async function getCategory(slug: string) {
+  const res = await fetch(
+    `https://apidocs-hrms.duluin.com/api/sections/${slug}`,
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!res.ok) throw new Error("Failed");
+
+  const data = await res.json();
+  return data.data;
+}

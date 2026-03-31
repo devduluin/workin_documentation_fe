@@ -6,7 +6,7 @@ import {
   Search,
   FolderClosed,
   FolderOpen,
-  FileText,
+  Dot,
 } from "lucide-react";
 import { useSidebarStore } from "@/stores/useSidebar";
 import { useEffect, useState } from "react";
@@ -70,9 +70,9 @@ export default function ArticleSidebar(props: any) {
                   if (item.categoryId !== openCategoryId)
                     toggleCategory(item.categoryId);
                 }}
-                className="flex items-start gap-2 px-3 py-2 text-[12px] hover:bg-slate-50"
+                className="flex items-start gap-1 px-3 py-2 text-[12px] hover:bg-slate-50"
               >
-                <FileText className="h-3 w-3 mt-1 text-slate-400" />
+                <Dot className="h-6 w-6 -mt-1 text-slate-400" />
                 <span>{item.title}</span>
               </Link>
             ))}
@@ -102,7 +102,7 @@ export default function ArticleSidebar(props: any) {
                     onClick={() => {
                       toggleCategory(category.id);
                     }}
-                    className={`w-full flex items-center  gap-2.5 px-4 py-3 text-[12px] font-semibold transition-all duration-200 ${
+                    className={`w-full flex cursor-pointer items-center  gap-2.5 px-4 py-3 text-[12px] font-semibold transition-all duration-200 ${
                       isCatOpen
                         ? "text-blue-700 bg-linear-to-r from-blue-50/80 to-indigo-50/40"
                         : "text-slate-700 hover:bg-slate-50"
@@ -135,7 +135,7 @@ export default function ArticleSidebar(props: any) {
                     href={`/categories/${category.Documents[0].id.toString()}#content`}
                   >
                     <button
-                      className={`w-full flex items-center gap-2.5 px-4 py-3 text-[12px] font-semibold transition-all duration-200
+                      className={`w-full flex cursor-pointer items-center gap-2.5 px-4 py-3 text-[12px] font-semibold transition-all duration-200
                            hover:bg-slate-50 ${
                              categorySlug ===
                              category.Documents[0].id.toString()
@@ -165,14 +165,14 @@ export default function ArticleSidebar(props: any) {
                         <div key={section.id}>
                           <Link
                             href={`${section.id.toString()}#content`}
-                            className={`flex items-start gap-2 pl-8 pr-4 py-1.5 text-[12px] leading-relaxed transition-all duration-200 ${
+                            className={`flex items-start gap-1 pl-8 pr-4 py-1.5 text-[12px] leading-relaxed transition-all duration-200 ${
                               section.id.toString() === categorySlug
                                 ? "text-blue-700 bg-blue-100 font-semibold border-r-[3px] border-blue-600"
                                 : "text-slate-500 hover:text-slate-700 hover:bg-white"
                             }`}
                           >
-                            <FileText
-                              className={`h-3 w-3 shrink-0 mt-px ${
+                            <Dot
+                              className={`h-6 w-6 shrink-0 -mt-1 ${
                                 section.isActive
                                   ? "text-blue-500"
                                   : "text-slate-300"

@@ -1,9 +1,7 @@
-"use client";
 import CTASection from "@/components/sections/CTASection";
 import BackToTop from "@/components/sections/BackToTop";
-import { useState } from "react";
 import Link from "next/link";
-import { FileText, Play, Search, Video } from "lucide-react";
+import { FileText, Video } from "lucide-react";
 import VideoSidebar from "@/components/sections/videos/VideoSidebar";
 import VideoContent from "@/components/sections/videos/VideoContent";
 import InfoSection from "@/components/sections/InfoSection";
@@ -11,6 +9,13 @@ import MobileSidebarToggle from "@/components/sections/ToggleSidebar";
 import WorkinNavbar from "@/components/layouts/Navbar";
 import WorkinFooter from "@/components/layouts/Footer";
 import HeroSection from "@/components/sections/HeroSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Video Tutorial - Workin by Duluin Help Center",
+  description:
+    "Temukan berbagai video tutorial yang membantu Anda memahami dan menggunakan produk Workin by Duluin dengan lebih efektif. Pelajari fitur-fitur utama, tips penggunaan, dan solusi untuk masalah umum melalui panduan video kami.",
+};
 
 export default function VideoTutorialPage() {
   return (
