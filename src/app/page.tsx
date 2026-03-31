@@ -20,7 +20,7 @@ export default function ArticlePage() {
   const currents =
     ArticleData.find((t) => t.id === activeTab) ?? ArticleData[0];
 
-  const { setCategories, categories } = useCategoryStore();
+  const { setCategories } = useCategoryStore();
 
   useEffect(() => {
     Promise.all([ApiHrms.getCategory()]).then(([c]) => {
@@ -31,7 +31,7 @@ export default function ArticlePage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <WorkinNavbar />
-      <HeroSection categories={categories} />
+      <HeroSection />
       {/* product tab */}
       <section className="py-16 md:py-20 bg-slate-50/30 mesh-bg">
         <div className="max-w-340 mx-auto px-5 sm:px-8">

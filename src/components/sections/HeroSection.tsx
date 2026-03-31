@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { FileText } from "lucide-react";
+import { Dot } from "lucide-react";
 import { useSidebarStore } from "@/stores/useSidebar";
 import Link from "next/link";
 import { useCategoryStore } from "@/stores/useCategory";
 
-export default function HeroSection(props: any) {
+export default function HeroSection() {
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const { openCategoryId, toggleCategory } = useSidebarStore();
@@ -48,7 +48,7 @@ export default function HeroSection(props: any) {
           <div className="max-w-xl mx-auto">
             <form action="/hc/id/search" method="get" className="relative">
               <div
-                className={`relative rounded-2xl transition-all duration-300 ${
+                className={`relative rounded-2xl z-50 transition-all duration-300 ${
                   isFocused
                     ? "shadow-[0_0_0_2px_rgba(99,102,241,0.4),0_8px_40px_rgba(99,102,241,0.15)] scale-[1.05]"
                     : "shadow-[0_4px_24px_rgba(0,0,0,0.2)]"
@@ -76,9 +76,9 @@ export default function HeroSection(props: any) {
                             if (item.categoryId !== openCategoryId)
                               toggleCategory(item.categoryId);
                           }}
-                          className="flex items-start gap-3 px-4 py-3 text-sm hover:bg-slate-50 transition"
+                          className="flex items-start gap-3 px-4 py-3 text-sm hover:bg-slate-100 transition"
                         >
-                          <FileText className="h-4 w-4 mt-1 text-slate-400" />
+                          <Dot className="w-8 -mt-0.5 -mr-3 text-slate-400" />
                           <span className="text-slate-700">{item.title}</span>
                         </Link>
                       ))}
@@ -87,9 +87,11 @@ export default function HeroSection(props: any) {
                 )}
 
                 {isFocused && query && results?.length === 0 && (
-                  <div className="absolute top-full mt-3 w-full bg-white rounded-2xl shadow-2xl border border-slate-200 p-4 text-sm text-slate-500 z-50">
-                    Tidak ditemukan hasil untuk "
-                    <span className="font-medium">{query}</span>"
+                  <div className="relative">
+                    <div className="absolute top-full mt-3 w-full bg-white rounded-2xl shadow-2xl border border-slate-200 p-4 text-sm text-slate-500">
+                      Tidak ditemukan hasil untuk "
+                      <span className="font-medium">{query}</span>"
+                    </div>
                   </div>
                 )}
               </div>
