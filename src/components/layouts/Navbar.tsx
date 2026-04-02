@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
   X,
@@ -12,16 +12,13 @@ import {
   Headphones,
   Tag,
   MessageSquare,
-  LogIn,
-  LogOut,
-  LayoutDashboard,
-  User2,
-  MessageCircle,
 } from "lucide-react";
 import { useSidebarStore } from "@/stores/useSidebar";
 import { useAuthStore } from "@/stores/useAuth";
 
 export default function WorkinNavbar() {
+  const pathname = usePathname();
+
   const router = useRouter();
   const {
     isMobileMenuOpen,
@@ -87,83 +84,94 @@ export default function WorkinNavbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-      <div className="bg-gray-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start py-1.5">
-          <div ref={langRef} className="relative">
-            <button
-              onClick={toggleLangDropdown}
-              className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <Globe className="h-3.5 w-3.5" />
-              <span>Bahasa Indonesia</span>
-              <ChevronDown
-                className={`h-3 w-3 transition-transform ${
-                  isLangDropdownOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {isLangDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-40 animate-slide-down z-50">
-                <Link
-                  href="#"
-                  className="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-                  onClick={closeLangDropdown}
-                >
-                  🇺🇸 English
-                </Link>
-                <div className="flex items-center gap-2 px-3 py-2 text-xs text-blue-700 bg-blue-50 font-medium">
-                  🇮🇩 Bahasa Indonesia
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-md">
       {/* Main Nav */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            {/* <span className="text-lg font-bold text-gray-900">Workin </span> */}
-            <img src={"/images/logo-workin.svg"} className="w-40 h-40" />
+            <img src={"/images/logo-workin.svg"} className="w-30 h-10" />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-8">
             {/* Produk Dropdown */}
             <div ref={productRef} className="relative">
               <Link href="https://workin.duluin.com/#feature" target="_blank">
                 <button
                   onClick={toggleProductDropdown}
-                  className="flex items-center gap-1 px-3 py-2 text-sm cursor-pointer text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+                  className={`relative text-blue-700 cursor-pointer hover:text-blue-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-blue-700/50
+              ${pathname === "https://workin.duluin.com/#feature" ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-all after:duration-300"}`}
                 >
                   Fitur
                 </button>
               </Link>
             </div>
 
+            {/* <Link
+              href="/"
+              className={`relative text-blue-700 hover:text-blue-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-blue-700/50
+              ${pathname === "/s" ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-all after:duration-300"}`}
+            >
+              Beranda
+            </Link> */}
+
             <Link
               href="https://workin.duluin.com/price-package"
               target="_blank"
-              className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+              className={`relative text-blue-700 hover:text-blue-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-blue-700/50
+              ${pathname === "https://workin.duluin.com/price-package" ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-all after:duration-300"}`}
             >
               Harga
             </Link>
             <Link
-              href="#"
-              className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+              href="https://workin.duluin.com"
+              className={`relative text-blue-700 hover:text-blue-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-blue-700/50
+              ${pathname === "https://workin.duluin.com" ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-all after:duration-300"}`}
             >
               Workin by Duluin
             </Link>
             <Link
               href="https://api.whatsapp.com/send/?phone=6285165555987&text&type=phone_number&app_absent=0"
-              className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-all"
+              className={`relative text-blue-700 hover:text-blue-500 after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-blue-700/50
+              ${pathname === "https://api.whatsapp.com/send/?phone=6285165555987&text&type=phone_number&app_absent=0" ? "after:w-full" : "after:w-0 hover:after:w-full after:transition-all after:duration-300"}`}
             >
               Workin Customer Care
             </Link>
 
-            <div className="w-px h-6 bg-gray-200 mx-1" />
+            <div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start py-1.5">
+                <div ref={langRef} className="relative">
+                  <button
+                    onClick={toggleLangDropdown}
+                    className="flex items-center gap-1.5 text-gray-700 transition-all cursor-pointer"
+                  >
+                    <Globe className="h-3.5 w-3.5" />
+                    <span>ID</span>
+                    <ChevronDown
+                      className={`h-3 w-3 transition-transform ${
+                        isLangDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {isLangDropdownOpen && (
+                    <div className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-40 animate-slide-down z-50">
+                      <Link
+                        href="#"
+                        className="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                        onClick={closeLangDropdown}
+                      >
+                        🇺🇸 EN
+                      </Link>
+                      <div className="flex items-center gap-2 px-3 py-2 text-xs text-blue-700 bg-blue-50 font-medium">
+                        🇮🇩 ID
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="w-px h-6 bg-gray-200 mx-1" /> */}
 
             {/* Auth Section */}
             {/* {authLoading ? (

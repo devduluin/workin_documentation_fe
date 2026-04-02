@@ -22,7 +22,7 @@ async function fetcher<T>(
 
 export const ApiHrms = {
   getCategory: () => fetcher<any[]>("/categories"),
-  getSection: (slug: string) => fetcher<any>(`/sections/document/${slug}`),
+  getSection: () => fetcher<any>(`/sections`),
   getCategoryDetails: (slug: string) => fetcher<any>(`/categories/${slug}`),
 };
 
