@@ -32,7 +32,7 @@ export default function TableOfContents() {
   return (
     <div className="space-y-3">
       {/* TOC */}
-      <div className="card-elevated !rounded-xl overflow-hidden">
+      <div className="card-elevated rounded-xl! overflow-hidden">
         <div className="px-4 py-3 border-b border-slate-100/80">
           <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
             <List className="h-3.5 w-3.5" />
@@ -49,7 +49,7 @@ export default function TableOfContents() {
                     href={`#${item.id}`}
                     className={`relative flex items-center gap-2.5 px-3 py-2 text-[12px] rounded-lg transition-all duration-200 ${
                       isActive
-                        ? "bg-gradient-to-r from-blue-50 to-indigo-50/50 text-blue-700 font-semibold"
+                        ? "bg-linear-to-r from-blue-50 to-indigo-50/50 text-blue-700 font-semibold"
                         : "text-slate-500 hover:bg-slate-50 hover:text-slate-700"
                     }`}
                   >
@@ -86,7 +86,7 @@ export default function TableOfContents() {
       </Link>
 
       {/* Quick Stats */}
-      <div className="card-elevated !rounded-xl p-4">
+      <div className="card-elevated rounded-xl! p-4">
         <div className="grid grid-cols-2 gap-3">
           <div className="text-center">
             <p className="text-[18px] font-bold text-slate-900">12</p>

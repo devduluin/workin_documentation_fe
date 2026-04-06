@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Play, MonitorPlay, ExternalLink } from "lucide-react";
 import { videoCategories, VideoItem } from "@/lib/videoData";
 import { useVideoStore } from "@/stores/useVideos";

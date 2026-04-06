@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -13,7 +11,6 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
-import Link from "next/link";
 
 export function TeamSwitcher({
   teams,
@@ -24,13 +21,8 @@ export function TeamSwitcher({
     plan: string;
   }[];
 }) {
-  const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
   const { state } = useSidebar();
-
-  if (!activeTeam) {
-    return null;
-  }
+  const activeTeam = teams[0];
 
   return (
     <SidebarMenu>

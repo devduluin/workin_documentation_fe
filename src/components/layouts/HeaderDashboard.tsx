@@ -222,7 +222,7 @@ const UserDropdown = ({ user }: { user: typeof dummyUser }) => {
   );
 };
 
-const HeaderDashboard = () => {
+const HeaderDashboard = ({ breadcrumbLabel }: { breadcrumbLabel?: string }) => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
@@ -242,15 +242,17 @@ const HeaderDashboard = () => {
                     Dashboard
                   </a>
                 </li>
-                <li className="flex items-center ml-3 text-white/60">
-                  <IconChevronRight className="mr-1 opacity-60" />
-                  <a
-                    href="/dashboard/hrms"
-                    className="hover:text-white/90 transition-colors"
-                  >
-                    HRMS
-                  </a>
-                </li>
+                {breadcrumbLabel && (
+                  <li className="flex items-center ml-3 text-white/60">
+                    <IconChevronRight className="mr-1 opacity-60" />
+                    <a
+                      href={`/dashboard/${breadcrumbLabel.toLowerCase()}`}
+                      className="hover:text-white/90 transition-colors"
+                    >
+                      {breadcrumbLabel}
+                    </a>
+                  </li>
+                )}
               </ol>
             </nav>
           </div>

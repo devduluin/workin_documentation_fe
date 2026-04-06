@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { infoCards } from "@/lib/data";
@@ -10,7 +9,7 @@ export default function InfoSection() {
       <div className="absolute inset-0 mesh-bg" />
       <div className="absolute inset-0 dot-pattern opacity-40" />
 
-      <div className="relative max-w-[1360px] mx-auto px-5 sm:px-8">
+      <div className="relative max-w-340 mx-auto px-5 sm:px-8">
         {/* Header */}
         <div className="text-center mb-12 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200/60 rounded-full mb-4 shadow-sm">
@@ -35,7 +34,7 @@ export default function InfoSection() {
               style={{ animationDelay: `${index * 80}ms` }}
             >
               {/* Icon */}
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200/60 flex items-center justify-center mb-5 group-hover:from-blue-50 group-hover:to-indigo-50 group-hover:border-blue-200/60 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-slate-100 to-slate-50 border border-slate-200/60 flex items-center justify-center mb-5 group-hover:from-blue-50 group-hover:to-indigo-50 group-hover:border-blue-200/60 transition-all duration-300">
                 <span className="text-2xl">{card.image}</span>
               </div>
 

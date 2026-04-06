@@ -4,7 +4,7 @@ import DataSectionView from "@/components/views/DashboardArticle";
 const Page = () => {
   return (
     <>
-      <HeaderDashboard />
+      <HeaderDashboard breadcrumbLabel="Videos" />
       <div className=" p-8 mx-auto">
         <DataSectionView />
       </div>

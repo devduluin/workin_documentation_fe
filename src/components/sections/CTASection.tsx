@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { MessageCircle, HelpCircle, ArrowUpRight } from "lucide-react";
 
@@ -7,13 +6,13 @@ export default function CTASection() {
     <section className="relative bg-white py-20 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-blue-100/30 to-indigo-100/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-linear-to-br from-blue-100/30 to-indigo-100/20 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-lg mx-auto px-5 sm:px-8 text-center">
         {/* Icon */}
         <div className="relative inline-flex mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl flex items-center justify-center">
+          <div className="w-16 h-16 bg-linear-to-br from-blue-100 to-indigo-100 rounded-3xl flex items-center justify-center">
             <HelpCircle className="h-7 w-7 text-blue-600" />
           </div>
           <div className="absolute -top-1 -right-1 w-5 h-5 bg-amber-400 rounded-full flex items-center justify-center">

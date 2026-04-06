@@ -39,22 +39,18 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "DOCS",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Sections",
+          url: "/dashboard/sections",
         },
         {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
+          title: "Videos",
+          url: "/dashboard/videos",
         },
       ],
     },

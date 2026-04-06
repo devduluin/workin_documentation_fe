@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ArrowUp } from "lucide-react";
 import { useSidebarStore } from "@/stores/useSidebar";
 

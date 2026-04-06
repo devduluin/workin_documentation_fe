@@ -11,12 +11,14 @@ import {
 import { ApiHrms } from "@/lib/API-hrms";
 import { TypeSection, useSectionsStore } from "@/stores/useSections";
 import { Button } from "@/components/ui/button";
+import AddDataArticle from "./AddDataArticle";
 
 const DataSectionView = () => {
   const [sortOrder, setSortOrder] = useState<string>("A");
   const [error, setError] = useState<string | null>(null);
-
   const { sections, setSections } = useSectionsStore();
+  const [postSection, setPostSection] = useState<any>(sections);
+  const [categoryArticle, setCategoryArticle] = useState<any>([]);
 
   useEffect(() => {
     Promise.all([ApiHrms.getSection()]).then(([c]) => {
@@ -40,15 +42,15 @@ const DataSectionView = () => {
   if (error) return <p>{error}</p>;
   return (
     <div className="p-2">
-      {/* <div className="mb-5">
-        <AddDataDashboard
-          setPostDashboard={setPostDashboard}
-          categoryDashboard={categoryDashboard}
-        />
-      </div> */}
-      <Button className="mb-4" onClick={() => {}}>
+      {/* <Button className="mb-4" onClick={() => {}}>
         Add Section
-      </Button>
+      </Button> */}
+      <div className="mb-5">
+        <AddDataArticle
+          setPostDashboard={setPostSection}
+          categoryDashboard={categoryArticle}
+        />
+      </div>
       <div className="min-h-[70vh]">
         <Table>
           <TableHeader className="bg-gray-100">
@@ -66,9 +68,6 @@ const DataSectionView = () => {
               <TableRow key={i}>
                 <TableCell>{i + 1}</TableCell>
                 <TableCell className="font-medium">{section.title}</TableCell>
-                {/* <TableCell className="font-medium max-w-40">
-                  <p className="truncate">{section.content}</p>
-                </TableCell> */}
                 <TableCell className="font-medium">
                   {section.documentId}
                 </TableCell>
