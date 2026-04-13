@@ -1,6 +1,6 @@
 // const API =
 //   process.env.NEXT_PUBLIC_API_UL || "https://apidocs-hrms.duluin.com/api";
-const API = "http://localhost:5000/api";
+const API = "http://doc-be:3600/api";
 
 async function fetcher<T>(
   endpoint: string,
