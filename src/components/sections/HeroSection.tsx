@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Dot } from "lucide-react";
 import { useSidebarStore } from "@/stores/useSidebar";
 import Link from "next/link";
-import { useCategoryStore } from "@/stores/useCategory";
+import { useCategoryStore } from "@/stores/useCategories";
 
 export default function HeroSection() {
   const [query, setQuery] = useState("");
@@ -15,7 +15,7 @@ export default function HeroSection() {
   const documents = categories?.flatMap((cat: any) => cat?.Documents || []);
 
   const results = documents?.filter((doc: any) =>
-    doc.title.toLowerCase().includes(query.toLowerCase()),
+    doc.title_tab.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (
@@ -70,16 +70,18 @@ export default function HeroSection() {
                       {results.slice(0, 8).map((item: any) => (
                         <Link
                           key={item.id}
-                          href={`/categories/${item.id}#content`}
+                          href={`/articles/${item.id}#content`}
                           onClick={() => {
                             setQuery("");
-                            if (item.categoryId !== openCategoryId)
-                              toggleCategory(item.categoryId);
+                            if (item.category_id !== openCategoryId)
+                              toggleCategory(item.category_id);
                           }}
                           className="flex items-start gap-3 px-4 py-3 text-sm hover:bg-slate-100 transition"
                         >
                           <Dot className="w-8 -mt-0.5 -mr-3 text-slate-400" />
-                          <span className="text-slate-700">{item.title}</span>
+                          <span className="text-slate-700">
+                            {item.title_tab}
+                          </span>
                         </Link>
                       ))}
                     </div>

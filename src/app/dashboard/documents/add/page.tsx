@@ -1,15 +1,15 @@
 import HeaderDashboard from "@/components/layouts/HeaderDashboard";
-import DataSectionView from "@/components/views/DashboardArticle";
+import AddSection from "@/components/views/Dashboard/Documents/addDataDocument";
 
-const Page = () => {
+const page = () => {
   return (
     <>
       <HeaderDashboard breadcrumbLabel="Sections" />
       <div className=" p-8 mx-auto">
-        <DataSectionView />
+        <AddSection />
       </div>
     </>
   );
 };
 
-export default Page;
+export default page;

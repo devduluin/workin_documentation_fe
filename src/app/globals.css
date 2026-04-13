@@ -305,3 +305,53 @@ body {
 --sidebar-border: oklch(1 0 0 / 10%);
 --sidebar-ring: oklch(0.556 0 0);
 }
+
+
+/* section tiptap */
+.prose {
+  overflow-x: auto;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  min-width: 500px; 
+}
+
+.prose th,
+.prose td {
+  border: 1px solid #e5e7eb; /* gray-200 */
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  background-color: #cfddeb;
+  font-weight: 600;
+}
+
+.prose tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.prose tbody tr:hover {
+  background-color: #f3f4f6;
+}
+
+.prose td p,
+.prose th p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .prose table {
+    font-size: 14px;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 8px;
+  }
+}

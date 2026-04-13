@@ -10,7 +10,7 @@ import { ArrowUpRight } from "lucide-react";
 import { ArticleData } from "@/lib/articleData";
 import WorkinNavbar from "@/components/layouts/Navbar";
 import WorkinFooter from "@/components/layouts/Footer";
-import { useCategoryStore } from "@/stores/useCategory";
+import { useCategoryStore } from "@/stores/useCategories";
 import { useEffect } from "react";
 import { ApiHrms } from "@/lib/API-hrms";
 

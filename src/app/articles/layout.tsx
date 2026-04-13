@@ -1,8 +1,8 @@
 "use client";
 import HeroSection from "@/components/sections/HeroSection";
 import TabSelector from "@/components/sections/TabSelector";
-import ArticleSidebar from "@/components/sections/ArticleSidebar";
-import ArticleContent from "@/components/sections/ArticleContent";
+import ArticleSidebar from "@/components/sections/Documents/DocumentSidebar";
+import ArticleContent from "@/components/sections/Documents/DocumentContent";
 import InfoSection from "@/components/sections/InfoSection";
 import CTASection from "@/components/sections/CTASection";
 import BackToTop from "@/components/sections/BackToTop";
@@ -10,7 +10,7 @@ import TableOfContents from "@/components/sections/TableOfContent";
 import MobileSidebarToggle from "@/components/sections/ToggleSidebar";
 import { ApiHrms } from "@/lib/API-hrms";
 import { useEffect } from "react";
-import { useCategoryStore } from "@/stores/useCategory";
+import { useCategoryStore } from "@/stores/useCategories";
 import WorkinNavbar from "@/components/layouts/Navbar";
 import WorkinFooter from "@/components/layouts/Footer";
 
@@ -28,7 +28,6 @@ export default function ArticlePage() {
       <HeroSection />
       <TabSelector />
 
-      {/* Section Title */}
       <div className="bg-white py-10 border-b border-slate-100">
         <div className="max-w-340 mx-auto px-5 sm:px-8 text-center">
           <h1 className="text-[20px] md:text-[24px] font-extrabold text-slate-900 tracking-tight">
@@ -41,8 +40,7 @@ export default function ArticlePage() {
         </div>
       </div>
 
-      {/* Main 3-Column Layout */}
-      <div className="flex-1 bg-slate-50/30 mesh-bg">
+      <div className="flex-1 bg-slate-50/30 mesh-bg pt-4" id="content">
         <div className="max-w-340 mx-auto px-5 sm:px-8 py-8">
           <div
             className="grid grid-cols-1 lg:grid-cols-12 gap-8"

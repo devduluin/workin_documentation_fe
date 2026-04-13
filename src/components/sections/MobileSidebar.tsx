@@ -1,7 +1,7 @@
 "use client";
 
 import { List, X } from "lucide-react";
-import ArticleSidebar from "./ArticleSidebar";
+import ArticleSidebar from "./Documents/DocumentSidebar";
 import { useSidebarStore } from "@/stores/useSidebar";
 
 export default function MobileSidebarToggle() {
@@ -19,7 +19,6 @@ export default function MobileSidebarToggle() {
         Daftar isi
       </button>
 
-      {/* Mobile Sidebar Overlay */}
       {isMobileSidebarOpen && (
         <div className="lg:hidden fixed inset-0 z-50">
           <div

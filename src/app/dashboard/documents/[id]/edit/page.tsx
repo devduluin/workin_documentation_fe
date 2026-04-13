@@ -1,12 +1,12 @@
 import HeaderDashboard from "@/components/layouts/HeaderDashboard";
-import DataSectionView from "@/components/views/Dashboard/Documents";
+import EditDocument from "@/components/views/Dashboard/Documents/editDataDocument";
 
 const Page = () => {
   return (
     <>
-      <HeaderDashboard />
+      <HeaderDashboard breadcrumbLabel="Sections" />
       <div className=" p-8 mx-auto">
-        <DataSectionView />
+        <EditDocument />
       </div>
     </>
   );

@@ -1,5 +1,5 @@
 import HeaderDashboard from "@/components/layouts/HeaderDashboard";
-import DataSectionView from "@/components/views/DashboardArticle";
+import DataSectionView from "@/components/views/Dashboard/Documents";
 
 const Page = () => {
   return (

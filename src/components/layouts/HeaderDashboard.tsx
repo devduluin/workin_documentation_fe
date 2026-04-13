@@ -9,17 +9,6 @@ const dummyUser = {
     "https://ui-avatars.com/api/?name=HRMS&background=6366f1&color=fff&size=64",
 };
 
-const quickSearchLinks = [
-  { label: "Employees", href: "/dashboard/hrms/employee", icon: "users2" },
-  { label: "Salary Payout", href: "/dashboard/hrms/payout", icon: "coins" },
-  {
-    label: "Shift & Attendance",
-    href: "/dashboard/hrms/attendance",
-    icon: "calendar",
-  },
-  { label: "Leave", href: "/dashboard/hrms/leave", icon: "briefcase" },
-];
-
 const userMenuLinks = [
   {
     label: "Email Settings",
@@ -131,26 +120,6 @@ const SearchModal = ({
               >
                 ESC
               </button>
-            </div>
-          </div>
-
-          {/* Quick links */}
-          <div className="relative z-10 mt-1 max-h-117 overflow-y-auto rounded-lg bg-white pb-1 shadow-lg">
-            <div className="px-5 py-4">
-              <p className="text-xs uppercase text-slate-500 mb-3.5">
-                Start your search here...
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {quickSearchLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="flex items-center gap-x-1.5 rounded-full border border-slate-300/70 px-3 py-0.5 hover:bg-slate-50 text-sm"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   ChevronRight,
@@ -19,17 +19,19 @@ import {
   relatedArticles,
 } from "@/lib/data";
 import { useParams } from "next/navigation";
+import { ApiHrms } from "@/lib/API-hrms";
 
 export default function ArticleContent(props: any) {
-  const { categories } = props;
-  const { categorySlug } = useParams();
+  const { id } = useParams();
+  const [articles, setArticles] = useState<any>(null);
 
-  const section = categories
-    ?.flatMap((cat: any) => cat?.Documents || [])
-    ?.flatMap((doc: any) => doc?.sections || [])
-    ?.find((sec: any) => sec.id.toString() === categorySlug);
+  useEffect(() => {
+    Promise.all([ApiHrms.getDocumentById(id?.toString() || "")]).then(([c]) => {
+      setArticles(c);
+    });
+  }, [id]);
 
-  if (!section) return <div>Loading...</div>;
+  if (!articles) return <div>Loading...</div>;
 
   return (
     <article className="min-w-0">
@@ -96,12 +98,13 @@ export default function ArticleContent(props: any) {
 
       <div>
         <h3 className="text-2xl font-bold text-gray-900 mb-3">
-          {section.title}
+          {articles.title}
         </h3>
 
         <div
+          className="prose"
           dangerouslySetInnerHTML={{
-            __html: section.content,
+            __html: articles.content,
           }}
         />
       </div>

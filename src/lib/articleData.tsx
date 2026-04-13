@@ -22,52 +22,52 @@ export const ArticleData: Article[] = [
     products: [
       {
         name: "Quick Overview",
-        href: "/categories/1",
+        href: "/articles/1",
         icon: "T",
       },
       {
         name: "Getting Started",
-        href: "/categories/2",
+        href: "/articles/2",
         icon: "Q",
       },
       {
         name: "Employe Management",
-        href: "/categories/3",
+        href: "/articles/3",
         icon: "J",
       },
       {
         name: "Claim & Travel",
-        href: "/categories/12",
+        href: "/articles/12",
         icon: "K",
       },
       {
         name: "Shift Attendence",
-        href: "/categories/4",
+        href: "/articles/4",
         icon: "F",
       },
       {
         name: "Leaves",
-        href: "/categories/5",
+        href: "/articles/5",
         icon: "E",
       },
       {
         name: "Company",
-        href: "/categories/6",
+        href: "/articles/6",
         icon: "S",
       },
       {
         name: "Payroll",
-        href: "/categories/7",
+        href: "/articles/7",
         icon: "St",
       },
       {
         name: "Publisher",
-        href: "/categories/8",
+        href: "/articles/8",
         icon: "C",
       },
       {
         name: "Settings",
-        href: "/categories/9",
+        href: "/articles/9",
         icon: "P",
       },
     ],
