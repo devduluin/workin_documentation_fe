@@ -1,5 +1,12 @@
-const API =
-  process.env.NEXT_PUBLIC_API_URL || "https://apidocs-hrms.duluin.com/api/v1";
+const normalizeApiBase = (value: string) => {
+  const trimmed = value.replace(/\/+$/, "");
+  if (trimmed.endsWith("/api")) return `${trimmed}/v1`;
+  return trimmed;
+};
+
+const API = normalizeApiBase(
+  process.env.NEXT_PUBLIC_API_URL || "https://apidocs-hrms.duluin.com/api/v1",
+);
 
 function getToken() {
   if (typeof window === "undefined") return null;
