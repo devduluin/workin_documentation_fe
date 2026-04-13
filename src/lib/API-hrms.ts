@@ -1,4 +1,5 @@
-const API = process.env.NEXT_PUBLIC_API_URL || "http://doc-be:3600/api/v1";
+const API =
+  process.env.NEXT_PUBLIC_API_URL || "https://apidocs-hrms.duluin.com/api/v1";
 
 async function fetcher<T>(
   endpoint: string,

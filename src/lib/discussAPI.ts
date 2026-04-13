@@ -1,4 +1,5 @@
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
+const API =
+  process.env.NEXT_PUBLIC_API_URL || "https://apidocs-hrms.duluin.com/api/v1";
 
 function getToken() {
   if (typeof window === "undefined") return null;
