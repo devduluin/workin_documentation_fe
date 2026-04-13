@@ -1,6 +1,4 @@
-// const API =
-//   process.env.NEXT_PUBLIC_API_UL || "https://apidocs-hrms.duluin.com/api";
-const API = "http://doc-be:3600/api";
+const API = process.env.NEXT_PUBLIC_DOCS_API_URL || "http://doc-be:3600/api/v1";
 
 async function fetcher<T>(
   endpoint: string,
@@ -100,7 +98,7 @@ export const ApiHrms = {
 };
 
 export async function getCategory(id: string) {
-  const res = await fetch(`http://localhost:5000/api/documents/${id}`, {
+  const res = await fetch(`${API}/documents/${id}`, {
     cache: "no-store",
   });
 
