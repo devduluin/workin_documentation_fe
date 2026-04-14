@@ -45,8 +45,8 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Sections",
-          url: "/dashboard/sections",
+          title: "Documents",
+          url: "/dashboard/documents",
         },
         {
           title: "Videos",
@@ -55,21 +55,18 @@ const data = {
       ],
     },
     {
-      title: "Models",
+      title: "Data Management",
       url: "#",
       icon: Bot,
+      isActive: true,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Article",
+          url: "/dashboard/article",
         },
         {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
+          title: "Category",
+          url: "/dashboard/category",
         },
       ],
     },

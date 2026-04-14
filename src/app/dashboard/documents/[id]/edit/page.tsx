@@ -4,7 +4,7 @@ import EditDocument from "@/components/views/Dashboard/Documents/editDataDocumen
 const Page = () => {
   return (
     <>
-      <HeaderDashboard breadcrumbLabel="Sections" />
+      <HeaderDashboard breadcrumbLabel="Documents" />
       <div className=" p-8 mx-auto">
         <EditDocument />
       </div>

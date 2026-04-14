@@ -2,13 +2,11 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArticleFormValues, articleSchema } from "@/lib/zod/article";
 import EditorPage from "@/components/layouts/editor";
-import { Button } from "@/components/ui/button";
-import { Undo2 } from "lucide-react";
 import { ApiHrms } from "@/lib/API-hrms";
 import { useEffect } from "react";
 import { useCategoryStore } from "@/stores/useCategories";
+import { DocumentFormValues, DocumentSchema } from "@/lib/zod/documents";
 
 export default function AddDocument() {
   const {
@@ -17,8 +15,8 @@ export default function AddDocument() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<ArticleFormValues>({
-    resolver: zodResolver(articleSchema),
+  } = useForm<DocumentFormValues>({
+    resolver: zodResolver(DocumentSchema),
     defaultValues: {
       title_tab: "",
       title_content: "",
@@ -30,14 +28,21 @@ export default function AddDocument() {
   const { categories, setCategories } = useCategoryStore();
 
   useEffect(() => {
-    Promise.all([ApiHrms.getCategory()]).then(([c]) => {
-      setCategories(c);
-    });
+    const fetchCategories = async () => {
+      try {
+        const data = await ApiHrms.getCategory();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+        setCategories([]);
+      }
+    };
+    fetchCategories();
   }, []);
 
   const contentValue = watch("content");
 
-  const onSubmit = async (data: ArticleFormValues) => {
+  const onSubmit = async (data: DocumentFormValues) => {
     try {
       await ApiHrms.AddDocument(data);
       alert("Document added successfully!");
@@ -85,23 +90,26 @@ export default function AddDocument() {
 
         <div>
           <label
-            htmlFor={`countries`}
+            htmlFor={`category`}
             className="block mb-2.5 text-sm font-medium text-heading"
           >
             Select a Category Docs
           </label>
           <select
-            id="countries"
-            defaultValue={""}
+            id="category"
             className="block w-full px-3 py-2.5 bg-white rounded-lg border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-            {...register("category_id", { required: true })}
+            {...register("category_id", {
+              required: "Please select a category",
+            })}
           >
             <option value={""}>Choose a category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
+            {categories.map((category) => {
+              return (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              );
+            })}
           </select>
           {errors.category_id && (
             <p className="text-red-500 text-sm mt-3">
@@ -127,7 +135,7 @@ export default function AddDocument() {
           type="submit"
           className="cursor-pointer bg-linear-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg"
         >
-          Submit
+          Add Document
         </button>
       </form>
     </div>

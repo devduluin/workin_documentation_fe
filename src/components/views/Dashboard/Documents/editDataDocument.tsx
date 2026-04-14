@@ -2,12 +2,12 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArticleFormValues, articleSchema } from "@/lib/zod/article";
 import EditorPage from "@/components/layouts/editor";
 import { ApiHrms } from "@/lib/API-hrms";
 import { useEffect } from "react";
 import { useCategoryStore } from "@/stores/useCategories";
 import { useParams } from "next/navigation";
+import { DocumentFormValues, DocumentSchema } from "@/lib/zod/documents";
 
 export default function EditDocument() {
   const { id } = useParams();
@@ -18,8 +18,8 @@ export default function EditDocument() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<ArticleFormValues>({
-    resolver: zodResolver(articleSchema),
+  } = useForm<DocumentFormValues>({
+    resolver: zodResolver(DocumentSchema),
     defaultValues: {
       title_tab: "",
       title_content: "",
@@ -47,7 +47,7 @@ export default function EditDocument() {
     });
   }, []);
 
-  const onSubmitEdit = async (data: ArticleFormValues) => {
+  const onSubmitEdit = async (data: DocumentFormValues) => {
     try {
       await ApiHrms.EditDocument(id?.toString() || "", data);
       alert("Document updated successfully!");

@@ -57,14 +57,10 @@ type PaginatedResponse<T> = {
 };
 
 export const ApiHrms = {
+  // Document API
   getDocuments: (page = 1) =>
     fetcherMeta<PaginatedResponse<any>>(`/documents?page=${page}`),
-  getCategory: () => fetcher<any[]>("/categories"),
-  getArticles: () => fetcher<any[]>("/articles"),
-  getSidebar: () => fetcher<any[]>("/articles/sidebar"),
   getDocumentById: (id: string) => fetcher<any>(`/documents/${id}`),
-
-  // Required token
   AddDocument: (data: {
     category_id: string;
     title_tab: string;
@@ -103,15 +99,48 @@ export const ApiHrms = {
       //   Authorization: `Bearer ${token}`,
       // },
     }),
+
+  // Article
+  getArticles: (page = 1) =>
+    fetcherMeta<PaginatedResponse<any>>(`/articles?page=${page}`),
+  getArticle: () => fetcher<any[]>("/articles"),
+  getArticleById: (id: string) => fetcher<any>(`/articles/${id}`),
+  getSidebar: () => fetcher<any[]>("/articles/sidebar"),
+  addArticle: (data: { name: string }) =>
+    fetcher("/articles", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  editArticle: (id: string, data: { name: string }) =>
+    fetcher(`/articles/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+
+  deleteArticle: (id: string) =>
+    fetcher(`/articles/${id}`, {
+      method: "DELETE",
+    }),
+
+  // Category
+  getCategories: (page = 1) =>
+    fetcherMeta<PaginatedResponse<any>>(`/categories?page=${page}`),
+  getCategory: () => fetcher<any[]>("/categories"),
+  getCategoryById: (id: string) => fetcher<any>(`/categories/${id}`),
+  addCategory: (data: { name: string; article_id: string }) =>
+    fetcher("/categories", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+
+  editCategory: (id: string, data: { name: string; article_id: string }) =>
+    fetcher(`/categories/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+
+  deleteCategory: (id: string) =>
+    fetcher(`/categories/${id}`, {
+      method: "DELETE",
+    }),
 };
-
-export async function getCategory(id: string) {
-  const res = await fetch(`${API}/documents/${id}`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) throw new Error("Failed");
-
-  const data = await res.json();
-  return data.data;
-}

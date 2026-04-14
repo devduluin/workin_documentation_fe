@@ -10,32 +10,32 @@ import {
 
 import { ApiHrms } from "@/lib/API-hrms";
 
-const DeleteDataDocument = ({ id }: { id: string }) => {
+const DeleteCategory = ({ id }: { id: string }) => {
   const onDelete = async () => {
     try {
-      await ApiHrms.DeleteDocument(id);
-      alert("Document deleted successfully!");
+      await ApiHrms.deleteCategory(id);
+      alert("Category deleted successfully!");
       window.location.reload();
     } catch (error) {
-      console.error("Error deleting document:", error);
-      alert("Failed to delete document. Please try again.");
+      console.error("Error deleting category:", error);
+      alert("Failed to delete category. Please try again.");
     }
   };
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-red-500 text-white cursor-pointer hover:bg-darkIndex flex gap-2">
+        <Button className="bg-red-100 text-red-500 cursor-pointer hover:bg-red-200 w-full py-3!">
           Delete
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-4xl">
         <DialogHeader>
           <DialogTitle className="text-xl text-gray-700 py-3 border-b border-b-gray-300">
-            Delete Document
+            Delete Category
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          <p>Are you sure you want to delete this document?</p>
+          <p>Are you sure you want to delete this category?</p>
           <div className="flex gap-4">
             <Button variant="outline" onClick={() => window.history.back()}>
               Cancel
@@ -50,4 +50,4 @@ const DeleteDataDocument = ({ id }: { id: string }) => {
   );
 };
 
-export default DeleteDataDocument;
+export default DeleteCategory;

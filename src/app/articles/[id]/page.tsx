@@ -1,11 +1,11 @@
 import ArticlePage from "@/components/views/PageArticles";
-import { getCategory } from "@/lib/API-hrms";
+import { ApiHrms } from "@/lib/API-hrms";
 
 export const generateMetadata = async (props: any) => {
   const { params } = props;
   const slug = (await params).id;
 
-  const data = await getCategory(slug).catch(() => null);
+  const data = await ApiHrms.getDocumentById(slug).catch(() => null);
 
   return {
     title: `${data?.title_content} - Workin by Duluin Help Center`,
