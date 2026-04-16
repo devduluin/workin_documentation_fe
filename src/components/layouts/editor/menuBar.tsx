@@ -97,18 +97,39 @@ const ImageModal = ({
   const [tab, setTab] = useState<"url" | "upload">("url");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === "string") {
-        onInsert(reader.result, file.name);
-        onClose();
-      }
-    };
-    reader.readAsDataURL(file);
-  };
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folder", "uploads");
+
+    const res = await fetch("https://apidev.duluin.com/api/users/file_uploader", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN_UPLOAD}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Upload gagal");
+    }
+
+    const fileUrl = data.file;
+
+    onInsert(fileUrl, file.name);
+
+    onClose();
+  } catch (err: any) {
+    console.error("UPLOAD ERROR:", err.message);
+    alert(err.message);
+  }
+};
 
   const handleInsertUrl = () => {
     if (url.trim()) {

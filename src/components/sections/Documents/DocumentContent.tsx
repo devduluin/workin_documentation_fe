@@ -102,7 +102,8 @@ export default function ArticleContent(props: any) {
         </h3>
 
         <div
-          className="prose"
+          className="prose tiptap ProseMirror tiptap-content"
+          id="doc-content"
           dangerouslySetInnerHTML={{
             __html: articles.content,
           }}

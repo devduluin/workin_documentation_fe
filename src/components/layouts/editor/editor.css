@@ -474,9 +474,17 @@
   color: var(--color-text);
   outline: none;
   min-height: 240px;
-  padding: 20px 24px;
+  max-height: 500px;
+  padding: 16px 20px;
+  overflow-y: scroll;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+ #doc-content {
+  max-height: none;
+  overflow-y: hidden;
+  padding: 0;
 }
 
 .ProseMirror > *,
@@ -548,7 +556,7 @@
   font-size: 1.125rem;  /* 18px */
   font-weight: 600;
   line-height: 1.5;
-  color: #334155;       /* slate-700 */
+  color: #296ec9;       /* slate-700 */
   margin-top: 1rem;
   margin-bottom: 0.25rem;
 }
@@ -769,8 +777,8 @@
 
 .ProseMirror table th,
 .tiptap-content table th {
-  background: #f8fafc;          /* slate-50  */
-  color: #475569;               /* slate-600 */
+  background: #a5a9ad;          
+  color: #ffffff;               
   font-weight: 600;
   font-size: 13px;
   text-align: left;

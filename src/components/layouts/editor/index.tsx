@@ -2,7 +2,6 @@
 import { EditorContent } from "@tiptap/react";
 import { MenuBar } from "./menuBar";
 import { useTipTapEditor } from "./editor";
-import "./editor.css";
 import { useEffect } from "react";
 
 type Props = {
