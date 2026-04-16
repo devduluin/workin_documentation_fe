@@ -97,8 +97,8 @@ export default function ArticleContent(props: any) {
       </header>
 
       <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-3">
-          {articles.title}
+        <h3 className="text-2xl font-bold text-blue-900 mb-3">
+          {articles.title_content}
         </h3>
 
         <div
