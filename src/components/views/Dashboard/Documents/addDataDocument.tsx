@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import EditorPage from "@/components/layouts/editor";
 import { ApiHrms } from "@/lib/API-hrms";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCategoryStore } from "@/stores/useCategories";
 import { DocumentFormValues, DocumentSchema } from "@/lib/zod/documents";
 
@@ -26,6 +26,8 @@ export default function AddDocument() {
   });
 
   const { categories, setCategories } = useCategoryStore();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -95,7 +97,7 @@ export default function AddDocument() {
           >
             Select a Category Docs
           </label>
-          <select
+          {/* <select
             id="category"
             className="block w-full px-3 py-2.5 bg-white rounded-lg border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
             {...register("category_id", {
@@ -110,7 +112,35 @@ export default function AddDocument() {
                 </option>
               );
             })}
-          </select>
+          </select> */}
+          <div className="relative z-50">
+            <div
+              className="w-full px-3 py-2.5 bg-white border rounded-lg cursor-pointer"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {selected || "Choose a category"}
+            </div>
+            {isOpen && (
+              <ul className="absolute z-10 w-full max-h-48 overflow-y-auto bg-white border rounded-lg mt-1 shadow-lg">
+                {categories.map((category) => (
+                  <li
+                    key={category.id}
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    {...register("category_id", {
+                      required: "Please select a category",
+                    })}
+                    onClick={() => {
+                      setSelected(category.name);
+                      setValue("category_id", category.id);
+                      setIsOpen(false);
+                    }}
+                  >
+                    {category.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           {errors.category_id && (
             <p className="text-red-500 text-sm mt-3">
               {errors.category_id.message}

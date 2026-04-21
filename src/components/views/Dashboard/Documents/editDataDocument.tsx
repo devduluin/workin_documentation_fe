@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import EditorPage from "@/components/layouts/editor";
 import { ApiHrms } from "@/lib/API-hrms";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCategoryStore } from "@/stores/useCategories";
 import { useParams } from "next/navigation";
 import { DocumentFormValues, DocumentSchema } from "@/lib/zod/documents";
@@ -16,6 +16,7 @@ export default function EditDocument() {
     register,
     handleSubmit,
     setValue,
+    getValues,
     watch,
     formState: { errors },
   } = useForm<DocumentFormValues>({
@@ -29,6 +30,9 @@ export default function EditDocument() {
   });
 
   const { categories, setCategories } = useCategoryStore();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+  const categoryId = watch("category_id");
 
   useEffect(() => {
     Promise.all([ApiHrms.getCategory()]).then(([c]) => {
@@ -39,13 +43,26 @@ export default function EditDocument() {
   const contentValue = watch("content") || "";
 
   useEffect(() => {
-    Promise.all([ApiHrms.getDocumentById(id?.toString() || "")]).then(([c]) => {
-      setValue("title_tab", c.title_tab);
-      setValue("title_content", c.title_content);
-      setValue("category_id", c.category_id);
-      setValue("content", String(c.content));
-    });
+    ApiHrms.getCategory().then(setCategories);
   }, []);
+
+  useEffect(() => {
+    if (id) {
+      ApiHrms.getDocumentById(id.toString()).then((doc) => {
+        setValue("title_tab", doc.title_tab);
+        setValue("title_content", doc.title_content);
+        setValue("category_id", doc.category_id);
+        setValue("content", String(doc.content));
+      });
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (categoryId && categories.length > 0) {
+      const categoryName = categories.find((c) => c.id === categoryId)?.name;
+      setSelected(categoryName || "");
+    }
+  }, [categoryId, categories]);
 
   const onSubmitEdit = async (data: DocumentFormValues) => {
     try {
@@ -100,19 +117,31 @@ export default function EditDocument() {
           >
             Select a Category Docs
           </label>
-          <select
-            id="countries"
-            defaultValue=""
-            className="block w-full px-3 py-2.5 bg-white rounded-lg border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-            {...register("category_id", { required: true })}
-          >
-            <option value={""}>Choose a category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <div className="relative z-50">
+            <div
+              className="w-full px-3 py-2.5 bg-white border rounded-lg cursor-pointer"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {selected || "Choose a category"}
+            </div>
+            {isOpen && (
+              <ul className="absolute z-10 w-full max-h-48 overflow-y-auto bg-white border rounded-lg mt-1 shadow-lg">
+                {categories.map((category) => (
+                  <li
+                    key={category.id}
+                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      setSelected(category.name);
+                      setValue("category_id", category.id);
+                      setIsOpen(false);
+                    }}
+                  >
+                    {category.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           {errors.category_id && (
             <p className="text-red-500 text-sm mt-3">
               {errors.category_id.message}
