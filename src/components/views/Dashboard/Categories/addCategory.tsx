@@ -13,7 +13,7 @@ import { CategoryFormValues, categorySchema } from "@/lib/zod/category";
 import { useArticleStore } from "@/stores/useArticles";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CirclePlus } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const AddCategory = () => {
@@ -32,6 +32,8 @@ const AddCategory = () => {
   });
 
   const { articles, setArticles } = useArticleStore();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -92,19 +94,34 @@ const AddCategory = () => {
               >
                 Select a article Docs
               </label>
-              <select
-                id="countries"
-                defaultValue={""}
-                className="block w-full px-3 py-2.5 bg-white rounded-lg border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-                {...register("article_id", { required: true })}
-              >
-                <option value={""}>Choose a article</option>
-                {articles.map((article, index) => (
-                  <option key={index} value={article.id}>
-                    {article.name}
-                  </option>
-                ))}
-              </select>
+              <div className="relative z-50">
+                <div
+                  className="w-full px-3 py-2.5 bg-white border rounded-lg cursor-pointer"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  {selected || "Choose a category"}
+                </div>
+                {isOpen && (
+                  <ul className="absolute z-10 w-full max-h-48 overflow-y-auto bg-white border rounded-lg mt-1 shadow-lg">
+                    {articles.map((article) => (
+                      <li
+                        key={article.id}
+                        className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                        {...register("article_id", {
+                          required: "Please select an article",
+                        })}
+                        onClick={() => {
+                          setSelected(article.name);
+                          setValue("article_id", article.id);
+                          setIsOpen(false);
+                        }}
+                      >
+                        {article.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
               {errors.article_id && (
                 <p className="text-red-500 text-sm mt-3">
                   {errors.article_id.message}

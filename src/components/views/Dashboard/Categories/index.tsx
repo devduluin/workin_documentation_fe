@@ -46,6 +46,7 @@ const DataCategoryView = () => {
 
   //   if (loading) return <SkeletonTable />;
   if (error) return <p>{error}</p>;
+  
   return (
     <div className="p-4 bg-slate-50 rounded-lg shadow">
       <div className="mb-5">
