@@ -104,6 +104,7 @@ export const ApiHrms = {
   getArticles: (page = 1) =>
     fetcherMeta<PaginatedResponse<any>>(`/articles?page=${page}`),
   getArticle: () => fetcher<any[]>("/articles"),
+  getAllArticles: () => fetcher<any[]>("/articles/all"),
   getArticleById: (id: string) => fetcher<any>(`/articles/${id}`),
   getSidebar: () => fetcher<any[]>("/articles/sidebar"),
   addArticle: (data: { name: string }) =>
@@ -126,6 +127,7 @@ export const ApiHrms = {
   getCategories: (page = 1) =>
     fetcherMeta<PaginatedResponse<any>>(`/categories?page=${page}`),
   getCategory: () => fetcher<any[]>("/categories"),
+  getAllCategories: () => fetcher<any[]>("/categories/all"),
   getCategoryById: (id: string) => fetcher<any>(`/categories/${id}`),
   addCategory: (data: { name: string; article_id: string }) =>
     fetcher("/categories", {

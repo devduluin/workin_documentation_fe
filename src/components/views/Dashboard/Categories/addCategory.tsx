@@ -38,7 +38,7 @@ const AddCategory = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const data = await ApiHrms.getArticle();
+        const data = await ApiHrms.getAllArticles();
         setArticles(data);
       } catch (error) {
         console.error("Failed to fetch articles:", error);

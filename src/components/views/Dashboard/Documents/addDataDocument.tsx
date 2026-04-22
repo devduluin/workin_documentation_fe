@@ -32,7 +32,7 @@ export default function AddDocument() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const data = await ApiHrms.getCategory();
+        const data = await ApiHrms.getAllCategories();
         setCategories(data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);

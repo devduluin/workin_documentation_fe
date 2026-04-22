@@ -35,7 +35,7 @@ export default function EditDocument() {
   const categoryId = watch("category_id");
 
   useEffect(() => {
-    Promise.all([ApiHrms.getCategory()]).then(([c]) => {
+    Promise.all([ApiHrms.getAllCategories()]).then(([c]) => {
       setCategories(c);
     });
   }, []);
@@ -43,7 +43,7 @@ export default function EditDocument() {
   const contentValue = watch("content") || "";
 
   useEffect(() => {
-    ApiHrms.getCategory().then(setCategories);
+    ApiHrms.getAllCategories().then(setCategories);
   }, []);
 
   useEffect(() => {
