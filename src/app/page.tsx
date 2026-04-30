@@ -13,6 +13,7 @@ import WorkinFooter from "@/components/layouts/Footer";
 import { useCategoryStore } from "@/stores/useCategories";
 import { useEffect } from "react";
 import { ApiHrms } from "@/lib/API-hrms";
+import Footer from "@/components/layouts/FooterSection";
 
 export default function ArticlePage() {
   const { activeTab, setActiveTab } = usePricingStore();
@@ -23,7 +24,7 @@ export default function ArticlePage() {
   const { setCategories } = useCategoryStore();
 
   useEffect(() => {
-    Promise.all([ApiHrms.getCategory()]).then(([c]) => {
+    Promise.all([ApiHrms.getAllCategories()]).then(([c]) => {
       setCategories(c);
     });
   }, []);
@@ -96,9 +97,10 @@ export default function ArticlePage() {
         </div>
       </section>
 
-      <InfoSection />
+      {/* <InfoSection /> */}
       <CTASection />
-      <WorkinFooter />
+      {/* <WorkinFooter /> */}
+      <Footer />
       <BackToTop />
       <MobileSidebarToggle />
     </div>

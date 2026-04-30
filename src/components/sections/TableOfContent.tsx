@@ -1,15 +1,34 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { List, MessageSquareMore, ArrowUpRight } from "lucide-react";
+import {  MessageSquareMore, ArrowUpRight } from "lucide-react";
 import { tableOfContents } from "@/lib/data";
 import { useSidebarStore } from "@/stores/useSidebar";
+import { ApiHrms } from "@/lib/API-hrms";
 
 export default function TableOfContents() {
   const { activeHeadingId, setActiveHeadingId } = useSidebarStore();
 
+  const [stats, setStats] = useState({ total: 0, updated: 0 });
+
   useEffect(() => {
+    ApiHrms.getDocuments(1)
+      .then((res: any) => {
+        if (res && res.meta) {
+          const total = res.meta.total_items || 0;
+          const thirtyDaysAgo = new Date();
+          thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+          const recentlyUpdated = (res.data || []).filter((doc: any) => {
+            return new Date(doc.updatedAt) > thirtyDaysAgo;
+          }).length;
+
+          setStats({ total, updated: recentlyUpdated });
+        }
+      })
+      .catch((err) => console.error("Failed to fetch stats:", err));
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,48 +50,9 @@ export default function TableOfContents() {
 
   return (
     <div className="space-y-3">
-      {/* TOC */}
-      <div className="card-elevated rounded-xl! overflow-hidden">
-        <div className="px-4 py-3 border-b border-slate-100/80">
-          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-            <List className="h-3.5 w-3.5" />
-            Daftar Isi
-          </p>
-        </div>
-        <nav className="p-2">
-          <ul className="space-y-0.5">
-            {tableOfContents.map((item) => {
-              const isActive = activeHeadingId === item.id;
-              return (
-                <li key={item.id}>
-                  <a
-                    href={`#${item.id}`}
-                    className={`relative flex items-center gap-2.5 px-3 py-2 text-[12px] rounded-lg transition-all duration-200 ${
-                      isActive
-                        ? "bg-linear-to-r from-blue-50 to-indigo-50/50 text-blue-700 font-semibold"
-                        : "text-slate-500 hover:bg-slate-50 hover:text-slate-700"
-                    }`}
-                  >
-                    <div
-                      className={`w-1.5 h-1.5 rounded-full shrink-0 transition-all ${
-                        isActive
-                          ? "bg-blue-600 ring-4 ring-blue-100"
-                          : "bg-slate-300"
-                      }`}
-                    />
-                    {item.title}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
-
       {/* Discuss CTA */}
       <Link
-        href="#"
-        target="_blank"
+        href="https://api.whatsapp.com/send/?phone=6285165555987&text&type=phone_number&app_absent=0"
         className="group flex items-center justify-center gap-2 w-full px-4 py-3.5 rounded-xl text-[13px] font-semibold text-white transition-all duration-300"
         style={{
           background: "linear-gradient(135deg, #1e40af, #4f46e5, #7c3aed)",
@@ -89,13 +69,17 @@ export default function TableOfContents() {
       <div className="card-elevated rounded-xl! p-4">
         <div className="grid grid-cols-2 gap-3">
           <div className="text-center">
-            <p className="text-[18px] font-bold text-slate-900">12</p>
+            <p className="text-[18px] font-bold text-slate-900">
+              {stats.total}
+            </p>
             <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">
               Total Artikel
             </p>
           </div>
           <div className="text-center">
-            <p className="text-[18px] font-bold text-emerald-600">3</p>
+            <p className="text-[18px] font-bold text-emerald-600">
+              {stats.updated}
+            </p>
             <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">
               Updated
             </p>

@@ -3,7 +3,6 @@ import HeroSection from "@/components/sections/HeroSection";
 import TabSelector from "@/components/sections/TabSelector";
 import ArticleSidebar from "@/components/sections/Documents/DocumentSidebar";
 import ArticleContent from "@/components/sections/Documents/DocumentContent";
-import InfoSection from "@/components/sections/InfoSection";
 import CTASection from "@/components/sections/CTASection";
 import BackToTop from "@/components/sections/BackToTop";
 import TableOfContents from "@/components/sections/TableOfContent";
@@ -12,13 +11,13 @@ import { ApiHrms } from "@/lib/API-hrms";
 import { useEffect } from "react";
 import { useCategoryStore } from "@/stores/useCategories";
 import WorkinNavbar from "@/components/layouts/Navbar";
-import WorkinFooter from "@/components/layouts/Footer";
+import Footer from "@/components/layouts/FooterSection";
 
 export default function ArticlePage() {
   const { setCategories, categories } = useCategoryStore();
 
   useEffect(() => {
-    Promise.all([ApiHrms.getCategory()]).then(([c]) => {
+    Promise.all([ApiHrms.getAllCategories()]).then(([c]) => {
       setCategories(c);
     });
   }, []);
@@ -70,9 +69,8 @@ export default function ArticlePage() {
         </div>
       </div>
 
-      <InfoSection />
       <CTASection />
-      <WorkinFooter />
+      <Footer />
       <BackToTop />
       <MobileSidebarToggle />
     </div>

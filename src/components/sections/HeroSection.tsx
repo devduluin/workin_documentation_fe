@@ -12,7 +12,7 @@ export default function HeroSection() {
   const { openCategoryId, toggleCategory } = useSidebarStore();
   const { categories } = useCategoryStore();
 
-  const documents = categories?.flatMap((cat: any) => cat?.Documents || []);
+  const documents = categories?.flatMap((cat: any) => cat?.Documents || []);  
 
   const results = documents?.filter((doc: any) =>
     doc.title_tab.toLowerCase().includes(query.toLowerCase()),

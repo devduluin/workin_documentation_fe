@@ -14,15 +14,6 @@ const footerMenus = {
     { label: "Dukungan purna jual", href: "https://workin.com/customer-care/" },
     { label: "Klien kami", href: "https://workin.com/klien-kami/" },
   ],
-  // Produk: [
-  //   { label: "workin Talenta", href: "https://workin.com/produk/talenta/" },
-  //   { label: "workin Jurnal", href: "https://workin.com/produk/jurnal/" },
-  //   { label: "workin Qontak", href: "https://workin.com/produk/qontak/" },
-  //   { label: "workin Klikpajak", href: "https://workin.com/produk/klikpajak/" },
-  //   { label: "workin Flex", href: "https://workin.com/produk/flex/" },
-  //   { label: "workin Sign", href: "https://workin.com/produk/sign/" },
-  //   { label: "workin Expense", href: "https://workin.com/produk/expense/" },
-  // ],
   Solusi: [
     { label: "Software ERP", href: "https://workin.com/sistem-software-erp/" },
     { label: "Integrasi", href: "https://workin.com/integrasi/" },

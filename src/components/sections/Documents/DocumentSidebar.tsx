@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronRight, Search, FolderClosed, Dot } from "lucide-react";
+import { ChevronRight, Search, Dot, AlignVerticalDistributeCenter } from "lucide-react";
 import { useSidebarStore } from "@/stores/useSidebar";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -17,13 +17,31 @@ export default function ArticleSidebar(props: any) {
     });
   }, []);
 
-  const { openCategoryId, toggleCategory } = useSidebarStore();
+  const { openCategoryId, toggleCategory, setOpenCategoryId } = useSidebarStore();
 
   const [openArticleId, setOpenArticleId] = useState<string | null>(null);
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (sidebar && id) {
+      const targetId = id.toString();
+      for (const article of sidebar) {
+        const categories = article.Categories || [];
+        for (const category of categories) {
+          const documents = category.Documents || [];
+          if (documents.some((doc: any) => doc.id.toString() === targetId)) {
+            setOpenArticleId(article.id);
+            setOpenCategoryId(category.id);
+            return;
+          }
+        }
+      }
+    }
+  }, [sidebar, id, setOpenCategoryId]);
+
   const [search, setSearch] = useState("");
   const [isFocus, setIsFocus] = useState(false);
-  const { id } = useParams();
 
   const toggleArticle = (id: string) => {
     setOpenArticleId((prev) => (prev === id ? null : id));
@@ -61,7 +79,6 @@ export default function ArticleSidebar(props: any) {
           className="w-full pl-9 pr-3 py-2.5 text-[12px] bg-slate-50 border border-slate-200/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20"
         />
 
-        {/* Search Dropdown */}
         {isFocus && search && results?.length > 0 && (
           <div className="absolute top-full mt-2 w-full bg-white border border-slate-200 rounded-xl shadow-lg max-h-60 overflow-auto z-50">
             {results.map((item: any) => (
@@ -188,7 +205,7 @@ export default function ArticleSidebar(props: any) {
                                 }`}
                               >
                                 <div className="w-4 h-4 rounded-md flex items-center justify-center shrink-0 bg-slate-100 text-slate-400">
-                                  <FolderClosed className="h-2.5 w-2.5" />
+                                  <AlignVerticalDistributeCenter className="h-2.5 w-2.5" />
                                 </div>
                                 <span className="flex-1 text-left truncate">
                                   {documents[0].title_tab}
@@ -201,7 +218,7 @@ export default function ArticleSidebar(props: any) {
                               className="w-full flex disabled:opacity-20 cursor-pointer items-center gap-2.5 pl-8 pr-4 py-2.5 text-[12px] font-semibold"
                             >
                               <div className="w-4 h-4 rounded-md flex items-center justify-center shrink-0 bg-slate-100 text-slate-400">
-                                <FolderClosed className="h-2.5 w-2.5" />
+                                <AlignVerticalDistributeCenter className="h-2.5 w-2.5" />
                               </div>
                               <span className="flex-1 text-left truncate">
                                 {category.name}

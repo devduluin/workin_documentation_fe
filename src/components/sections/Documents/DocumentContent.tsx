@@ -1,35 +1,116 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   ChevronRight,
-  Download,
-  GraduationCap,
   Clock,
   User,
   ExternalLink,
   Share2,
   MessageCircle,
+  Facebook,
+  Instagram,
+  Linkedin,
 } from "lucide-react";
-import {
-  breadcrumbs,
-  releaseLogEntries,
-  recentArticles,
-  relatedArticles,
-} from "@/lib/data";
 import { useParams } from "next/navigation";
 import { ApiHrms } from "@/lib/API-hrms";
+
+// <li key={doc.id}>
+//   <Link
+//     href={`/articles/${doc.id}#content`}
+//     className="text-xs text-blue-600 hover:text-blue-800 hover:underline transition-colors leading-relaxed"
+//   >
+//     {doc.title_tab || doc.title_content}
+//   </Link>
+// </li>
+
+const relatedDocs = [
+  {
+    link: "/articles/3e7179d7-4a73-4c25-8535-0c1c452b7454",
+    title_tab: "Sekilas menu halaman Attendence Shift & Attendence",
+  },
+  {
+    link: "/articles/e4b4a00a-8db4-4964-97ea-add36cf6f05d",
+    title_tab: "Halaman Overview Reimbursment & Travel",
+  },
+  {
+    link: "/articles/cc80fa57-13d7-40cf-ae62-9e2cdc9616e8",
+    title_tab: "Cara menambahkan Employee baru",
+  },
+  {
+    link: "/articles/ce665933-97fa-41f6-a699-c377a3a45867",
+    title_tab: "Overview Document Management",
+  },
+  {
+    link: "/articles/7a7aeee8-5893-42e5-bf88-f0aa29a7153d",
+    title_tab: "Pengunaan menu Leave and Holiday",
+  },
+];
 
 export default function ArticleContent(props: any) {
   const { id } = useParams();
   const [articles, setArticles] = useState<any>(null);
+  const [recentDocs, setRecentDocs] = useState<any[]>([]);
+
+  const getRelativeTime = (dateString: string) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+    if (diffInSeconds < 60) return "Baru saja";
+
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    if (diffInMinutes < 60) return `${diffInMinutes} menit yang lalu`;
+
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) return `${diffInHours} jam yang lalu`;
+
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays < 30) return `${diffInDays} hari yang lalu`;
+
+    const diffInMonths = Math.floor(diffInDays / 30);
+    if (diffInMonths < 12) return `${diffInMonths} bulan yang lalu`;
+
+    const diffInYears = Math.floor(diffInMonths / 12);
+    return `${diffInYears} tahun yang lalu`;
+  };
 
   useEffect(() => {
-    Promise.all([ApiHrms.getDocumentById(id?.toString() || "")]).then(([c]) => {
-      setArticles(c);
+    Promise.all([
+      ApiHrms.getDocumentById(id?.toString() || ""),
+      ApiHrms.getDocuments(1),
+    ]).then(([article, allDocs]: any) => {
+      setArticles(article);
+      setRecentDocs(allDocs.data.slice(0, 5));
     });
   }, [id]);
+
+  const handleShare = (platform: string) => {
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const text = articles?.title_content || "Cek panduan ini";
+    let shareUrl = "";
+
+    switch (platform) {
+      case "Facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        break;
+      case "Instagram":
+        shareUrl = `https://www.instagram.com/duluinworkin/`;
+        break;
+      case "LinkedIn":
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        break;
+      case "WhatsApp":
+        shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`;
+        break;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, "_blank", "width=600,height=400");
+    }
+  };
 
   if (!articles) return <div>Loading...</div>;
 
@@ -38,19 +119,35 @@ export default function ArticleContent(props: any) {
       {/* Breadcrumb */}
       <nav className="mb-6">
         <ol className="flex items-center flex-wrap gap-1 text-xs text-gray-500">
-          {breadcrumbs.map((crumb, index) => (
-            <React.Fragment key={crumb.href}>
-              {index > 0 && <ChevronRight className="h-3 w-3 text-gray-300" />}
+          <li>
+            <Link
+              href="/articles/5b96aff9-5d8a-4f45-9883-3471940942b6"
+              className="hover:text-blue-600 transition-colors"
+            >
+              Quick Guide
+            </Link>
+          </li>
+          {/* {articles?.Category && (
+            <>
+              <ChevronRight className="h-3 w-3 text-gray-300" />
               <li>
                 <Link
-                  href={crumb.href}
+                  href={`/articles/${articles.Category.id}`}
                   className="hover:text-blue-600 transition-colors"
                 >
-                  {crumb.label}
+                  {articles.Category.name}
                 </Link>
               </li>
-            </React.Fragment>
-          ))}
+            </>
+          )} */}
+          {articles && (
+            <>
+              <ChevronRight className="h-3 w-3 text-gray-300" />
+              <li className="font-medium text-gray-900 truncate max-w-[200px] md:max-w-md">
+                {articles.title_tab || articles.title_content}
+              </li>
+            </>
+          )}
         </ol>
       </nav>
 
@@ -66,32 +163,32 @@ export default function ArticleContent(props: any) {
             </div>
             <div>
               <p className="text-sm font-medium text-gray-900">
-                Learning Center Workin
+                Learning Center {articles?.Category?.name}
               </p>
               <div className="flex items-center gap-1.5 text-xs text-gray-500">
                 <Clock className="h-3 w-3" />
-                <span>Diperbarui 6 hari yang lalu</span>
+                <span>Diperbarui {getRelativeTime(articles.updatedAt)}</span>
               </div>
             </div>
           </div>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            <button
+            {/* <button
               onClick={() => window.print()}
               className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
             >
               <Download className="h-3.5 w-3.5" />
               PDF
-            </button>
-            <Link
+            </button> */}
+            {/* <Link
               href="https://community.Workin.com/Workin-training/Workin/"
               target="_blank"
               className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-linear-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 rounded-lg transition-all shadow-sm"
             >
               <GraduationCap className="h-3.5 w-3.5" />
               Ikut pelatihan GRATIS!
-            </Link>
+            </Link> */}
           </div>
         </div>
       </header>
@@ -110,117 +207,6 @@ export default function ArticleContent(props: any) {
         />
       </div>
 
-      {/* Article Body */}
-      <section className="prose prose-sm max-w-none mb-8">
-        <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-5 mb-8">
-          <p className="text-sm text-gray-700 leading-relaxed m-0">
-            Kumpulan catatan rilis (release log) artikel panduan mengenai Workin
-            Account untuk melakukan berbagai pengaturan pengoperasian penggunaan
-            sistem Workin Account. Halaman ini berisi daftar artikel panduan
-            Workin Account baru atau yang diperbarui pada tahun tertera
-            berdasarkan fitur yang telah dirilis per bulannya.
-          </p>
-        </div>
-
-        {/* Year 2026 */}
-        <h2
-          id="tahun-2026"
-          className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2"
-        >
-          <div className="w-1 h-6 bg-blue-600 rounded-full" />
-          Tahun 2026
-        </h2>
-        <p className="text-sm text-gray-600 mb-6">
-          Temukan panduan baru atau yang diperbarui di sini.
-        </p>
-
-        {/* Januari */}
-        <h3
-          id="januari"
-          className="text-lg font-semibold text-gray-800 mb-4 pl-3 border-l-2 border-gray-300"
-        >
-          Januari
-        </h3>
-
-        {/* Empty state for Januari */}
-        <div className="bg-gray-50 rounded-lg p-4 mb-6 text-center">
-          <p className="text-xs text-gray-400 italic">
-            Belum ada data untuk bulan ini.
-          </p>
-        </div>
-
-        {/* Februari */}
-        <h3
-          id="februari"
-          className="text-lg font-semibold text-gray-800 mb-4 pl-3 border-l-2 border-blue-500"
-        >
-          Februari
-        </h3>
-
-        {/* Release Log Table */}
-        <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm mb-8">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-linear-to-r from-gray-50 to-gray-100">
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-b border-gray-200">
-                  Published Date
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-b border-gray-200">
-                  Feature Name
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-b border-gray-200">
-                  Guidebook Title
-                </th>
-                <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider border-b border-gray-200">
-                  Feature Status
-                </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-b border-gray-200">
-                  Description
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-100">
-              {releaseLogEntries.map((entry, index) => (
-                <tr
-                  key={index}
-                  className="hover:bg-blue-50/30 transition-colors"
-                >
-                  <td className="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
-                    {entry.publishedDate}
-                  </td>
-                  <td className="px-4 py-3 text-xs text-gray-700 font-medium">
-                    {entry.featureName}
-                  </td>
-                  <td className="px-4 py-3 text-xs">
-                    <Link
-                      href={entry.guidebookHref}
-                      target="_blank"
-                      className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
-                    >
-                      {entry.guidebookTitle}
-                    </Link>
-                  </td>
-                  <td className="px-4 py-3 text-center">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${
-                        entry.featureStatus === "New"
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-amber-100 text-amber-700"
-                      }`}
-                    >
-                      {entry.featureStatus}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-xs text-gray-600">
-                    {entry.description}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
       {/* Share */}
       <div className="flex items-center gap-3 py-4 border-t border-gray-200 mb-6">
         <span className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
@@ -231,20 +217,31 @@ export default function ArticleContent(props: any) {
           {[
             {
               name: "Facebook",
-              color: "bg-blue-600 hover:bg-blue-700",
-              icon: "f",
+              color: "bg-[#1877F2] hover:bg-[#166fe5]",
+              icon: <Facebook className="h-4 w-4" />,
             },
-            { name: "X", color: "bg-gray-900 hover:bg-gray-800", icon: "𝕏" },
+            {
+              name: "Instagram",
+              color:
+                "bg-linear-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] hover:opacity-90",
+              icon: <Instagram className="h-4 w-4" />,
+            },
             {
               name: "LinkedIn",
-              color: "bg-blue-700 hover:bg-blue-800",
-              icon: "in",
+              color: "bg-[#0A66C2] hover:bg-[#004182]",
+              icon: <Linkedin className="h-4 w-4" />,
+            },
+            {
+              name: "WhatsApp",
+              color: "bg-[#25D366] hover:bg-[#20bd5c]",
+              icon: <MessageCircle className="h-4 w-4" />,
             },
           ].map((social) => (
             <button
               key={social.name}
-              className={`w-8 h-8 ${social.color} text-white rounded-lg flex items-center justify-center text-xs font-bold transition-colors shadow-sm`}
-              title={`Share to ${social.name}`}
+              onClick={() => handleShare(social.name)}
+              className={`w-8 h-8 ${social.color} cursor-pointer text-white rounded-lg flex items-center justify-center transition-all shadow-sm hover:scale-110 active:scale-95`}
+              title={`Bagikan ke ${social.name}`}
             >
               {social.icon}
             </button>
@@ -262,7 +259,7 @@ export default function ArticleContent(props: any) {
           form
         </p>
         <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLSdZiSPo0y8tJUtkZ3zWIKVv8KCK1YuvGBnqIeXG3zlyOEOumg/viewform"
+          href="https://form.duluin.com/form/v/9fb67097-55e6-4248-8f51-e140b1e3ebef"
           target="_blank"
           className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all shadow-sm"
         >
@@ -277,16 +274,16 @@ export default function ArticleContent(props: any) {
         <div className="bg-white rounded-xl border border-gray-200 p-5">
           <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
             <Clock className="h-4 w-4 text-gray-400" />
-            Panduan yang dilihat baru-baru ini
+            Panduan Terbaru
           </h3>
           <ul className="space-y-2">
-            {recentArticles.map((article) => (
-              <li key={article.href}>
+            {recentDocs.map((doc) => (
+              <li key={doc.id}>
                 <Link
-                  href={article.href}
+                  href={`/articles/${doc.id}#content`}
                   className="text-xs text-blue-600 hover:text-blue-800 hover:underline transition-colors leading-relaxed"
                 >
-                  {article.title}
+                  {doc.title_tab || doc.title_content}
                 </Link>
               </li>
             ))}
@@ -300,13 +297,13 @@ export default function ArticleContent(props: any) {
             Panduan terkait
           </h3>
           <ul className="space-y-2">
-            {relatedArticles.map((article, i) => (
-              <li key={i}>
+            {relatedDocs.map((doc, id) => (
+              <li key={id}>
                 <Link
-                  href={article.href}
+                  href={`${doc.link}#content`}
                   className="text-xs text-blue-600 hover:text-blue-800 hover:underline transition-colors leading-relaxed"
                 >
-                  {article.title}
+                  {doc.title_tab}
                 </Link>
               </li>
             ))}

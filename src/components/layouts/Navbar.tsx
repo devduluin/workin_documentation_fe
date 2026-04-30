@@ -138,7 +138,7 @@ export default function WorkinNavbar() {
               Workin Customer Care
             </Link>
 
-            <div>
+            {/* <div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start py-1.5">
                 <div ref={langRef} className="relative">
                   <button
@@ -169,7 +169,7 @@ export default function WorkinNavbar() {
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* <div className="w-px h-6 bg-gray-200 mx-1" /> */}
 

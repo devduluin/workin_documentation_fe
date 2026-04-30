@@ -3,13 +3,12 @@ import HeroSection from "@/components/sections/HeroSection";
 import TabSelector from "@/components/sections/TabSelector";
 import ArticleSidebar from "@/components/sections/Documents/DocumentSidebar";
 import ArticleContent from "@/components/sections/Documents/DocumentContent";
-import InfoSection from "@/components/sections/InfoSection";
 import CTASection from "@/components/sections/CTASection";
 import BackToTop from "@/components/sections/BackToTop";
 import TableOfContents from "@/components/sections/TableOfContent";
 import MobileSidebarToggle from "@/components/sections/ToggleSidebar";
 import WorkinNavbar from "@/components/layouts/Navbar";
-import WorkinFooter from "@/components/layouts/Footer";
+import Footer from "../layouts/FooterSection";
 
 export default function ArticlePage() {
   return (
@@ -62,9 +61,8 @@ export default function ArticlePage() {
         </div>
       </div>
 
-      <InfoSection />
       <CTASection />
-      <WorkinFooter />
+      <Footer />
       <BackToTop />
       <MobileSidebarToggle />
     </div>

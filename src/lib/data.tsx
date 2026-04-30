@@ -10,8 +10,8 @@ import {
 import { SignatureIcon } from "lucide-react";
 
 export const breadcrumbs: BreadcrumbItem[] = [
-  { label: "Workin Help Center", href: "/categories/1" },
-  { label: "General", href: "/categories/2" },
+  { label: "General", href: "/articles/5b96aff9-5d8a-4f45-9883-3471940942b6" },
+  { label: "", href: "/categories/2" },
   {
     label: "Guidebook Release Log",
     href: "/categories/3",

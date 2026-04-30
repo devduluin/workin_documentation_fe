@@ -7,6 +7,7 @@ interface SidebarState {
 
   openCategoryId: string | null;
   toggleCategory: (id: string) => void;
+  setOpenCategoryId: (id: string | null) => void;
 
   openSectionId: string | null;
   toggleSection: (id: string) => void;
@@ -39,6 +40,7 @@ export const useSidebarStore = create<SidebarState>((set) => ({
   openCategoryId: "cat-general",
   toggleCategory: (id) =>
     set((s) => ({ openCategoryId: s.openCategoryId === id ? null : id })),
+  setOpenCategoryId: (id) => set({ openCategoryId: id }),
 
   openSectionId: "sec-guidebook-release",
   toggleSection: (id) =>
