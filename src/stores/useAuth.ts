@@ -1,4 +1,4 @@
-import { discussApi } from "@/lib/discussAPI";
+import { ApiHrms } from "@/lib/API-hrms";
 import { create } from "zustand";
 
 interface User {
@@ -11,40 +11,36 @@ interface User {
 
 interface AuthState {
   user: User | null;
-  token: string | null;
   loading: boolean;
-  setAuth: (user: User, token: string) => void;
+  setAuth: (user: User) => void;
   logout: () => void;
   loadUser: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
-  token:
-    typeof window !== "undefined"
-      ? localStorage.getItem("discuss_token")
-      : null,
   loading: true,
-  setAuth: (user, token) => {
-    localStorage.setItem("discuss_token", token);
-    set({ user, token, loading: false });
+  setAuth: (user) => {
+    set({ user, loading: false });
   },
-  logout: () => {
-    localStorage.removeItem("discuss_token");
-    set({ user: null, token: null, loading: false });
+  logout: async () => {
+    try {
+      await ApiHrms.logout();
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+    set({ user: null, loading: false });
   },
   loadUser: async () => {
     try {
-      const token = localStorage.getItem("discuss_token");
-      if (!token) {
-        set({ loading: false });
-        return;
+      const res = await ApiHrms.me();
+      if (res && res.user) {
+        set({ user: res.user, loading: false });
+      } else {
+        set({ user: null, loading: false });
       }
-      const user = await discussApi.me();
-      set({ user, token, loading: false });
     } catch {
-      localStorage.removeItem("discuss_token");
-      set({ user: null, token: null, loading: false });
+      set({ user: null, loading: false });
     }
   },
 }));

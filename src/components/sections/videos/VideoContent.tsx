@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { Play, MonitorPlay, ExternalLink } from "lucide-react";
-import { videoCategories, VideoItem } from "@/lib/videoData";
-import { useVideoStore } from "@/stores/useVideos";
+import { VideoItem, useVideoStore } from "@/stores/useVideos";
 
 function VideoCard({ video }: { video: VideoItem }) {
   return (
@@ -11,14 +11,12 @@ function VideoCard({ video }: { video: VideoItem }) {
       <div className="relative aspect-video bg-slate-900 overflow-hidden">
         <iframe
           title={video.title}
-          src={`https://www.youtube.com/embed/${video.youtubeId}?enablejsapi=1`}
+          src={`https://www.youtube.com/embed/${video.youtube_id}?enablejsapi=1`}
           className="absolute inset-0 w-full h-full"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         />
-
-        {/* Subtle overlay linear at bottom for text readability */}
         <div className="absolute bottom-0 left-0 right-0 h-8 bg-linear-to-t from-black/10 to-transparent pointer-events-none" />
       </div>
 
@@ -39,12 +37,64 @@ function VideoCard({ video }: { video: VideoItem }) {
   );
 }
 
+function VideoCardSkeleton() {
+  return (
+    <div className="card-elevated rounded-2xl! overflow-hidden">
+      <div className="aspect-video bg-slate-200 animate-pulse" />
+      <div className="p-4 flex items-start gap-3">
+        <div className="w-8 h-8 rounded-lg bg-slate-200 animate-pulse shrink-0 mt-0.5" />
+        <div className="flex-1 space-y-2 pt-1">
+          <div className="h-3 bg-slate-200 animate-pulse rounded w-full" />
+          <div className="h-3 bg-slate-100 animate-pulse rounded w-2/3" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function VideoContent() {
-  const { activeCategoryId } = useVideoStore();
+  const { categories, loading, activeCategoryId, loadCategories } = useVideoStore();
 
-  const activeCategory = videoCategories.find((c) => c.id === activeCategoryId);
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
-  if (!activeCategory) return null;
+  const activeCategory = categories.find((c) => c.id === activeCategoryId);
+
+  if (loading) {
+    return (
+      <div className="animate-fade-in">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 rounded-xl bg-slate-200 animate-pulse" />
+          <div className="space-y-2">
+            <div className="h-5 bg-slate-200 animate-pulse rounded w-40" />
+            <div className="h-3 bg-slate-100 animate-pulse rounded w-24" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {[...Array(4)].map((_, i) => (
+            <VideoCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!activeCategory) {
+    return (
+      <div className="card-elevated rounded-2xl! p-12 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
+          <MonitorPlay className="h-7 w-7 text-slate-300" />
+        </div>
+        <p className="text-[14px] font-medium text-slate-500">
+          Pilih kategori video di sidebar
+        </p>
+        <p className="text-[12px] text-slate-400 mt-1">
+          Video tutorial akan ditampilkan di sini
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="animate-fade-in">
@@ -82,7 +132,7 @@ export default function VideoContent() {
         ))}
       </div>
 
-      {/* Empty State (if needed) */}
+      {/* Empty State */}
       {activeCategory.videos.length === 0 && (
         <div className="card-elevated rounded-2xl! p-12 text-center">
           <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4">
