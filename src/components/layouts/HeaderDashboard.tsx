@@ -1,9 +1,6 @@
 "use client";
 import { useState } from "react";
 import { SidebarTrigger } from "../ui/sidebar";
-import { useAuthStore } from "@/stores/useAuth";
-import Router from "next/router";
-import { useRouter } from "next/navigation";
 
 const dummyUser = {
   name: "HRMS",
@@ -133,18 +130,6 @@ const SearchModal = ({
 
 const UserDropdown = ({ user }: { user: typeof dummyUser }) => {
   const [open, setOpen] = useState(false);
-  const { logout } = useAuthStore();
-
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      router.replace("/login");
-    } catch (err: any) {
-      console.log(err);
-    }
-  };
   return (
     <div className="relative ml-4">
       <button
@@ -193,7 +178,6 @@ const UserDropdown = ({ user }: { user: typeof dummyUser }) => {
 
             <div className="my-2 -mx-2 h-px bg-slate-200/60" />
             <button
-              onClick={handleLogout}
               className="w-full flex items-center gap-2 p-2 rounded-md text-sm text-red-500
                 hover:bg-red-50 transition-colors"
             >

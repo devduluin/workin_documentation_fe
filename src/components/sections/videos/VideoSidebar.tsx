@@ -1,39 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
 import { Play, ChevronRight, MonitorPlay } from "lucide-react";
+import { videoCategories } from "@/lib/videoData";
 import { useVideoStore } from "@/stores/useVideos";
 
 export default function VideoSidebar() {
-  const { categories, loading, activeCategoryId, setActiveCategoryId, loadCategories } = useVideoStore();
-
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
-  if (loading) {
-    return (
-      <aside className="space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="h-3 w-20 bg-slate-200 animate-pulse rounded" />
-          <div className="h-4 w-10 bg-slate-100 animate-pulse rounded-full" />
-        </div>
-        <div className="card-elevated rounded-xl! overflow-hidden divide-y divide-slate-100">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="flex items-center gap-3 px-4 py-3.5">
-              <div className="w-8 h-8 rounded-xl bg-slate-100 animate-pulse shrink-0" />
-              <div className="flex-1 space-y-1.5">
-                <div className="h-3 bg-slate-200 animate-pulse rounded w-3/4" />
-                <div className="h-2.5 bg-slate-100 animate-pulse rounded w-1/3" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </aside>
-    );
-  }
-
-  const totalVideos = categories.reduce((acc, cat) => acc + cat.videos.length, 0);
+  const { activeCategoryId, setActiveCategoryId } = useVideoStore();
 
   return (
     <aside className="space-y-3">
@@ -43,14 +15,14 @@ export default function VideoSidebar() {
           Daftar video
         </h3>
         <span className="text-[10px] font-semibold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
-          {categories.length} produk
+          {videoCategories.length} produk
         </span>
       </div>
 
       {/* Category List */}
       <div className="card-elevated rounded-xl! overflow-hidden">
         <div className="divide-y divide-slate-100/80">
-          {categories.map((category) => {
+          {videoCategories.map((category) => {
             const isActive = activeCategoryId === category.id;
             return (
               <button
@@ -116,7 +88,9 @@ export default function VideoSidebar() {
             <Play className="h-4 w-4 text-violet-600" />
           </div>
           <div>
-            <p className="text-[16px] font-bold text-slate-900">{totalVideos}</p>
+            <p className="text-[16px] font-bold text-slate-900">
+              {videoCategories.reduce((acc, cat) => acc + cat.videos.length, 0)}
+            </p>
             <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">
               Total Video
             </p>

@@ -24,7 +24,6 @@ async function fetcher<T>(
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...((options.headers as Record<string, string>) || {}),
     },
-    credentials: "include",
     ...options,
   });
   if (!res.ok) {
@@ -36,13 +35,12 @@ async function fetcher<T>(
 
 export const discussApi = {
   // Auth
-  login: (body: { username: string; password: any }) =>
+  login: (body: { email: string; password: string }) =>
     fetcher<{ token: string; user: any }>("/auth/login", {
       method: "POST",
       body: JSON.stringify(body),
     }),
-  logout: () => fetcher<any>("/auth/logout", { method: "POST" }),
-  register: (body: { username: string; email: string; password: string }) =>
+  register: (body: { name: string; email: string; password: string }) =>
     fetcher<{ token: string; user: any }>("/auth/register", {
       method: "POST",
       body: JSON.stringify(body),

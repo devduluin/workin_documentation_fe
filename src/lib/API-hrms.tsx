@@ -17,13 +17,12 @@ async function fetcher<T>(
       "Content-Type": "application/json",
       ...((options.headers as Record<string, string>) || {}),
     },
-    credentials: "include",
     ...options,
   });
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: "Request failed" }));
-    console.log(err);
+    throw new Error(err.error || "Request failed");
   }
   const data = await res.json();
   return data.data;
@@ -38,13 +37,11 @@ async function fetcherMeta<T>(
       "Content-Type": "application/json",
       ...((options.headers as Record<string, string>) || {}),
     },
-    credentials: "include",
     ...options,
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: "Request failed" }));
-    console.log(err);
-    
+    throw new Error(err.error || "Request failed");
   }
   const data = await res.json();
   return data;
@@ -149,35 +146,4 @@ export const ApiHrms = {
     fetcher(`/categories/${id}`, {
       method: "DELETE",
     }),
-
-  //auth
-  login: (username: string, password: any) =>
-    fetcher<{ token: string; user: any }>("/auth/login", {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-    }),
-  logout: () => fetcher<any>("/auth/logout", { method: "POST" }),
-  register: (body: { username: string; email: string; password: string }) =>
-    fetcher<{ token: string; user: any }>("/auth/register", {
-      method: "POST",
-      body: JSON.stringify(body),
-    }),
-  me: () => fetcher<any>("/auth/me"),
-
-  // Video
-  getVideoCategories: () => fetcher<any[]>("/video-categories"),
-  getVideoCategoryById: (id: string) => fetcher<any>(`/video-categories/${id}`),
-  createVideoCategory: (body: { name: string; order?: number }) =>
-    fetcher<any>("/video-categories", { method: "POST", body: JSON.stringify(body) }),
-  updateVideoCategory: (id: string, body: { name?: string; order?: number }) =>
-    fetcher<any>(`/video-categories/${id}`, { method: "PUT", body: JSON.stringify(body) }),
-  deleteVideoCategory: (id: string) =>
-    fetcher<any>(`/video-categories/${id}`, { method: "DELETE" }),
-
-  createVideo: (body: { video_category_id: string; title: string; youtube_id: string; order?: number }) =>
-    fetcher<any>("/videos", { method: "POST", body: JSON.stringify(body) }),
-  updateVideo: (id: string, body: { title?: string; youtube_id?: string; order?: number; video_category_id?: string }) =>
-    fetcher<any>(`/videos/${id}`, { method: "PUT", body: JSON.stringify(body) }),
-  deleteVideo: (id: string) =>
-    fetcher<any>(`/videos/${id}`, { method: "DELETE" }),
 };

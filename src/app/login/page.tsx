@@ -5,14 +5,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Home, LogIn } from "lucide-react";
 import { useAuthStore } from "@/stores/useAuth";
-import { ApiHrms } from "@/lib/API-hrms";
-import WorkinNavbar from "@/components/layouts/Navbar";
-import Footer from "@/components/layouts/FooterSection";
+import { discussApi } from "@/lib/discussAPI";
 
 export default function LoginPage() {
   const router = useRouter();
-  const {  setAuth } = useAuthStore();
-  const [username, setUsername] = useState("");
+  const { setAuth } = useAuthStore();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,9 +20,9 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
     try {
-      const res = await ApiHrms.login(username, password);
-      setAuth(res.user);
-      router.replace("/dashboard");
+      const res = await discussApi.login({ email, password });
+      setAuth(res.user, res.token);
+      router.push("/discuss");
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -33,9 +31,7 @@ export default function LoginPage() {
   };
 
   return (
-    <>
-    <WorkinNavbar />
-    <div className="min-h-screen mesh-bg flex items-center justify-center bg-slate-50/30 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50/30 px-4">
       <div className="card-elevated rounded-2xl! p-8 w-full max-w-md">
         <Link
           href="/"
@@ -59,14 +55,14 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-[12px] font-semibold text-slate-600 mb-1">
-              Username
+              Email
             </label>
             <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-slate-200 rounded-xl px-4 py-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-              placeholder="Username"
+              placeholder="email@example.com"
               required
             />
           </div>
@@ -81,6 +77,7 @@ export default function LoginPage() {
               className="w-full border border-slate-200 rounded-xl px-4 py-3 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               placeholder="••••••••"
               required
+              minLength={6}
             />
           </div>
           <button
@@ -103,8 +100,5 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
-    <Footer />
-    </>
-
   );
 }
