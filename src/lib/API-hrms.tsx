@@ -44,7 +44,6 @@ async function fetcherMeta<T>(
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: "Request failed" }));
     console.log(err);
-    
   }
   const data = await res.json();
   return data;
@@ -168,16 +167,37 @@ export const ApiHrms = {
   getVideoCategories: () => fetcher<any[]>("/video-categories"),
   getVideoCategoryById: (id: string) => fetcher<any>(`/video-categories/${id}`),
   createVideoCategory: (body: { name: string; order?: number }) =>
-    fetcher<any>("/video-categories", { method: "POST", body: JSON.stringify(body) }),
+    fetcher<any>("/video-categories", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
   updateVideoCategory: (id: string, body: { name?: string; order?: number }) =>
-    fetcher<any>(`/video-categories/${id}`, { method: "PUT", body: JSON.stringify(body) }),
+    fetcher<any>(`/video-categories/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+    }),
   deleteVideoCategory: (id: string) =>
     fetcher<any>(`/video-categories/${id}`, { method: "DELETE" }),
 
-  createVideo: (body: { video_category_id: string; title: string; youtube_id: string; order?: number }) =>
-    fetcher<any>("/videos", { method: "POST", body: JSON.stringify(body) }),
-  updateVideo: (id: string, body: { title?: string; youtube_id?: string; order?: number; video_category_id?: string }) =>
-    fetcher<any>(`/videos/${id}`, { method: "PUT", body: JSON.stringify(body) }),
+  createVideo: (body: {
+    video_category_id: string;
+    title: string;
+    youtube_id: string;
+    order?: number;
+  }) => fetcher<any>("/videos", { method: "POST", body: JSON.stringify(body) }),
+  updateVideo: (
+    id: string,
+    body: {
+      title?: string;
+      youtube_id?: string;
+      order?: number;
+      video_category_id?: string;
+    },
+  ) =>
+    fetcher<any>(`/videos/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(body),
+    }),
   deleteVideo: (id: string) =>
     fetcher<any>(`/videos/${id}`, { method: "DELETE" }),
 };
