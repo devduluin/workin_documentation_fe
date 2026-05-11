@@ -287,12 +287,12 @@ export default function WorkinNavbar() {
                 <div className="flex items-center gap-3 px-3 py-3 mb-2 bg-gray-50 rounded-lg">
                   <div className="w-10 h-10 bg-linear-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-sm font-bold">
-                      {getUserInitials(user.name)}
+                      {getUserInitials(user.username)}
                     </span>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-gray-900 truncate">
-                      {user.name}
+                      {user.username}
                     </p>
                     <p className="text-xs text-gray-500 truncate">
                       {user.email}

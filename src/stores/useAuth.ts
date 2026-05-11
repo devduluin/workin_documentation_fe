@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 interface User {
   id: string;
-  name: string;
+  username: string;
   email: string;
   role: string;
   avatar?: string;
@@ -13,7 +13,7 @@ interface AuthState {
   user: User | null;
   loading: boolean;
   setAuth: (user: User) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
   loadUser: () => Promise<void>;
 }
 
@@ -29,6 +29,10 @@ export const useAuthStore = create<AuthState>((set) => ({
     } catch (err) {
       console.error("Logout error:", err);
     }
+    localStorage.removeItem("token");
+    document.cookie =
+      "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     set({ user: null, loading: false });
   },
   loadUser: async () => {

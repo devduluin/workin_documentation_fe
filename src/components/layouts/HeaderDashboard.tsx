@@ -138,12 +138,8 @@ const UserDropdown = ({ user }: { user: typeof dummyUser }) => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    try {
-      await logout();
-      router.replace("/login");
-    } catch (err: any) {
-      console.log(err);
-    }
+    await logout();
+    router.replace("/login");
   };
   return (
     <div className="relative ml-4">

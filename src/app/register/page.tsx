@@ -24,6 +24,7 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       const res = await ApiHrms.register({ username, email, password });
+      document.cookie = `token=${res.token}; path=/`;
       setAuth(res.user);
       router.push("/dashboard");
     } catch (err: any) {

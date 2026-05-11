@@ -4,28 +4,36 @@ const normalizeApiBase = (value: string) => {
   return trimmed;
 };
 
-const API = normalizeApiBase(
-  process.env.NEXT_PUBLIC_API_URL || "https://apidocs-hrms.duluin.com/api/v1",
-);
+const API = normalizeApiBase("https://apidocs-hrms.duluin.com/api/v1");
+
+const getToken = () => {
+  if (typeof window === "undefined") return null;
+
+  return localStorage.getItem("token");
+};
 
 async function fetcher<T>(
   endpoint: string,
   options: RequestInit = {},
 ): Promise<T> {
+  const token = getToken();
   const res = await fetch(`${API}${endpoint}`, {
     headers: {
       "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...((options.headers as Record<string, string>) || {}),
     },
     credentials: "include",
     ...options,
   });
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: "Request failed" }));
-    console.log(err);
-  }
   const data = await res.json();
+
+  if (!res.ok) {
+    console.error("API Error:", data);
+    throw new Error(data.message || "Request failed");
+  }
+
   return data.data;
 }
 
@@ -33,19 +41,24 @@ async function fetcherMeta<T>(
   endpoint: string,
   options: RequestInit = {},
 ): Promise<T> {
+  const token = getToken();
   const res = await fetch(`${API}${endpoint}`, {
     headers: {
       "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...((options.headers as Record<string, string>) || {}),
     },
     credentials: "include",
     ...options,
   });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: "Request failed" }));
-    console.log(err);
-  }
+
   const data = await res.json();
+
+  if (!res.ok) {
+    console.error("API Error:", data);
+    throw new Error(data.message || "Request failed");
+  }
+
   return data;
 }
 
@@ -72,9 +85,6 @@ export const ApiHrms = {
   }) =>
     fetcher("/documents", {
       method: "POST",
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
       body: JSON.stringify(data),
     }),
 
@@ -89,18 +99,12 @@ export const ApiHrms = {
   ) =>
     fetcher(`/documents/${id}`, {
       method: "PUT",
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
       body: JSON.stringify(data),
     }),
 
   DeleteDocument: (id: string) =>
     fetcher(`/documents/${id}`, {
       method: "DELETE",
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
     }),
 
   // Article
