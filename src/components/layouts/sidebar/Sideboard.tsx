@@ -65,8 +65,12 @@ const data = {
           url: "/dashboard/article",
         },
         {
-          title: "Category",
-          url: "/dashboard/category",
+          title: "Category Document",
+          url: "/dashboard/category-document",
+        },
+        {
+          title: "Category Video",
+          url: "/dashboard/category-video",
         },
       ],
     },

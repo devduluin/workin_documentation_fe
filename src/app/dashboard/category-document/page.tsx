@@ -1,12 +1,12 @@
 import HeaderDashboard from "@/components/layouts/HeaderDashboard";
-import DataVideosView from "@/components/views/Dashboard/Videos";
+import DataCategoryView from "@/components/views/Dashboard/Categories";
 
 const Page = () => {
   return (
     <>
-      <HeaderDashboard breadcrumbLabel="Videos" />
+      <HeaderDashboard breadcrumbLabel="Category Document" />
       <div className=" p-8 mx-auto">
-        <DataVideosView />
+        <DataCategoryView />
       </div>
     </>
   );

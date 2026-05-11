@@ -4,7 +4,8 @@ const normalizeApiBase = (value: string) => {
   return trimmed;
 };
 
-const API = normalizeApiBase("https://apidocs-hrms.duluin.com/api/v1");
+// const API = normalizeApiBase("https://apidocs-hrms.duluin.com/api/v1");
+const API = normalizeApiBase("http://localhost:5000/api/v1");
 
 const getToken = () => {
   if (typeof window === "undefined") return null;
@@ -169,6 +170,12 @@ export const ApiHrms = {
 
   // Video
   getVideoCategories: () => fetcher<any[]>("/video-categories"),
+  getAllVideoCategory: (page = 1) =>
+    fetcherMeta<PaginatedResponse<any>>(`/video-categories/all?page=${page}`),
+
+  getVideoCategory: (page = 1) =>
+    fetcherMeta<PaginatedResponse<any>>(`/video-categories?page=${page}`),
+
   getVideoCategoryById: (id: string) => fetcher<any>(`/video-categories/${id}`),
   createVideoCategory: (body: { name: string; order?: number }) =>
     fetcher<any>("/video-categories", {
@@ -182,6 +189,12 @@ export const ApiHrms = {
     }),
   deleteVideoCategory: (id: string) =>
     fetcher<any>(`/video-categories/${id}`, { method: "DELETE" }),
+
+  getVideos: (page = 1) =>
+    fetcherMeta<PaginatedResponse<any>>(`/videos/all?page=${page}`),
+  getAllVideos: () => fetcher<any[]>(`/videos`),
+
+  getVideoById: (id: string) => fetcher<any>(`/videos/${id}`),
 
   createVideo: (body: {
     video_category_id: string;
