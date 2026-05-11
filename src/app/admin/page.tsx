@@ -73,7 +73,7 @@ export default function DashboardPage() {
               Dashboard
             </h1>
             <p className="text-[13px] text-slate-500">
-              Selamat datang, {user.name}
+              Selamat datang, {user.username}
               {user.role === "ADMIN" && (
                 <span className="ml-2 text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
                   ADMIN
