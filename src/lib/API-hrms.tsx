@@ -4,8 +4,8 @@ const normalizeApiBase = (value: string) => {
   return trimmed;
 };
 
-// const API = normalizeApiBase("https://apidocs-hrms.duluin.com/api/v1");
-const API = normalizeApiBase("http://localhost:5000/api/v1");
+const API = normalizeApiBase("https://apidocs-hrms.duluin.com/api/v1");
+// const API = normalizeApiBase("http://localhost:5000/api/v1");
 
 const getToken = () => {
   if (typeof window === "undefined") return null;
